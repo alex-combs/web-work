@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="rlab6-combining-data_files/header-attrs-2.23/header-attrs.js"></script>
+    <script src="rlab6-combining-data_files/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: March 11, 2024
+### Last updated: March 11, 2025
 ]
 
 ---
@@ -42,7 +42,7 @@ class: center, middle, inverse, title-slide
 &gt; **Create a new project named "rlab6" and start new R Markdown document. Change YAML and global options. Delete template.**
 
 
-```r
+``` r
 ---
 title: "RLab 6: Combining Data"
 author: "Your Name"
@@ -58,7 +58,7 @@ output:
 &gt; **Load the following packages**
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
@@ -72,7 +72,7 @@ library(tidyverse)
 &gt; **In your setup code chunk, import the data files using the following code.**
 
 
-```r
+``` r
 st_fin_2014 &lt;- read_csv("st_fin_2014.csv")
 st_fin_2015 &lt;- read_csv("st_fin_2015.csv")
 st_fin_2016 &lt;- read_csv("st_fin_2016.csv")
@@ -102,7 +102,7 @@ ga_county_pop &lt;- read_csv("ga_county_pop.csv")
 --
 
 
-```r
+``` r
 glimpse(gapminder07)
 ```
 
@@ -114,7 +114,7 @@ glimpse(gapminder07)
 ## $ gdpPercap &lt;dbl&gt; 974.5803, 5937.0295, 6223.3675, 4797.2313, 12779.3796, 34435…
 ```
 
-```r
+``` r
 glimpse(gapminder02)
 ```
 
@@ -130,7 +130,7 @@ glimpse(gapminder02)
 # Append Example
 
 
-```r
+``` r
 glimpse(gapminder97)
 ```
 
@@ -150,7 +150,7 @@ glimpse(gapminder97)
 - General syntax
 
 
-```r
+``` r
 new_dataset &lt;- bind_rows(dataset1, dataset2, ...)
 ```
 
@@ -158,7 +158,7 @@ new_dataset &lt;- bind_rows(dataset1, dataset2, ...)
 # Append Example
 
 
-```r
+``` r
 gapminder97_07 &lt;- bind_rows(gapminder97, gapminder02, gapminder07)
 
 glimpse(gapminder97_07)
@@ -191,7 +191,7 @@ glimpse(gapminder97_07)
 &gt; **Start a new code chunk and use `glimpse` to confirm it worked**
 
 
-```r
+``` r
 glimpse(st_fin_2014_2016)
 ```
 
@@ -225,7 +225,7 @@ class: inverse, middle, center
 &gt; **Generate a bar graph using the following code.**
 
 
-```r
+``` r
 covid_ga_5 %&gt;% 
   ggplot(aes(x = county, y = cases)) +
   geom_col()
@@ -291,7 +291,7 @@ covid_ga_5 %&gt;%
 - If a single variable is the key and named the same across datasets
 
 
-```r
+``` r
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(name_of_right_dataset, 
             by = "name_of_key")
@@ -302,7 +302,7 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 -  If multiple variables of the same name are the key
 
 
-```r
+``` r
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(name_of_right_dataset, 
 *           by = c("name_of_key1", "name_of_key2", ...))
@@ -314,7 +314,7 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 - If one variable is the key and named differently across datasets
 
 
-```r
+``` r
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(name_of_right_dataset, 
 *           by = c("key_in_left_data" = "key_in_right_data"))
@@ -325,7 +325,7 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 - If multiple variables are the key and at least one is named differently
 
 
-```r
+``` r
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(name_of_right_dataset, 
 *           by = c("key_in_left_data" = "key_in_right_data",
@@ -338,7 +338,7 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 - Suppose I want to join several datasets to a main dataset. Some have same name for key and some don't.
 
 
-```r
+``` r
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(right1_dataset, by = "name_of_key") %&gt;% 
   left_join(right2_dataset, by = c("key_in_left" = "key_in_right2")) %&gt;% 
@@ -351,7 +351,7 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 - Suppose I want to add population to the `gapminder97_07` that I appended earlier
 
 
-```r
+``` r
 glimpse(gapminder97_07)
 ```
 
@@ -371,7 +371,7 @@ glimpse(gapminder97_07)
 
 
 
-```r
+``` r
 glimpse(gap_pop_US)
 ```
 
@@ -397,7 +397,7 @@ glimpse(gap_pop_US)
 --
 
 
-```r
+``` r
 gap_pop_97_07 &lt;- gapminder97_07 %&gt;% 
   left_join(gap_pop_US, 
             by = c('country', 'year'))
@@ -426,7 +426,7 @@ glimpse(gap_pop_97_07)
 - Which variable(s) is(are) the key for joining the two datasets?
 
 
-```r
+``` r
 glimpse(ga_county_pop)
 ```
 
@@ -437,7 +437,7 @@ glimpse(ga_county_pop)
 ## $ population &lt;dbl&gt; 18386, 8165, 11164, 3038, 44890, 19234, 83240, 107738, 1670…
 ```
 
-```r
+``` r
 glimpse(covid_ga_5)
 ```
 
@@ -464,7 +464,7 @@ glimpse(covid_ga_5)
 - For example, if `county` was stored as a factor variable in `covid_ga_5` and as a character variable in `ga_county_pop`, we could change county to factor in `ga_county_pop` like so.
 
 
-```r
+``` r
 ga_county_pop$county &lt;- as.factor(ga_county_pop$county)
 ```
 
@@ -478,7 +478,7 @@ ga_county_pop$county &lt;- as.factor(ga_county_pop$county)
 
 
 
-```r
+``` r
 covid_ga_5 &lt;- covid_ga_5 %&gt;% 
   ___(___, ___ = '___')
 ```
@@ -489,7 +489,7 @@ covid_ga_5 &lt;- covid_ga_5 %&gt;%
 &gt; **Use `glimpse` on our updated data**
 
 
-```r
+``` r
 glimpse(covid_ga_5)
 ```
 
@@ -511,7 +511,7 @@ glimpse(covid_ga_5)
 &gt; **Insert a new code chunk below the left join that added population to `covid_ga_5`. Add three new variables: `pop100K`, `cases_rate`, and `deaths_rate`.**
 
 
-```r
+``` r
 covid_ga_5 &lt;- covid_ga_5 %&gt;% 
   ___(pop100K = ___,
       cases_rate = ___, 

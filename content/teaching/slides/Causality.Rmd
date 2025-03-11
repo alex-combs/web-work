@@ -491,7 +491,7 @@ include_graphics('lectures_files/dag_ovbdirect.png', dpi = 150)
 - Key question: Is the bias pushing my result toward 0 or away from 0?
 
 ---
-# Recap
+# Internal Validity Recap
 
 - Is my claim about the relationship between a cause and effect credible? Can I claim there is no OVB?
 
@@ -590,7 +590,7 @@ $$Outcome=\beta_0 + \beta_1Treatment + \beta_2Collider + \epsilon$$
 
 - These data are made up in a way that the effect of Treatment, $\beta_1$, should equal 50.
 
-- The collider does not affect the outcome or the treatment. The outcome and treatment affects the collider.
+- The collider does not affect the outcome or the treatment. The outcome and treatment affect the collider.
 
 $$Treatment \rightarrow Collider \leftarrow Outcome$$
 
@@ -618,7 +618,7 @@ get_regression_table(biased) %>%
 ```
 ]
 
-- Coefficient for $X$ should be 50.
+- Coefficient for $Treatment$ should be 50.
 
 - Because $Treatment \rightarrow Collider \leftarrow Outcome$, controlling for Collider introduces bias
 
