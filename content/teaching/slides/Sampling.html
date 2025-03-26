@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Sampling_files/header-attrs-2.23/header-attrs.js"></script>
+    <script src="Sampling_files/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: March 26, 2024
+### Last updated: March 25, 2025
 ]
 
 ---
@@ -101,7 +101,7 @@ class: center, middle, inverse, title-slide
 ---
 # Inference overview
 
-1. We take a sample. Hopefully **random**. If not, need to correct using sample weights and/or controls in a regression. Otherwise, **biased**.
+1. We obtain data from a sample of units. Ideally **random**. If not, could be **biased** if we do not account for factors causing that bias.
 
 --
 
@@ -118,7 +118,7 @@ class: center, middle, inverse, title-slide
 ---
 # Law of Large Numbers (LLN)
 
-- We *know* a (fair) coin has 50% chance landing heads. 
+- We *know* a fair coin has 50% chance landing heads. 
 
 - The population parameter for the number of heads for all coin flips ever is 50%.
 
@@ -127,6 +127,9 @@ class: center, middle, inverse, title-slide
 - We do not know the population parameter for most phenomena
 
 - LLN says: given a large enough sample size, our sample estimate will approach the population parameter
+
+  - No magic sample size that ensures accuracy
+  - Larger sample and closer to the total population size is expected to be better
 
 ---
 # Law of Large Numbers (LLN)
@@ -161,22 +164,22 @@ class: inverse, center, middle
 ---
 # Sampling distribution
 
-&gt; **Replace values in the `class-sampling-distribution` code chunk then run.**
+&gt; **Replace values in the `class-sampling-distribution` code chunk with everyone's estimates then run.**
 
 ---
 # Sampling distribution
 
 - Distribution of a variable is the distribution of *values* for that variable in a given sample
 
-- Sampling distribution is the distribution of *estimates* (e.g., proportion, average, regression coefficient) each obtained from a different sample that contains the variable(s) of interest
+- Sampling distribution is the distribution of *estimates* (e.g., percentage, average, regression coefficient) each obtained from a different sample
 
 --
 
 - In our coin flip example:
   - Data: 100 observations of a coin flip
-  - Distribution: the distribution of heads and tails in our sample of 100
+  - Distribution: the number of heads and tails in our sample of 100
   - Estimate: percent of flips resulting in heads in our sample of 100 
-  - Sampling distribution: the distribution of percent heads from all of the samples of 100 flips we simulated
+  - Sampling distribution: the distribution of percent heads from the numerous samples of 100 flips we simulated
 
 ---
 # Central Limit Theorem
@@ -279,7 +282,7 @@ class: inverse, center, middle
 - Our estimate is a sample mean. The formula for the standard error of a sample mean is:
 
 `$$SE_{\bar{x}}=\frac{s}{\sqrt{n}}$$`
-- Where `\(s\)` is the standard deviation of our variable ($x$) in the sample and `\(n\)` is the size of the sample.
+- Where `\(s\)` is the standard deviation of our variable (`\(x\)`) in the sample and `\(n\)` is the size of the sample.
 
 &gt; **Run the `salary-standard-error` code chunk**
 
@@ -389,7 +392,7 @@ class: inverse, center, middle
 |urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 
-```r
+``` r
 # not exactly equal due to slight differences in underlying math
 1993 - 1.96*262
 ```
@@ -398,7 +401,7 @@ class: inverse, center, middle
 ## [1] 1479.48
 ```
 
-```r
+``` r
 1993 + 1.96*262
 ```
 
@@ -447,7 +450,7 @@ class: inverse, center, middle
 |urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 
-```r
+``` r
 1993-2.58*262
 ```
 
@@ -455,7 +458,7 @@ class: inverse, center, middle
 ## [1] 1317.04
 ```
 
-```r
+``` r
 1993+2.58*262
 ```
 
@@ -463,6 +466,7 @@ class: inverse, center, middle
 ## [1] 2668.96
 ```
 
+- The tradeoff for higher confidence is lower precision
 ---
 # Recap
 

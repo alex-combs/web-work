@@ -4,36 +4,42 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="sampling2_files/header-attrs-2.5/header-attrs.js"></script>
-    <link href="sampling2_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-    <script src="sampling2_files/anchor-sections-1.0/anchor-sections.js"></script>
+    <script src="sampling2_files/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # PADP 7120 Data Applications in PA
+]
+.subtitle[
 ## Sampling
+]
+.author[
 ### Alex Combs
+]
+.institute[
 ### UGA | SPIA | PADP
-### Last updated: October 22, 2021
+]
+.date[
+### Last updated: March 25, 2025
+]
 
 ---
-
 
 # Outline
 
 
 
-- Understand what allows us to take a sample and make conclusions about a population
+- Reinforce fundamental concepts in sampling and inference
+  - Population parameter vs. sample estimate
   - Normal distribution and standard deviation (68-95-99 rule)
   - Law of large numbers (LLN)
   - Central limit theorem (CLT)
   
-- We will use R to make this as concrete as possible
-
-&gt; **Download and open the "sampling-simulations.Rmd" on eLC.**
+- Understand what allows us to take a sample and make conclusions about a population?
 
 ---
 # Credible analysis
@@ -48,15 +54,17 @@ class: center, middle, inverse, title-slide
 
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 --
 
-- Our goal is to gain an intuitive understanding of `std_error`, `lower_ci`, and `upper_ci` columns; how they are derived and what they tell us.
+- Our goal is to gain an intuitive understanding of `std_error`, `lower_ci`, and `upper_ci` columns; how they are derived and what they tell us. 
+
+- We need not be experts in the underlying math but know enough to be effective producers and/or consumers of statistics.
 
 ---
 # Inference
@@ -67,20 +75,18 @@ class: center, middle, inverse, title-slide
 # Sample estimates
 
 - A sample estimate can be any statistical measure we are interested in:
-  - Mean, median of a continuous variable
-  - Proportion, percentage of levels of a categorical variable
+  - Mean, median of a variable
+  - Proportion, percentage of a variable
   - Difference between two means or percentages between groups
   - Regression coefficient/estimate of `\(\beta\)`
 
 ---
-# Questions of inference
+# Key questions
 
 - Is our estimate an accurate guess of the population parameter?
   - `\(E\)` denotes expected value; the average of our estimate over many repetitions
 
 `$$E(\hat{\theta}) = \theta  ?$$`
-
-- **Biased** if our estimate is systematically too high or low
 
 --
 
@@ -91,13 +97,13 @@ class: center, middle, inverse, title-slide
 - The larger the range needed to confidently capture the parameter, the less useful it is.
 
 ---
-# Inference overview
+# Steps in inference
 
-1. We take a sample. Hopefully **random**. If not, need to correct using sample weights and/or controls in a regression. Otherwise, **biased**.
+1. We take a random sample. Maybe not *truly* random but then we'd need to account/control for any variable that would cause bias.
 
 --
 
-2. **Law of large numbers (LLN)** allows us to say our sample estimate is expected to be close to the population parameter.
+2. **Law of large numbers (LLN)** allows us to say our sample estimate is expected to be close to the population parameter. Think many rolls of a six-sided die resulting in an average of 3.5.
 
 --
 
@@ -108,187 +114,392 @@ class: center, middle, inverse, title-slide
 4. We calculate the standard deviation of the sampling distribution, a.k.a. **standard error**, and construct **confidence intervals** based on the **68-95-99 rule**.
 
 ---
-# Law of Large Numbers (LLN)
+# Example Step 1
 
-- We *know* a (fair) coin has 50% chance landing heads. 
-
-- The population parameter for the number of heads for all coin flips ever is 50%.
+- Suppose we take a sample of 50 MPA graduates and record their salaries. We eventually want to use this sample to estimate average salary of MPA graduates.
 
 --
 
-- We do not know the population parameter for most phenomena
+- Random sampling means every graduate had literally equal chance of being selected. Hard to achieve in reality, but there are sampling and statistical techniques to work around it.
 
-- LLN says: given a large enough sample size, our sample estimate will approach the population parameter
+--
+
+- Maybe we have to rely on graduates who attended an alumni event and responded to our question. Will these folks have systematically different salaries than the population?
+
+--
+
+- As long as we did not over- or under-sample a characteristic correlated with salary (e.g. sex, race, age, etc.), we should be OK. If we did, we can control for those variables via sample weighting or multiple regression.
 
 ---
-# Law of Large Numbers (LLN)
+# Example Step 1
 
-&gt; **Run the `set-up` and `functions` code chunks**
 
---
+``` r
+salaries &lt;- tibble(ID = c(1:2000), 
+                   salary = rnorm(2000, 80000, 7000))
+```
 
-&gt; **Run the `coin-flips` code chunk**
+- Created a population of 2,000 graduates with mean salary of 80,000 and standard deviation of 7,000.
 
---
 
-&gt; **Run the `head-count` code chunk. Make note of the percent of flips resulting in heads.**
+``` r
+sal_sample &lt;- rep_sample_n(salaries,
+                           size = 50)
+```
 
---
-
-&gt; **Change the number of flips from 10 to 100 and run again. Make note of the percent of flips resulting in heads.**
+- Took sample of 50.
 
 ---
-class: inverse, center, middle
+# The population
 
-# As sample size increases, accuracy tends to increase (assuming no bias)
+.pull-left[
+
+**Population**
+
+&lt;img src="sampling2_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+**Sample**
+
+![](sampling2_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+]
+
+---
+# The 68-95-99 rule
+
+&lt;img src="lectures_files/normdist.png" width="917" height="60%" style="display: block; margin: auto;" /&gt;
+
+- 95% of observations are 1.96 standard deviations from mean and 99% are 2.58 standard deviations from the mean
+
+---
+# The population
+
+.pull-left[
+&lt;img src="sampling2_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+- Mean is 80,000 with SD of 7,000
+
+- Since distribution is normal, we could answer descriptive questions about the range of salaries that captures a percentage of graduates or the percent of graduates above or below a certain salary.
+]
+
+- What percent of graduates have salary greater than 94,000 dollars?
+
+---
+# Example Step 2
+
+- Our estimate for average salary using a sample of 50 is
+
+
+``` r
+mean(sal_sample$salary)
+```
+
+```
+## [1] 81052.86
+```
+
+- We know the true population mean is 80,000. Normally do not know this.
+
+- So what allows us to conclude this sample estimate is close to the population parameter?
+
+--
+
+**Law of large numbers (LLN)** - the average of many random outcomes will settle around the expected value of the population parameter.
+
+---
+# Law of large numbers
+
+- Suppose the data-generating process of an important phenomenon in the population, like education level, eviction, job loss, or addiction, was based on a six-sided die.
+
+- The outcome will be among integers 1 through 6 each with equal probability
+
+--
+
+- The expected value of the population parameter:
+
+`$$\frac{1+2+3+4+5+6}{6}=3.5$$`
+--
+
+- If we roll a die enough times, the average of those rolls will start to settle around 3.5
+
+---
+# Example Step 2
+
+- Unlike a die roll, we don't know the data-generating process of most phenomena, so we don't know the expected value of the outcome in the population unless we directly compute it.
+
+--
+
+- Instead, we claim there is an expected value (population parameter) out there to estimate.
+
+--
+
+- As long as our sample was taken randomly (or at least unbiased), then each observation in our sample is like rolling the die once to obtain a value of a random outcome.
+
+--
+
+- We roll the die enough times (i.e. sample size) and the average of those rolls will settle around whatever is the expected value in the population.
+
+---
+# Example Step 2
+
+
+``` r
+sal_sample2 &lt;- rep_sample_n(salaries,
+                           size = 10)
+```
+
+
+``` r
+sal_sample3 &lt;- rep_sample_n(salaries,
+                           size = 250)
+```
+
+
+``` r
+mean(sal_sample2$salary)
+```
+
+```
+## [1] 79610.51
+```
+
+
+``` r
+mean(sal_sample3$salary)
+```
+
+```
+## [1] 79840.7
+```
+
+**As sample size increases, accuracy of estimate tends to increase (as long as sample is not biased)**
+
+---
+# Example Step 3
+
+- Highly unlikely our estimate *equals* the population parameter
+
+--
+
+- We need to calculate the range of plausible values that will capture the population parameter with a chosen frequency of success.
+
+--
+
+- Instead of a distribution of salaries, suppose we had a **distribution of estimates of average salary** where each estimate is from a different sample of MPA graduates. This is called a **sampling distribution**.
+
+--
+
+- The **central limit theorem** allows us to assume our one estimate was drawn from a sampling distribution that is **distributed normally**.
 
 ---
 # Sampling distribution
 
-- Our sample of 100 has revealed an estimate of the probability of heads that should be close to the parameter
+- Sampling 50 graduates and repeating 100 times to get 100 samples of size 50
 
-- Highly unlikely that our estimate *equals* the parameter, so we need to construct a **range of plausible values** that will capture the parameter
 
---
+``` r
+sal_100_samples &lt;- salaries %&gt;% 
+  rep_sample_n(size = 50, reps = 100)
+```
 
-- What if we collected all of the estimates we got from each of our samples and plotted their distribution? That would give us the **sampling distribution** for our estimate.
 
---
+Table: Preview of data
 
-&gt; **Replace values in the `class-sampling-distribution` code chunk then run.**
-
---
-
-&gt; **We need more estimates to make a proper histogram. Let's obtain two more estimates each and add to histogram.**
+| replicate|   ID| salary|
+|---------:|----:|------:|
+|        88| 1675|  86464|
+|        52| 1845|  86078|
+|        89|  820|  71541|
+|        51| 1372|  70764|
+|        98|  424|  88906|
 
 ---
 # Sampling distribution
 
-- Distribution of a variable is the distribution of *values* for that variable in a given sample
+- Calculating average salary for each of 100 samples
 
-- Sampling distribution is the distribution of *estimates* (e.g., proportion, average, regression coefficient) each obtained from a different sample that contains the variable(s) of interest
 
---
+``` r
+sal_dist_means &lt;- sal_100_samples %&gt;% 
+  group_by(replicate) %&gt;% 
+  summarize(AvgSal = mean(salary))
+```
 
-- In our coin flip example:
-  - Data: 100 observations of a coin flip
-  - Distribution: the distribution of heads and tails in our sample of 100
-  - Estimate: percent of flips resulting in heads in our sample of 100 
-  - Sampling distribution: the distribution of percent heads from all of the samples of 100 flips we simulated
 
----
-# Central Limit Theorem
+Table: Preview of data
 
-- The CLT says, no matter the shape of the underlying distribution of the variable from which our estimate was derived, its sampling distribution will be approximately normal given sufficient sample size.
-
---
-
-- For a normal distribution:
-
-  - 68% of the estimates fall within one standard deviation
-
-  - 95% of the estimates fall within 1.96 standard deviations
-
-  - 99% fall within 2.58 standard deviations
+| replicate| AvgSal|
+|---------:|------:|
+|         1|  82067|
+|         2|  79501|
+|         3|  80745|
+|         4|  79258|
+|         5|  80120|
 
 ---
-# Standard Error
+# Sampling distribution
 
-- We need to know the **standard deviation of our sampling distribution**. Then we can compute a range of plausible values for our parameter.
+&lt;img src="sampling2_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
 
-- **Standard error** is the special name we give to the standard deviation of a sampling distribution.
+- Distribution of our 100 estimates of average salary.
 
-&gt; **Run the `standard-error` code chunk to compute the standard error of our sampling distribution.**
-
----
-# Confidence intervals
-
-- **Confidence interval** is the range of plausible values that captures our population parameter.
-
-- Common to use a 95% confidence interval: 1.96 standard errors below and above our estimate.
-
---
-
-&gt; **Run the `confidence-interval` code chunk**
+- The **CLT** demonstrates that sampling distributions approach normal *regardless of the underlying variable's distribution*.
 
 ---
-# Confidence intervals &amp; sample size
+# Sampling distribution
 
-- Each of the next three code chunks uses a different sample size of coin flips (10,100,1000), counts the number of heads, then replicates this 100 times to provide you 100 *estimates* for percent heads.
+.pull-left[
 
---
+```
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+```
 
-&gt; **Run the `sampling-distribution` code chunks**
+&lt;img src="sampling2_files/figure-html/unnamed-chunk-22-1.png" height="60%" style="display: block; margin: auto;" /&gt;
+]
 
-- Should notice the spread of the sampling distribution decreasing as sample size increases
+.pull-right[
+- **LLN** tells us the center of the sampling distribution is close to the population parameter.
 
---
 
-&gt; **Run the `se` code chunks**
+``` r
+mean(sal_dist_means$AvgSal)
+```
 
-- The standard error should be decreasing as sample size increases
+```
+## [1] 80224.5
+```
+
+- We assume our original estimate is close to this center.
+
+
+``` r
+mean(sal_sample$salary)
+```
+
+```
+## [1] 81052.86
+```
+
+]
 
 ---
-class: inverse, center, middle
+# Example Step 4
 
-# As sample size increases, precision increases
-
----
-# MPA Salary Inference
-
-- In reality, we do not have many samples to construct an actual sampling distribution.
-
-- We just have one sample and one estimate
-
-- Let's use inference in a more realistic way, but test its success by making a simulated population we can observe
-
-&gt; **Run the `mpa-population` and `parameter` code chunks.**
-
-- What is the population parameter for average salary among all MPA graduates?
-
----
-# Sample and estimate
-
-&gt; **Once you've been given your sample size (n), run the `sample` and `salary-estimate` code chunks.**
+- We need to provide a range of plausible values for the population parameter
 
 --
 
-- You now have a sample of MPA graduates drawn from the population
+- Thanks to the **CLT**, we can assume the sampling distribution is normal. Therefore...
 
 --
 
-- This time, we won't compile our estimates to make a sampling distribution.
+- 68% of the estimates fall within one standard deviation
 
-- Instead, we assume our estimate is a single draw from a sampling distribution that is approximately normal even though we never observe the sampling distribution
+- 95% of the estimates fall within two (1.96) standard deviations
+
+- 99% fall within three (2.58) standard deviations
 
 --
 
-- But we still need the standard error of the sampling distribution to construct confidence intervals...
+- We need the **standard deviation of our sampling distribution**
 
 ---
 # Standard error
 
-- Our estimate is a sample mean. The (assumed) standard error for a sample mean is:
-
-`$$SE_{\bar{x}}=\frac{s}{\sqrt{n}}$$`
-- Where `\(s\)` is the standard deviation of `\(x\)` in our sample and `\(n\)` is the size of our sample.
+- The **standard error** is the standard deviation of a sampling distribution
 
 --
 
-&gt; **Run the `salary-standard-error` code chunk**
+- If we calculate the standard error, we can apply the **68-95-99 rule** to construct a range of values that will capture the population parameter 68, 95, or 99 times out of 100 attempts to estimate the parameter. The latter two are common choices.
+
+--
+
+- Two standard errors above and below our estimate will generate a **95% confidence interval**
+
+--
+
+- But how do we calculate the standard error when we don't actually see the sampling distribution? We only have one sample and one estimate.
 
 ---
-# Confidence intervals
+# Standard error
 
-- Now we need a plausible range of values that we expect to capture the parameter 95 times if this "study" was conducted 100 times
+- There are formulas for standard errors of various estimates. The standard error of a sample mean `\(\bar{x}\)` is:
 
-&gt; **Run the `salary-ci` and `precision` code chunks**
+`$$SE_{\bar{x}}=\frac{s}{\sqrt{n}}$$`
+
+- Where `\(s\)` is the standard deviation of `\(x\)` in our sample and `\(n\)` is the size of our sample
+
+---
+# Example Step 4
+
+
+``` r
+mean(sal_sample$salary)
+```
+
+```
+## [1] 81052.86
+```
+
+
+``` r
+sd(sal_sample$salary)/sqrt(50)
+```
+
+```
+## [1] 903.5873
+```
+
+
+``` r
+81052-(1.96*904)
+```
+
+```
+## [1] 79280.16
+```
+
+``` r
+81052+(1.96*904)
+```
+
+```
+## [1] 82823.84
+```
+
+---
+# Example Step 4
+
+- Our 95% confidence interval for the average salary among MPA graduates is 79,280 - 82,824. Does it capture the population parameter?
+
+&lt;img src="sampling2_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Back to reality
+
+- We engineered a population and a known parameter to evaluate the process of inference
+
+- But we don't observe the population, otherwise we wouldn't need inference
 
 --
 
-- Those with larger sample sizes should have more precise confidence intervals
+- We have only one sample and estimate. We do not observe the sampling distribution, its shape, or its standard error.
 
-- Does your confidence interval contain the population parameter?
+--
+
+- **LLN** and **CLT** allow us to assume our estimate is the center of the unobserved sampling distribution and the sampling distribution is normal.
+
+--
+
+- Our estimate almost certainly does not equal the parameter, so we estimate the standard error and construct a confidence interval that provides a range of plausible values.
 
 ---
 # Confidence interval
@@ -303,6 +514,10 @@ Rather, if we were to do this "study" 100 times, our method of constructing the 
 
 We saw that our one CI was successful because we knew the parameter. In reality, our CI could be one of the unsuccessful ones. But we accept this knowing that our method is expected to fail only 5 out of 100 times.
 
+--
+
+Or could construct a 99% CI expected to fail only 1 out of 100 times. But this produces a *wider* interval that is less precise and perhaps less useful. It's up to us to consider this trade-off.
+
 ---
 # A look at 100 CIs
 
@@ -310,15 +525,14 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 
 
 
+&lt;img src="sampling2_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
 
-
-&lt;img src="sampling2_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
-
+- As expected, 5 CIs fail. Our study could be any one of these.
 
 ---
 # Point estimate vs. CI
 
-- Suppose our estimate for average salary was $81,053. This is what often gets reported. This is for brevity and convenience.
+- Our point estimate for average salary was $81,053. This is what often gets reported. This is for brevity and convenience.
 
 --
 
@@ -332,9 +546,76 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 
 - Depending on the context of our study and the width of the CI, only reporting the point estimate could be very misleading.
 
---
+---
+# Sample size and CI
 
-- What if the 95% CI for average salary was [20,000 - 140,000]?
+- We already saw that larger sample size improves accuracy.
+
+**Standard error for sample size of 10**
+
+``` r
+sd(sal_sample2$salary)/sqrt(10)
+```
+
+```
+## [1] 1816.5
+```
+
+**Standard error for sample size of 250**
+
+``` r
+sd(sal_sample3$salary)/sqrt(250)
+```
+
+```
+## [1] 425.2634
+```
+
+- **Larger sample size also improves precision (i.e. more narrow CI)**
+
+---
+# Sample size and CI
+
+- With sample of size 10, our estimate for average salary was 79,611. 95% CI is: 
+
+
+``` r
+79611-(1.96*1817)
+```
+
+```
+## [1] 76049.68
+```
+
+``` r
+79611+(1.96*1817)
+```
+
+```
+## [1] 83172.32
+```
+
+---
+# Sample size and CI
+
+- With sample of size 250, our estimate was 79,841. The 95% CI is:
+
+
+``` r
+79841-(1.96*425)
+```
+
+```
+## [1] 79008
+```
+
+``` r
+79841+(1.96*425)
+```
+
+```
+## [1] 80674
+```
 
 ---
 # Back to regression table
@@ -342,11 +623,11 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 `$$MedHHInc = \beta_0 + \beta_1HSDegree + \beta_2 Urbanization + \epsilon$$` 
 
 
-|term      |   estimate| std_error| statistic| p_value|    lower_ci|   upper_ci|
-|:---------|----------:|---------:|---------:|-------:|-----------:|----------:|
-|intercept | -115382.50| 22643.377|    -5.096|   0.000| -160935.103| -69829.905|
-|hs        |    1993.18|   262.416|     7.595|   0.000|    1465.267|   2521.093|
-|urbanlow  |   -6541.47|  1801.233|    -3.632|   0.001|  -10165.082|  -2917.857|
+|term       |   estimate| std_error| statistic| p_value|    lower_ci|   upper_ci|
+|:----------|----------:|---------:|---------:|-------:|-----------:|----------:|
+|intercept  | -115382.50| 22643.377|    -5.096|   0.000| -160935.103| -69829.905|
+|hs         |    1993.18|   262.416|     7.595|   0.000|    1465.267|   2521.093|
+|urban: low |   -6541.47|  1801.233|    -3.632|   0.001|  -10165.082|  -2917.857|
 
 - Now we can apply the concepts to our regression table
 - We took one sample of state data
@@ -357,11 +638,11 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 # Back to regression table
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 - Therefore, we calculate the standard error (similar to before but math is different)
 - Then calculate the lower and upper bounds of the 95% CI
@@ -370,11 +651,11 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 # Back to the regression table
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 - Report on the point estimate for `hs` would be something like "On average, as the percent of a state's population with at least a high school degree increases 1 percentage point, median household income tends to increase almost 2,000 dollars."
 
@@ -384,14 +665,14 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 # Back to the regression table
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 
-```r
+``` r
 # not equal due to rounding
 1993 - 1.96*262
 ```
@@ -400,7 +681,7 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 ## [1] 1479.48
 ```
 
-```r
+``` r
 1993 + 1.96*262
 ```
 
@@ -412,11 +693,11 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 # Back to the regression table
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 - `\(\beta_1\)` could fall anywhere in the 95% CI with equal likelihood
 
@@ -428,11 +709,11 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 # Back to the regression table
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 - Even still, our sample could be one of the 5 out of 100 samples where our method of inference is expected to fail to capture `\(\beta_1\)`.
 
@@ -442,14 +723,14 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 # Back to the regression table
 
 
-|term      | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:---------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept |  -115383|     22643|        -5|       0|  -160935|   -69830|
-|hs        |     1993|       262|         8|       0|     1465|     2521|
-|urbanlow  |    -6541|      1801|        -4|       0|   -10165|    -2918|
+|term       | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:----------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept  |  -115383|     22643|        -5|       0|  -160935|   -69830|
+|hs         |     1993|       262|         8|       0|     1465|     2521|
+|urban: low |    -6541|      1801|        -4|       0|   -10165|    -2918|
 
 
-```r
+``` r
 1993-2.58*262
 ```
 
@@ -457,7 +738,7 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 ## [1] 1317.04
 ```
 
-```r
+``` r
 1993+2.58*262
 ```
 
@@ -468,7 +749,11 @@ We saw that our one CI was successful because we knew the parameter. In reality,
 ---
 # Final points for consumers
 
-- Beware a point estimate without a confidence interval
+- Beware a point estimate without a confidence interval or at least the standard error
+
+--
+
+- Consider measurement validity &amp; reliability, and omitted variable bias
 
 --
 
@@ -528,6 +813,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
