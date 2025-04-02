@@ -86,6 +86,20 @@ If relationship between $x$ and $y$ is initially negative then eventually positi
 If relationship between $x$ and $y$ is initially positive then eventually negative, linear term, $b_1$, will be positive and quadratic term, $b_2$, will be negative.
 ]
 
+
+---
+# Examples of quadratic relationships
+
+- Tax rates on tax revenues (or many cases of price vs. revenue)
+
+- Administrative staff on efficiency
+
+- Class size on student performance
+
+- Work hours on productivity
+
+- Public health campaign intensity and behavior change
+
 ---
 # Quadratic regression
 
@@ -115,7 +129,7 @@ $$\hat{y}=b_0+b_1x_1$$
 
 $$\Delta \hat{y} = b_1$$
 
-- Unit change is constant. Does not depend on value of $x$ that is changing
+- Unit change is constant. Does not depend on the value of $x$ that is changing
 
 ---
 # Linear vs. Quadratic unit change
@@ -150,8 +164,8 @@ $$x = \frac{-b_2}{2b_3}$$
 
 $$y= 100 + 10x - 1x^2$$
 
-- What is the marginal effect $x$ at $x=3$?
-  - Marginal effect another term for change in $y$ given a small change in $x$
+- What is the marginal effect of $x$ at $x=3$?
+  - Marginal effect another term for change in $y$ given a small change in $x$ like 1 unit
   - Note we need a starting value for $x$ to answer this question
 
 --

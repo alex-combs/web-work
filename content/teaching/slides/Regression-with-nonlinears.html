@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Regression-with-nonlinears_files/header-attrs-2.23/header-attrs.js"></script>
+    <script src="Regression-with-nonlinears_files/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 02, 2024
+### Last updated: April 02, 2025
 ]
 
 ---
@@ -84,6 +84,20 @@ If relationship between `\(x\)` and `\(y\)` is initially negative then eventuall
 If relationship between `\(x\)` and `\(y\)` is initially positive then eventually negative, linear term, `\(b_1\)`, will be positive and quadratic term, `\(b_2\)`, will be negative.
 ]
 
+
+---
+# Examples of quadratic relationships
+
+- Tax rates on tax revenues (or many cases of price vs. revenue)
+
+- Administrative staff on efficiency
+
+- Class size on student performance
+
+- Work hours on productivity
+
+- Public health campaign intensity and behavior change
+
 ---
 # Quadratic regression
 
@@ -113,7 +127,7 @@ If relationship between `\(x\)` and `\(y\)` is initially positive then eventuall
 
 `$$\Delta \hat{y} = b_1$$`
 
-- Unit change is constant. Does not depend on value of `\(x\)` that is changing
+- Unit change is constant. Does not depend on the value of `\(x\)` that is changing
 
 ---
 # Linear vs. Quadratic unit change
@@ -148,8 +162,8 @@ If relationship between `\(x\)` and `\(y\)` is initially positive then eventuall
 
 `$$y= 100 + 10x - 1x^2$$`
 
-- What is the marginal effect `\(x\)` at `\(x=3\)`?
-  - Marginal effect another term for change in `\(y\)` given a small change in `\(x\)`
+- What is the marginal effect of `\(x\)` at `\(x=3\)`?
+  - Marginal effect another term for change in `\(y\)` given a small change in `\(x\)` like 1 unit
   - Note we need a starting value for `\(x\)` to answer this question
 
 --
@@ -205,12 +219,12 @@ class: inverse, center, middle
 `$$Wage=\beta_0+\beta_1Educ+\beta_2Age+\beta_3Age^2+\epsilon$$`
 
 
-```r
+``` r
 quad &lt;- lm(Wage ~ Educ + Age + I(Age^2), data = wages)
 ```
 
 
-```r
+``` r
 get_regression_table(quad)
 ```
 
@@ -278,7 +292,7 @@ class: inverse, center, middle
 `$$ln(LifeExp)=\beta_0+\beta_1ln(GDPperCap)+\beta_2Continent+\epsilon$$`
 
 
-```r
+``` r
 log_log &lt;- lm(log(lifeExp) ~ log(gdpPercap) + continent, 
                data = gapminder)
 ```
@@ -287,7 +301,7 @@ log_log &lt;- lm(log(lifeExp) ~ log(gdpPercap) + continent,
 # Log-log model in R
 
 
-```r
+``` r
 get_regression_table(log_log) %&gt;% 
   select(term, estimate)
 ```
@@ -339,7 +353,7 @@ get_regression_table(log_log) %&gt;%
 `$$LifeExp=\beta_0+\beta_1ln(GDPperCap)+\beta_2Continent+\epsilon$$`
 
 
-```r
+``` r
 lev_log &lt;- lm(lifeExp ~ log(gdpPercap) + continent, 
                data = gapminder)
 ```
@@ -348,7 +362,7 @@ lev_log &lt;- lm(lifeExp ~ log(gdpPercap) + continent,
 # Level-log Model in R
 
 
-```r
+``` r
 get_regression_table(lev_log) %&gt;% 
   select(term, estimate)
 ```
@@ -395,7 +409,7 @@ get_regression_table(lev_log) %&gt;%
 `$$ln(LifeExp)=\beta_0+\beta_1GDPperCap+\beta_2Continent+\epsilon$$`
 
 
-```r
+``` r
 log_lev &lt;- lm(log(lifeExp) ~ gdpPercap + continent, 
                data = gapminder)
 ```
@@ -404,7 +418,7 @@ log_lev &lt;- lm(log(lifeExp) ~ gdpPercap + continent,
 # Log-level Model in R
 
 
-```r
+``` r
 get_regression_table(log_lev) %&gt;% 
   select(term, estimate)
 ```
