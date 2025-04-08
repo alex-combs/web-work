@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="rlab8-reporting-reg_files/header-attrs-2.23/header-attrs.js"></script>
+    <script src="rlab8-reporting-reg_files/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 09, 2024
+### Last updated: April 08, 2025
 ]
 
 ---
@@ -45,7 +45,7 @@ class: center, middle, inverse, title-slide
 &gt; **Change YAML.**
 
 
-```r
+``` r
 ---
 title: "RLab 7: Reporting Regression"
 author: "Your Name"
@@ -62,7 +62,7 @@ output:
 &gt; **In setup code chunk, load following packages**
 
 
-```r
+``` r
 library(tidyverse)
 library(moderndive)
 library(fivethirtyeight)
@@ -77,7 +77,7 @@ library(interactions) # for better regression visualizations
 &gt; **Add below code to setup code chunk**
 
 
-```r
+``` r
 state_data &lt;- hate_crimes %&gt;%
   filter(state != "District of Columbia") %&gt;%
   mutate(urbanization = if_else(share_pop_metro&lt;=0.75, "low", "high")) %&gt;% 
@@ -133,7 +133,7 @@ state_data &lt;- hate_crimes %&gt;%
 &gt; **In a new code chunk, add below code. Include the code chunk option `results='asis'`. Knit to HTML.**
 
 
-```r
+``` r
 stargazer(inc_mod,
           type="html",
           title="Regression Results",
@@ -152,7 +152,7 @@ stargazer(inc_mod,
 &gt; **Change options to include confidence intervals instead of standard errors and include goodness-of-fit. Knit to HTML.**
 
 
-```r
+``` r
 stargazer(inc_mod, 
 *         ci=TRUE, ci.separator = " : ",
           type="html",
@@ -172,7 +172,7 @@ stargazer(inc_mod,
 &gt; **Add the last line below. Knit to HTML.**
 
 
-```r
+``` r
 stargazer(inc_mod, ci=TRUE, ci.separator = " : ",
           type="html",
           title="Regression Results",
@@ -191,7 +191,7 @@ stargazer(inc_mod, ci=TRUE, ci.separator = " : ",
 ---
 class: inverse, center, middle
 
-# For presentations, we may want to use graphs instead of tables.
+# We may want to use graphs instead of tables.
 
 ---
 # Visualizing Regression
@@ -200,7 +200,7 @@ class: inverse, center, middle
 
 .pull-left[
 
-```r
+``` r
 ggplot(state_data, 
        aes(x = share_pop_hs, 
            y = median_house_inc, 
@@ -220,7 +220,7 @@ ggplot(state_data,
 ---
 # Visualizing Regression Line
 
-- `ggplot` cannot easily visualize regression models that include:
+- `ggplot` can easily visualize regression models that include:
 
   - **ONE** numerical explanatory variable
   - **ONE** categorical explanatory variable (with or without interaction)
@@ -235,7 +235,7 @@ ggplot(state_data,
 &gt; **Add below code in a new code chunk**
 
 
-```r
+``` r
 effect_plot(inc_mod, # Saved reg results
             pred = share_pop_hs, # an explanatory variable
             plot.points = TRUE, # show points or not
@@ -252,7 +252,7 @@ effect_plot(inc_mod, # Saved reg results
 &gt; **In a new code chunk, add below code**
 
 
-```r
+``` r
 interact_plot(inc_mod, 
               pred = share_pop_hs, 
               modx = urbanization, # the interaction variable
@@ -269,7 +269,7 @@ interact_plot(inc_mod,
 &gt; **Add following code in a new code chunk.**
 
 
-```r
+``` r
 plot_coefs(inc_mod)
 ```
 

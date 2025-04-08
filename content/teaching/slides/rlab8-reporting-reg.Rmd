@@ -178,7 +178,7 @@ stargazer(inc_mod, ci=TRUE, ci.separator = " : ",
 ---
 class: inverse, center, middle
 
-# For presentations, we may want to use graphs instead of tables.
+# We may want to use graphs instead of tables.
 
 ---
 # Visualizing Regression
@@ -216,7 +216,7 @@ ggplot(state_data,
 ---
 # Visualizing Regression Line
 
-- `ggplot` cannot easily visualize regression models that include:
+- `ggplot` can easily visualize regression models that include:
 
   - **ONE** numerical explanatory variable
   - **ONE** categorical explanatory variable (with or without interaction)
