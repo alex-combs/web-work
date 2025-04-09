@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Hypothesis-Testing_files/header-attrs-2.23/header-attrs.js"></script>
+    <script src="Hypothesis-Testing_files/header-attrs-2.29/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 08, 2024
+### Last updated: April 09, 2025
 ]
 
 ---
@@ -135,46 +135,48 @@ class: inverse, center, middle
   - Means result of 0.3 is not improbable enough to rule out random chance
   - `\(P_M-P_F\lesseqqgtr0\)` ; we don't know which
   
---
+---
+# Do Not Accept the Null
 
-- Can *never* conclude males and females *are* promoted equally `\(P_M-P_F = 0\)` from a hypothesis test. This is equivalent to accepting the null.
+- Either reject or fail to reject the null
+
+- Cannot accept the null
+
+- That would be equivalent to concluding that males and females *are* promoted equally `\(P_M-P_F = 0\)`
+
+- A hypothesis test (p-value) will almost never tell us an estimate *equals* 0 because of confidence intervals
+
+- "Absence of evidence is not evidence of absence."
 
 ---
 # What If We're Wrong
 
-- Suppose our estimate of `\(P_M-P_F=?\)`, `\(p_M-p_F=0.3\)`, is so unlikely that we reject the null 
+- Suppose our estimate of `\(P_M-P_F=?\)`, `\(p_M-p_F=0.3\)`, is so unlikely that we reject the null based on p-value
 
 - Conclude that males and females are not promoted in equal proportions `\(P_M-P_F \neq 0\)`.
 
---
-
-- Our estimate of 0.3 is a scientific guess around which we construct a range of plausible values we assume captures the parameter
+- Or, we obtain a high p-value, so we fail to reject the null, and can't conclude there is a difference
 
 --
 
-- Our confidence interval could be 1 of the 5 out of 100 (assuming 95% CI) expected to fail to capture the parameter
+- But 0.3 is an *estimate* around which we construct a range of plausible values we assume captures the true parameter
+
+- But our confidence interval could be 1 of the 5 out of 100 (assuming 95% CI) expected to fail
 
 ---
 # What If We're Wrong
 
-- We may reject the null because our 95% CI does **not** contain 0, thus `\(P_M-P_F \neq 0\)`
+- If we **reject the null** because our 95% CI does **not** contain 0 (p-value &lt; 0.05) but are wrong
 
---
-
-- But our CI could be wrong and the true value is that `\(P_M-P_F = 0\)`
   - Type I error
-  - False positive
-
----
-# What If We're Wrong
-
-- We may fail to reject the null because our 95% CI does include 0, thus we can't rule out with high enough confidence that `\(P_M-P_F \neq 0\)`
+  - False positive - concluding there is evidence when there truly is not
 
 --
 
-- But our CI could be wrong and the true value is that `\(P_M-P_F \neq 0\)`
+- If we **fail to reject** because our 95% CI does contain 0 (p-value `\(\geq\)` 0) but are wrong
+
   - Type II error
-  - False negative
+  - False negative - concluding no evidence when there truly is
 
 ---
 # Decision rule
@@ -290,8 +292,8 @@ class: inverse, center, middle
 
 |term           | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
 |:--------------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept      |    20.06|      0.16|    123.32|       0|    19.75|    20.38|
-|treatment: Yes |    -6.41|      0.23|    -27.85|       0|    -6.86|    -5.96|
+|intercept      |   20.064|     0.163|   123.322|       0|   19.745|   20.383|
+|treatment: Yes |   -6.406|     0.230|   -27.850|       0|   -6.857|   -5.955|
 
 - What are the null and alternative hypotheses? What is the result of the test?
 
