@@ -57,7 +57,7 @@ trump_vote <- hate_crimes %>%
 
 ```{r, eval=FALSE}
 ---
-title: "RLab 7: Reporting Regression"
+title: "RLab 8: Regression Diagnostics"
 author: "Your Name"
 output: 
   html_document:
@@ -86,6 +86,12 @@ library(gvlma)
 
 > **Use the `summary()` function to obtain a simple display of summary statistics**
 
+- We will focus on three variables in the data
+
+```{r, echo=FALSE}
+trump_vote %>% select(share_vote_trump, white, white_pov) %>% summary()
+```
+
 ---
 # Regression
 
@@ -105,7 +111,7 @@ get_regression_table(trump_mod) %>%
   kable()
 ```
 
-- We now understand all the information in this table. 
+- We have now covered all the information in this table. 
 
 - But the information could be wrong if regression assumptions are violated.
 
@@ -415,9 +421,9 @@ ggplot(trump_vote, aes(x = white_pov, y = share_vote_trump)) +
   geom_smooth(method = "lm", se=FALSE)
 ```
 
-- What is the pattern of plot points doing to our attempt to fit a line to them?
+- What is the pattern of plot points doing to our attempt to fit a line?
 
-- Which state is this problematic point?
+- Which observation is this problematic point?
 
 ---
 # Excluding DC
