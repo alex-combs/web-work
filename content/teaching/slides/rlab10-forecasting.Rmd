@@ -13,6 +13,15 @@ output:
       countIncrementalSlides: false
       highlightLines: true
 ---
+# Learning objectives
+
+- Convert a dataset to a time series dataset in R
+- Explore time series for patterns
+- Use simple forecasting models like naive, average, and trend
+- Use exponential smoothing forecast
+- Assess goodness-of-fit between forecast models
+
+---
 # Set-up
 
 ```{r, include=FALSE}
@@ -53,7 +62,27 @@ options(scipen = 999)
 ---
 # Set-up
 
-> **Download `acc_select_tax_rev` from eLC and import. You can copy and paste the below code in your setup code chunk.**
+> **Download `acc_select_tax_rev` from eLC.**
+
+> **Open `acc_select_tax_rev` in Excel or whatever spreadsheet software you have**
+
+> **Please do not work ahead yet**
+
+---
+# Non-statistical forecast
+
+- Statistical forecasting does not necessarily produce the best forecast
+
+- Two common non-statistical methods:
+  - Expert judgement
+  - Delphi method
+  
+- Let's put a non-statistical approach to the test...
+
+---
+# Import data
+
+> **Import `acc_select_tax_rev`. You can copy and paste the below code in your setup code chunk.**
 
 ```{r, include=FALSE}
 acc_taxrev <- read_csv("labs_files/acc_select_tax_rev.csv")
@@ -62,15 +91,6 @@ acc_taxrev <- read_csv("labs_files/acc_select_tax_rev.csv")
 ```{r, eval=FALSE}
 acc_taxrev <- read_csv("acc_select_tax_rev.csv")
 ```
-
----
-# Learning objectives
-
-- Convert a dataset to a time series dataset in R
-- Explore time series for patterns
-- Use simple forecasting models like naive, average, and trend
-- Use exponential smoothing forecast
-- Assess goodness-of-fit between forecast models
 
 ---
 # Steps of forecasting
