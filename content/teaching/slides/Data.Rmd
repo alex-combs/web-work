@@ -101,21 +101,6 @@ kable(generic, format = 'html')
 - Be careful not to accidentally include a unit analysis that does not belong in the data
 
 ---
-class: inverse, middle, center
-
-# Suppose we want to study homelessness in Athens-Clarke County (potential causes or correlates, demographics, government performance metrics, etc.). We need to collect data.
-
----
-class: inverse, middle, center
-
-# What variables might we collect if the unit of analysis is **individuals**?
-
----
-class: inverse, middle, center
-
-# What variables might we collect if the unit of analysis is **years**? 
-
----
 # Types of variables
 
 ![](lectures_files/variables.png)
@@ -128,11 +113,6 @@ class: inverse, middle, center
 --
 
 - A **quantitative** or **numerical** variable is a variable that has intrinsic numerical meaning
-
----
-class: inverse, middle, center
-
-# Which of our variables are qualitative and which are quantitative?
 
 ---
 # Types of qualitative variables
@@ -151,11 +131,6 @@ class: inverse, middle, center
 - **Discrete** variables take on numeric values that are **countable**, integers (e.g. 0, 1, 2, ...)
 
 - **Continuous** variables take on potentially any value. For example, a percentage ranges between 0 and 100 but can take on infinite values between that range (e.g. 50, 50.4, 50.44, 50.444, ...) even though we round to a finite set of values.  
-
----
-class: inverse, middle, center
-
-# Which of our qualitative variables are nominal or ordinal. Which of our quantitative variables are discrete or continuous?
 
 ---
 # Variables and information

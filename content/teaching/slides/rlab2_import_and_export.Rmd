@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 2: Importing & Exporting"
+subtitle: "Lab 2: Importing & Exporting"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -39,14 +39,14 @@ library(fivethirtyeight)
 ---
 # Set-up
 
-> **Create a new project named "rlab2". I recommend locating it in the same parent file as your rlab1 project.**
+> **Create a new project named "lab2".**
 
 ---
 # Set-up
 
 > **Start a R Markdown document**
 
-> **Change the title in the YAML to "RLab2: Import & Export"**
+> **Change the title in the YAML to "Lab2: Import & Export"**
 
 > **Keep the setup code chunk at the top of the template but delete the rest of the template.**
 
@@ -69,7 +69,7 @@ library(fivethirtyeight) #contains data we need to use
 
 > **Download "ncbirths" from eLC and add it to your current project folder**
 
-> **Download "ga_schdist_raw" from eLC and add to your "rlab2" project folder.**
+> **Download "ga_schdist_raw" from eLC and add to your current project folder.**
 
 ---
 class: inverse, middle, center
@@ -182,7 +182,7 @@ slice_head(hc, n=4) # prints result without saving anything
 
 ```{r, eval=FALSE}
 ---
-title: "RLab2: Import & Export"
+title: "Lab2: Import & Export"
 author: "Your Name"
 output:
   html_document: #<<
@@ -201,7 +201,7 @@ output:
 
 ```{r, eval=FALSE}
 ---
-title: "RLab2: Import & Export"
+title: "Lab2: Import & Export"
 author: "Alex Combs"
 output:
   html_document:
@@ -220,7 +220,7 @@ This is not required, but you can change the theme of your document (similar to 
 
 ```{r, eval=FALSE}
 ---
-title: "RLab2: Import & Export"
+title: "Lab2: Import & Export"
 author: "Alex Combs"
 output:
   html_document:
@@ -531,4 +531,4 @@ write_csv(name_of_object_in_environment, 'name_for_new_file.csv')
 
 - Now we can begin to focus on the skills related to the analysis step
 
-> **Upload your Rmd to the RLab assignment dropbox on eLC.**
+> **Upload your Rmd to the Lab assignment dropbox on eLC.**
