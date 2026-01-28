@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 3: Data Wrangling Part 1"
+subtitle: "Lab 3: Data Wrangling Part 1"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -52,13 +52,13 @@ library(knitr)
 ---
 # Set up
 
-> **Create a new project named "rlab3" and start new R Markdown document.**
+> **Create a new project named "lab3" and start new R Markdown document.**
   
 > **Change YAML:**
 
 ```{r, eval=FALSE}
 ---
-title: "RLab3: Data Wrangling"
+title: "lab3: Data Wrangling"
 author: "Your Name"
 output:
   html_document:

@@ -78,6 +78,14 @@ library(knitr)
 - Census data (e.g., population, race/ethnicity)
 
 ---
+# Example
+
+
+```{r echo=FALSE, out.width="50%", fig.align='center'}
+knitr::include_graphics("lectures_files/home_value.jpg")
+```
+
+---
 # Why does this matter?
 
 - Can lead to important questions about how data are collected.
