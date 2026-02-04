@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Description_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="Description_files/header-attrs-2.30/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: January 29, 2025
+### Last updated: February 04, 2026
 ]
 
 ---
@@ -57,7 +57,7 @@ class: center, middle, inverse, title-slide
 
 --
 
-- **Sample:** a subset of that population
+- **Sample:** a subset of our target population
 
 - We can describe a sample or a population
 
@@ -66,36 +66,29 @@ class: center, middle, inverse, title-slide
 ---
 # Descriptive vs. inferential
 
-- Suppose we want to learn more about employment and earning outcomes among MPA graduates through a survey
+- Suppose we conduct a survey to learn more about employment and earning outcomes among MPA graduates.
+
+- Are the following questions **descriptive** or **inferential**?
 
 --
-
-.pull-left[
-**Descriptive Questions**
 
 - What is the average income of respondents?
-- What percent of respondents are employed?
-- What percent of respondents earn more than they did prior to MPA?
-
-]
+- What is the average income of MPA graduates?
 
 --
 
-.pull-right[
-**Inferential Questions**
+- What percent of respondents are employed?
 
-- What is the average income for MPA graduates?
-- Does an MPA increase employment?
+--
+
 - Does an MPA increase income?
-]
 
 ---
 # Parameter vs. statistic
 
 - **Parameter:** a measure pertaining to a population
 
-  - Typically used when population is unobserved
-  - The "true" value we try to estimate using a sample
+  - The "true" value we try to estimate if the population is unobserved
 
 - **Statistic:** a measure pertaining to a sample
 
@@ -104,7 +97,7 @@ class: center, middle, inverse, title-slide
 ---
 # Back to Survey Example
 
-Suppose our survey receives 100 responses and finds that the median income of UGA MPA alumni is $75,000
+Suppose our survey of UGA MPA alumni receives 100 responses and and the median income of respondents is $80,000.
 
 - Is this a sample statistic or a population parameter?
 
@@ -117,8 +110,9 @@ Suppose we set out to confirm the average salary in Georgia for ourselves. We su
 
 --
 
-- What is the population and sample?
-- What is the parameter and statistic/estimate?
+- What is the population and what is the sample?
+- What is the parameter we intend to estimate?
+- What is the statistic we will use to estimate the parameter?
 
 ---
 # Descriptive vs. inferential
@@ -152,7 +146,7 @@ class: inverse, middle, center
 
 - A distribution shows the (possible) values for a variable and how often they occur.
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Describing numerical variables
@@ -175,20 +169,13 @@ class: inverse, middle, center
 ---
 # Mean (average)
 
-- Add values and divide by the count of values
+`$$\bar{x}={\frac {1}{n}}\sum _{i=1}^{n}x_{i}={\frac {x_{1}+x_{2}+\cdots +x_{n}}{n}}$$`
 
-
-``` r
-(2 + 4 + 6 + 8 + 10)/5
-```
-
-```
-## [1] 6
-```
-
-
+- Sum of all values and divide by the number of values
 
 .pull-left[
+
+
 &lt;table&gt;
  &lt;thead&gt;
   &lt;tr&gt;
@@ -224,14 +211,29 @@ class: inverse, middle, center
 .pull-right[
 
 ``` r
-mean(x$variable)
+(2 + 4 + 6 + 8 + 10)/5
 ```
 
 ```
 ## [1] 6
 ```
 
-&lt;img src="lectures_files/mean.png" width="1105" /&gt;
+&lt;img src="lectures_files/mean.png" alt="" width="1105" /&gt;
+]
+
+---
+# Mean
+
+- In R, can use the `mean(data$variable)` function
+
+
+``` r
+mean(data$variable)
+```
+
+```
+## [1] 6
+```
 
 
 ``` r
@@ -242,8 +244,6 @@ mean(ncbirths$weeks)
 ## [1] 38.4675
 ```
 
-
-]
 
 ---
 # Median
@@ -287,7 +287,7 @@ mean(ncbirths$weeks)
 .pull-right[
 
 ``` r
-median(x$variable)
+median(data$variable)
 ```
 
 ```
@@ -376,7 +376,7 @@ median(ncbirths$weeks)
 - Which measure of center is best for describing typical weeks pregnant?
 
 .pull-left[
-&lt;img src="Description_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -404,7 +404,7 @@ median(ncbirths$weeks)
 - Which measure of center is best for describing typical GDP per capita?
 
 .pull-left[
-&lt;img src="Description_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -443,9 +443,74 @@ class: inverse, middle, center
 - **Range:** the difference between the maximum and minimum values
 
 ---
+# Variance
+
+`$$S^2={\frac {1}{n-1}}\sum _{i=1}^{n}(x_{i}-\bar{x})^2={\frac {(x_{1}-\bar{x})^2+(x_{2}-\bar{x})^2+\cdots +(x_{n}-\bar{x})^2}{n-1}}$$`
+
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; ID &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; variable &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; xbar &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; deviation &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; devsquared &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+``` r
+(16+4+0+4+16)/4
+```
+
+```
+## [1] 10
+```
+
+---
 # Standard deviation (SD)
 
-- Variance makes no sense as a descriptive measure of spread
+- Variance does not make sense as a *descriptive* measure of spread
 
 
 ``` r
@@ -548,7 +613,7 @@ IQR(ncbirths$weeks)
 .pull-right[
 
 ``` r
-sd(xextreme$variable)
+sd(extreme$variable)
 ```
 
 ```
@@ -556,7 +621,7 @@ sd(xextreme$variable)
 ```
 
 ``` r
-IQR(xextreme$variable)
+IQR(extreme$variable)
 ```
 
 ```
@@ -568,18 +633,10 @@ IQR(xextreme$variable)
 # SD vs. IQR
 
 .pull-left[
-![](Description_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](Description_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-
-``` r
-var(ncbirths$weeks)
-```
-
-```
-## [1] 7.583423
-```
 
 ``` r
 sd(ncbirths$weeks)
@@ -602,18 +659,10 @@ IQR(ncbirths$weeks)
 # SD vs. IQR
 
 .pull-left[
-&lt;img src="Description_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-28-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-
-``` r
-var(gapminder$gdpPercap)
-```
-
-```
-## [1] 97169410
-```
 
 ``` r
 sd(gapminder$gdpPercap)
@@ -643,6 +692,8 @@ IQR(gapminder$gdpPercap)
 - Or how different are the most different observations
 ]
 
+--
+
 .pull-right[
 
 ``` r
@@ -666,14 +717,116 @@ range(gapminder$gdpPercap)
 # Choosing measures
 
 .pull-left[
-![](Description_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+![](Description_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-&lt;img src="Description_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-32-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 - Which measures of center and spread should we use or not use to describe the above distributions?
+
+---
+# Keep the Distribution in Mind
+
+- Underlying distributions are often simplified into summary descriptive measures
+
+- Don't let these simplifications hide potential nuance in the underlying distribution
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+  - Median: 80
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+  - Median: 80
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+  - Median: 80
+  - Maximum: 100
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+  - Median: 80
+  - Maximum: 100
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+  - Median: 80
+  - Maximum: 100
+  - Minimum: 65
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+  - Median: 80
+  - Maximum: 100
+  - Minimum: 25
+]
 
 ---
 class: inverse, middle, center
@@ -685,7 +838,7 @@ class: inverse, middle, center
 
 - Distribution of a variable *given* another variable's values
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-33-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Measures of association
@@ -732,7 +885,7 @@ Suppose we want to investigate the association between the percent of a state po
 ]
 
 .pull-right[
-&lt;img src="Description_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-36-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -740,7 +893,7 @@ Suppose we want to investigate the association between the percent of a state po
 
 - Or percent of white population in poverty
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-37-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Units with higher values along the x-axis tend to have higher or lower values along the Y axis. Or no tendency.
 
@@ -781,7 +934,7 @@ Suppose we want to investigate the association between the percent of a state po
 
 ---
 # Correlation coefficient
-&lt;img src="Description_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-38-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ``` r
@@ -824,7 +977,7 @@ Which correlation is stronger?
 ---
 # Correlation
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-42-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 Unit of analysis is states.
 Is the correlation positive or negative?
@@ -832,7 +985,7 @@ Is the correlation positive or negative?
 ---
 # Correlation
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-43-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ``` r
@@ -868,8 +1021,8 @@ What is the interpretation?
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

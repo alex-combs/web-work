@@ -45,7 +45,7 @@ library(fivethirtyeight)
 
 --
 
-- **Sample:** a subset of that population
+- **Sample:** a subset of our target population
 
 - We can describe a sample or a population
 
@@ -54,36 +54,29 @@ library(fivethirtyeight)
 ---
 # Descriptive vs. inferential
 
-- Suppose we want to learn more about employment and earning outcomes among MPA graduates through a survey
+- Suppose we conduct a survey to learn more about employment and earning outcomes among MPA graduates.
+
+- Are the following questions **descriptive** or **inferential**?
 
 --
-
-.pull-left[
-**Descriptive Questions**
 
 - What is the average income of respondents?
-- What percent of respondents are employed?
-- What percent of respondents earn more than they did prior to MPA?
-
-]
+- What is the average income of MPA graduates?
 
 --
 
-.pull-right[
-**Inferential Questions**
+- What percent of respondents are employed?
 
-- What is the average income for MPA graduates?
-- Does an MPA increase employment?
+--
+
 - Does an MPA increase income?
-]
 
 ---
 # Parameter vs. statistic
 
 - **Parameter:** a measure pertaining to a population
 
-  - Typically used when population is unobserved
-  - The "true" value we try to estimate using a sample
+  - The "true" value we try to estimate if the population is unobserved
 
 - **Statistic:** a measure pertaining to a sample
 
@@ -92,7 +85,7 @@ library(fivethirtyeight)
 ---
 # Back to Survey Example
 
-Suppose our survey receives 100 responses and finds that the median income of UGA MPA alumni is $75,000
+Suppose our survey of UGA MPA alumni receives 100 responses and and the median income of respondents is $80,000.
 
 - Is this a sample statistic or a population parameter?
 
@@ -105,8 +98,9 @@ Suppose we set out to confirm the average salary in Georgia for ourselves. We su
 
 --
 
-- What is the population and sample?
-- What is the parameter and statistic/estimate?
+- What is the population and what is the sample?
+- What is the parameter we intend to estimate?
+- What is the statistic we will use to estimate the parameter?
 
 ---
 # Descriptive vs. inferential
@@ -170,38 +164,44 @@ ggplot(ncbirths, aes(x = weeks)) +
 ---
 # Mean (average)
 
-- Add values and divide by the count of values
+$$\bar{x}={\frac {1}{n}}\sum _{i=1}^{n}x_{i}={\frac {x_{1}+x_{2}+\cdots +x_{n}}{n}}$$
 
-```{r}
-(2 + 4 + 6 + 8 + 10)/5
-```
+- Sum of all values and divide by the number of values
 
+.pull-left[
 ```{r, include=FALSE}
-x <- tibble(ID = 1:5, variable = c(2,4,6,8,10))
+data <- tibble(ID = 1:5, variable = c(2,4,6,8,10))
 library(knitr)
 ```
 
-.pull-left[
 ```{r, echo=FALSE}
-kable(x, format = 'html')
+kable(data, format = 'html')
 ```
 ]
 
 .pull-right[
 ```{r}
-mean(x$variable)
+(2 + 4 + 6 + 8 + 10)/5
 ```
 
 ```{r, echo=FALSE}
 include_graphics('lectures_files/mean.png')
+```
+]
+
+---
+# Mean
+
+- In R, can use the `mean(data$variable)` function
+
+```{r}
+mean(data$variable)
 ```
 
 ```{r}
 mean(ncbirths$weeks)
 ```
 
-
-]
 
 ---
 # Median
@@ -211,13 +211,13 @@ mean(ncbirths$weeks)
 
 .pull-left[
 ```{r, echo=FALSE}
-kable(x, format = 'html')
+kable(data, format = 'html')
 ```
 ]
 
 .pull-right[
 ```{r}
-median(x$variable)
+median(data$variable)
 ```
 
 ![](lectures_files/median.png)
@@ -235,7 +235,7 @@ median(ncbirths$weeks)
 
 .pull-left[
 ```{r, echo=FALSE}
-kable(x, format = 'html')
+kable(data, format = 'html')
 ```
 ]
 
@@ -328,9 +328,29 @@ class: inverse, middle, center
 - **Range:** the difference between the maximum and minimum values
 
 ---
+# Variance
+
+$$S^2={\frac {1}{n-1}}\sum _{i=1}^{n}(x_{i}-\bar{x})^2={\frac {(x_{1}-\bar{x})^2+(x_{2}-\bar{x})^2+\cdots +(x_{n}-\bar{x})^2}{n-1}}$$
+
+```{r, include=FALSE}
+variance <- data %>% 
+  mutate(xbar = mean(variable),
+         deviation = variable - xbar, 
+         devsquared = deviation^2)
+```
+
+```{r, echo=FALSE}
+kable(variance, format = 'html')
+```
+
+```{r}
+(16+4+0+4+16)/4
+```
+
+---
 # Standard deviation (SD)
 
-- Variance makes no sense as a descriptive measure of spread
+- Variance does not make sense as a *descriptive* measure of spread
 
 ```{r}
 var(ncbirths$weeks)
@@ -378,15 +398,15 @@ IQR(ncbirths$weeks)
 
 .pull-left[
 ```{r, echo=FALSE}
-xextreme <- tibble(ID = 1:5, variable = c(2,4,6,8,100))
-kable(xextreme, format = 'html')
+extreme <- tibble(ID = 1:5, variable = c(2,4,6,8,100))
+kable(extreme, format = 'html')
 ```
 ]
 
 .pull-right[
 ```{r}
-sd(xextreme$variable)
-IQR(xextreme$variable)
+sd(extreme$variable)
+IQR(extreme$variable)
 ```
 ]
 
@@ -405,7 +425,6 @@ ggplot(ncbirths, aes(x = weeks)) +
 
 .pull-right[
 ```{r}
-var(ncbirths$weeks)
 sd(ncbirths$weeks)
 IQR(ncbirths$weeks)
 ```
@@ -429,7 +448,6 @@ gapminder %>%
 
 .pull-right[
 ```{r}
-var(gapminder$gdpPercap)
 sd(gapminder$gdpPercap)
 IQR(gapminder$gdpPercap)
 ```
@@ -445,6 +463,8 @@ IQR(gapminder$gdpPercap)
 
 - Or how different are the most different observations
 ]
+
+--
 
 .pull-right[
 ```{r}
@@ -482,6 +502,108 @@ gapminder %>%
 ]
 
 - Which measures of center and spread should we use or not use to describe the above distributions?
+
+---
+# Keep the Distribution in Mind
+
+- Underlying distributions are often simplified into summary descriptive measures
+
+- Don't let these simplifications hide potential nuance in the underlying distribution
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+  - Median: 80
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+  - Median: 80
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+  - Median: 80
+  - Maximum: 100
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+  - Median: 80
+  - Maximum: 100
+]
+
+---
+# Keep the Distribution in Mind
+
+A city has a private high school and a public high school. Each year, students take a state standardized test. Student scores can range between 0-100.
+
+.pull-left[
+- Private school
+  - Mean: 80
+  - Standard deviation: 5
+  - Median: 80
+  - Maximum: 100
+  - Minimum: 65
+]
+
+.pull-right[
+- Public school
+  - Mean: 70
+  - Standard deviation: 12
+  - Median: 80
+  - Maximum: 100
+  - Minimum: 25
+]
 
 ---
 class: inverse, middle, center
