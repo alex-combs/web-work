@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 5: Visualizations"
+subtitle: "Lab 5: Visualizations"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -222,11 +222,11 @@ class: inverse, middle, center
 
 # Set up
 
-> **Create a new project named "rlab5" and start new R Markdown document Change YAML and global options. Delete template.**
+> **Create a new project named "lab5" and start new R Markdown document Change YAML and global options. Delete template.**
 
 ```{r, eval=FALSE}
 ---
-title: "RLab5: Data Viz"
+title: "Lab5: Data Viz"
 author: "Your Name"
 output:
   html_document:
