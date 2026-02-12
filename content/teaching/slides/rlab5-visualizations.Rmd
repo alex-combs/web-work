@@ -35,17 +35,6 @@ class: inverse, middle, center
 ---
 # Choosing graphs
 
-Among common types of graphs, which are appropriate for visualizing the following scenarios?
-
-- values for a categorical variable
-- values of a single continuous variable
-- relationship between values of two categorical variables
-- relationship between values of a continuous variable and a categorical variable
-- relationship between values of two continuous variable?
-
----
-# Choosing graphs
-
 ```{r, echo=FALSE}
 gap07 <- filter(gapminder, year==2007)
 gapminder %>% 
@@ -341,7 +330,7 @@ nhanes %>%
 
 - Common to have `NA` in survey data. Usually okay to drop these for graphs.
 
-> **Insert `drop_na(gun.use)` prior to using the `ggplot` function**
+> **Add `drop_na(gun.use)` as part of the pipeline prior to using the `ggplot` function**
 
 > **Re-run graph**
 
