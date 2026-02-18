@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Regression_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="Regression_files/header-attrs-2.30/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: February 11, 2025
+### Last updated: February 18, 2026
 ]
 
 ---
@@ -72,12 +72,12 @@ ggplot(States, aes(x = dollars, y = SATM)) +
   theme(text=element_text(size=18))
 ```
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-3-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Correlation conclusions
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - States that spend more on public education tend to have lower average SAT Math scores among its graduating high school students
 
@@ -116,7 +116,7 @@ ggplot(States, aes(x = dollars, y = SATM)) +
        y = 'Average SAT Math score')
 ```
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-6-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Equation of a line
@@ -399,7 +399,7 @@ class: inverse, center, middle
 
 
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-16-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # The residual
@@ -723,11 +723,11 @@ get_regression_summaries(satm_mod2)
 # Goodness of fit
 
 .pull-left[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-27-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-28-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 - Note that the data points in model 2 (right) are closer to the regression line -&gt; more explained variance in `SATM` -&gt; higher `\(R^2\)`
@@ -842,11 +842,11 @@ class: inverse, center, middle
 - We found states spending more on education tend to have lower SAT math scores, and states with a higher percent of graduates taking the SAT tend to have lower SAT math scores. What may be going on?
 
 .pull-left[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-31-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-32-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -854,7 +854,7 @@ class: inverse, center, middle
 
 - Relationship between spending and SAT participation
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-33-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Running multiple regression
@@ -1177,9 +1177,9 @@ class: inverse, middle, center
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"countIncrementalSlides": false,
-"highlightLines": true
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
