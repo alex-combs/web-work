@@ -32,6 +32,13 @@ library(knitr)
 - Understand what it means to control for other variables
 
 ---
+# Example Data
+
+```{r}
+glimpse(States)
+```
+
+---
 # Correlation coefficients
 
 ```{r}
@@ -233,13 +240,6 @@ class: inverse, middle, center
 
 - Explore data
 
-```{r}
-glimpse(States)
-```
-
----
-# Running regression
-
 ```{r, eval=FALSE}
 summary(States)
 ```
@@ -332,9 +332,10 @@ viz.resid
 
 $$\hat{SATM} = 560 - 12.17 \times Dollars$$
 
-- What is the predicted `SATM` for a state where `dollars` equals $7,887? 
+- Suppose we were interested in predicted `SATM` for a few specific values for `dollars`:
 
-- How about a state where `dollars` equals $4,231?
+  - $3,648
+  - $7,887
 
 --
 
@@ -555,9 +556,13 @@ $$\hat{y}=b_0+b_1x_1+b_2x_2+\dots+b_kx_k$$
 ---
 # Controlling for other factors
 
-- The two previous regressions each controlled for one variable we might theorize affects average state SAT math scores
+- The two previous regressions each controlled for one variable we might hypothesize affects average state SAT math scores
+
+--
 
 - There is any number of additional variables contained in the error term $\epsilon$
+
+--
 
 - If we can, we should include those additional variables in the same regression model
 
@@ -656,10 +661,10 @@ What is the predicted average SAT math score for a state that spends $5,000 per 
 ---
 class: inverse, middle, center
 
-# Connecting results to policy decisions
+# Connecting results to conclusions
 
 ---
-# Policy Decision
+# Policy conclusions
 
 - Let's ignore inference for now and treat these results as if they are statistically meaningful.
 
@@ -704,7 +709,7 @@ get_regression_table(satm_mod4) %>%
 
 --
 
-- How might these results inform a state policy decision concerning education spending and college entrance exam participation?
+- How might these results inform state government officials concerned with the relationship between spending and academic performance (SATM)?
 
 ---
 class: inverse, middle, center
