@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 6: Combining Data"
+subtitle: "Lab 6: Combining Data"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -23,11 +23,11 @@ output:
 ---
 # Set up
 
-> **Create a new project named "rlab6" and start new R Markdown document. Change YAML and global options. Delete template.**
+> **Create a new project named "lab6" and start new R Markdown document. Change YAML and global options. Delete template.**
 
 ```{r, eval=FALSE}
 ---
-title: "RLab 6: Combining Data"
+title: "Lab 6: Combining Data"
 author: "Your Name"
 output:
   html_document:
