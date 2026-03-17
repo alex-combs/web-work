@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Causality_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="Causality_files/header-attrs-2.30/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: March 11, 2025
+### Last updated: March 17, 2026
 ]
 
 ---
@@ -85,7 +85,7 @@ class: center, middle, inverse, title-slide
 ---
 # Credible Analysis
 
-&lt;img src="lectures_files/credible.png" width="1304" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/credible.png" alt="" width="1304" style="display: block; margin: auto;" /&gt;
 
 ---
 # Internal validity
@@ -179,12 +179,12 @@ class: inverse, center, middle
 
 `$$Happiness=\beta_0+\beta_1Age+\beta_2Income+\epsilon$$`
 
-&lt;img src="lectures_files/dag15.png" width="843" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag15.png" alt="" width="843" style="display: block; margin: auto;" /&gt;
 
 ---
 # Backdoor path
 
-&lt;img src="lectures_files/dag3.png" width="552" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag3.png" alt="" width="552" style="display: block; margin: auto;" /&gt;
 
 - `\(Z\)` is a **confounder**
 
@@ -204,7 +204,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-&lt;img src="lectures_files/dag4.png" width="700" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag4.png" alt="" width="700" style="display: block; margin: auto;" /&gt;
 
 .pull-left[
 `$$Y=\beta_0+\beta_1X+\epsilon$$`
@@ -232,7 +232,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-&lt;img src="lectures_files/dag4.2.png" width="447" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag4.2.png" alt="" width="447" style="display: block; margin: auto;" /&gt;
 
 .center[
 `$$X \rightarrow Y$$`
@@ -267,7 +267,7 @@ class: inverse, center, middle
 ---
 # Collider variable
 
-&lt;img src="lectures_files/dag6.png" width="533" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag6.png" alt="" width="533" style="display: block; margin: auto;" /&gt;
 
 - `\(Z\)` is a **collider** in this case
 
@@ -276,7 +276,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-&lt;img src="lectures_files/dag5.png" width="351" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag5.png" alt="" width="351" style="display: block; margin: auto;" /&gt;
 
 .center[
 `\(X \rightarrow Y\)`
@@ -302,7 +302,7 @@ class: inverse, center, middle
 ---
 # The error term and OVB
 
-&lt;img src="lectures_files/dag8.png" width="796" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag8.png" alt="" width="796" style="display: block; margin: auto;" /&gt;
 
 .center[
 
@@ -321,7 +321,7 @@ class: inverse, center, middle
 `$$Happiness=\beta_0+\beta_1Age+\beta_2Income+\epsilon$$`]
 
 .pull-left[
-&lt;img src="lectures_files/dag15.png" width="843" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag15.png" alt="" width="843" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -371,14 +371,14 @@ class: inverse, center, middle
 
 - Suppose we settle on the following DAG
 
-&lt;img src="lectures_files/dag10.png" width="473" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag10.png" alt="" width="473" style="display: block; margin: auto;" /&gt;
 
 - Next step is to list all paths we can trace between `\(C\)` and `\(Y\)`, drawing the arrows according to their direction in our diagram
 
 ---
 # Using DAGS
 
-&lt;img src="lectures_files/dag10.png" width="394" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag10.png" alt="" width="394" style="display: block; margin: auto;" /&gt;
 
 1. `\(C \rightarrow Y\)` (the causal effect of college on earnings)
 
@@ -421,7 +421,7 @@ class: inverse, center, middle
 ---
 # Assumptions &amp; alternatives
 
-&lt;img src="lectures_files/dag10.png" width="394" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag10.png" alt="" width="394" style="display: block; margin: auto;" /&gt;
 
 - Two key assumptions this DAG makes
 
@@ -436,7 +436,7 @@ class: inverse, center, middle
 ---
 # Assumptions &amp; alternatives
 
-&lt;img src="lectures_files/dag11.png" width="389" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag11.png" alt="" width="389" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -466,7 +466,7 @@ class: inverse, center, middle
 
 - All is not necessarily lost. Results may still be useful.
 
-&lt;img src="lectures_files/dag_ovbdirect.png" width="292" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag_ovbdirect.png" alt="" width="292" style="display: block; margin: auto;" /&gt;
 
 - If influence of `\(Z\)` is in same direction: bias is positive
 - If influence of `\(Z\)` is in opposite directions: bias is negative
@@ -502,7 +502,7 @@ class: inverse, center, middle
 ---
 # Causal inference models
 
-&lt;img src="lectures_files/dag14.png" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag14.png" alt="" width="468" style="display: block; margin: auto;" /&gt;
 
 - Random assignment breaks any OVB from the error term
 
@@ -598,14 +598,14 @@ biased &lt;- lm(Outcome ~ Treatment + Collider, data = collider_bias)
 
 - Suppose at-risk youth are identified by socioeconomic status, GPA, and absences
 
-&lt;img src="lectures_files/dag13.png" width="385" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag13.png" alt="" width="385" style="display: block; margin: auto;" /&gt;
 
 ---
 # Collider bias (2) bad sample
 
 `$$GPA = \beta_0 + \beta_1TotAbsences + \beta_2 SES + \epsilon$$`
 
-&lt;img src="lectures_files/dag13.png" width="385" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag13.png" alt="" width="385" style="display: block; margin: auto;" /&gt;
 
 .pull-left[
 
@@ -697,15 +697,15 @@ biased &lt;- lm(Outcome ~ Treatment + Collider, data = collider_bias)
 ---
 # Seeing Selection Bias
 
-&lt;img src="Causality_files/figure-html/unnamed-chunk-36-1.png" height="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Causality_files/figure-html/unnamed-chunk-36-1.png" alt="" height="90%" style="display: block; margin: auto;" /&gt;
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
