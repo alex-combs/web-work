@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Regression-with-nonlinears_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="Regression-with-nonlinears_files/header-attrs-2.30/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 02, 2025
+### Last updated: April 01, 2026
 ]
 
 ---
@@ -44,7 +44,7 @@ class: center, middle, inverse, title-slide
 
 - The relationship between `\(x\)` and `\(y\)` may not follow a linear path
 
-&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Common nonlinear variables
@@ -74,7 +74,7 @@ class: center, middle, inverse, title-slide
 
 `$$y=\beta_0+\beta_1x_1+\beta_2x_1^2+\beta_3x_2+...+\beta_kx_{k-1}+\epsilon$$`
 
-&lt;img src="lectures_files/quadratic.png" width="420" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/quadratic.png" alt="" width="420" style="display: block; margin: auto;" /&gt;
 
 .pull-left[
 If relationship between `\(x\)` and `\(y\)` is initially negative then eventually positive, linear term, `\(b_1\)`, will be negative and quadratic term, `\(b_2\)`, will be positive. 
@@ -211,7 +211,7 @@ class: inverse, center, middle
 ---
 # Viz
 
-&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-5-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Quadratic regression
@@ -267,12 +267,12 @@ class: inverse, center, middle
 ---
 # Transform skewed data
 
-&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Transform skewed data
 
-&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression-with-nonlinears_files/figure-html/unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Log-log Model
@@ -473,9 +473,9 @@ get_regression_table(log_lev) %&gt;%
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"countIncrementalSlides": false,
-"highlightLines": true
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
