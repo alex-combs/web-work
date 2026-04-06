@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 8: Regression Diagnostics"
+subtitle: "Lab 8: Regression Diagnostics"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -57,7 +57,7 @@ trump_vote <- hate_crimes %>%
 
 ```{r, eval=FALSE}
 ---
-title: "RLab 8: Regression Diagnostics"
+title: "Lab 8: Regression Diagnostics"
 author: "Your Name"
 output: 
   html_document:
