@@ -154,17 +154,17 @@ freq.table %>%
 ---
 # Creating TS object
 
-- `acc_taxrev` contains annual property tax and sales tax revenues for Athens-Clarke County from 1992-2022
+- `acc_taxrev` contains annual property tax and sales tax revenues for Athens-Clarke County from 1992-2023
 
 > **In a new code chunk, set `acc_taxrev` as a TS object.**
 
 ```{r, eval=FALSE}
-ts_taxrev <- ts(acc_taxrev[,-1], start = 1992, end = 2022, 
+ts_taxrev <- ts(acc_taxrev[,-1], start = 1992, end = 2023, 
                frequency = 1)
 ```
 
 ```{r, include=FALSE}
-ts_taxrev <- ts(acc_taxrev[,-1], start = 1992, end = 2022, 
+ts_taxrev <- ts(acc_taxrev[,-1], start = 1992, end = 2023, 
                frequency = 1)
 ```
 
