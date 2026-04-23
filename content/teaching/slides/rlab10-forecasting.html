@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="rlab10-forecasting_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="rlab10-forecasting_files/header-attrs-2.30/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 # PADP 7120 Data Applications in PA
 ]
 .subtitle[
-## RLab 9: Forecasting
+## Lab 7: Forecasting
 ]
 .author[
 ### Alex Combs
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 22, 2025
+### Last updated: April 23, 2026
 ]
 
 ---
@@ -70,26 +70,6 @@ library(forecast)
 library(fpp2)
 options(scipen = 999)
 ```
-
----
-# Set-up
-
-&gt; **Download `acc_select_tax_rev` from eLC.**
-
-&gt; **Open `acc_select_tax_rev` in Excel or whatever spreadsheet software you have**
-
-&gt; **Please do not work ahead yet**
-
----
-# Non-statistical forecast
-
-- Statistical forecasting does not necessarily produce the best forecast
-
-- Two common non-statistical methods:
-  - Expert judgement
-  - Delphi method
-  
-- Let's put a non-statistical approach to the test...
 
 ---
 # Import data
@@ -139,11 +119,11 @@ ts_name &lt;- ts(data_set_name[,-1],
 
 | year| revenue|
 |----:|-------:|
-| 2016|      37|
-| 2017|      33|
+| 2016|      48|
+| 2017|      30|
 | 2018|      59|
-| 2019|      42|
-| 2020|      49|
+| 2019|      33|
+| 2020|      39|
 
 
 ``` r
@@ -163,75 +143,21 @@ ts_data &lt;- ts(data[,-1],
 
 | year| quarter| revenue|
 |----:|-------:|-------:|
-| 2016|       1|      55|
-| 2016|       2|      59|
+| 2016|       1|      54|
+| 2016|       2|      41|
 
 
 
 | year| quarter| revenue|
 |----:|-------:|-------:|
-| 2020|       3|      55|
-| 2020|       4|      50|
+| 2020|       3|      57|
+| 2020|       4|      57|
 
 
 ``` r
 ts_quarterly &lt;- ts(quarterly[,-1], 
                    start = 2016, end = 2020,
 *                  frequency = 4)
-```
-
----
-# TS object examples
-
-- monthly data (top &amp; bottom rows shown)
-
-
-
-
-| year| month| revenue|
-|----:|-----:|-------:|
-| 2016|     1|      24|
-| 2016|     2|      56|
-
-
-
-| year| month| revenue|
-|----:|-----:|-------:|
-| 2020|    11|      44|
-| 2020|    12|      51|
-
-
-``` r
-ts_monthly &lt;- ts(monthly[,-1], 
-                 start = 2016, end = 2020,
-*                  frequency = 12)
-```
-
----
-# TS object examples
-
-- biennial data (top &amp; bottom rows shown)
-
-
-
-
-| year| revenue|
-|----:|-------:|
-| 2000|      47|
-| 2002|      41|
-
-
-
-| year| revenue|
-|----:|-------:|
-| 2018|      58|
-| 2020|      69|
-
-
-``` r
-ts_biennial &lt;- ts(biennial[,-1], 
-                  start = 2000, end = 2020,
-*                  frequency = 0.5)
 ```
 
 ---
@@ -288,14 +214,14 @@ ts_taxrev &lt;- ts(acc_taxrev[,-1], start = 1992, end = 2022,
 ---
 # Patterns
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-16-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Trend with seasonality
 
 ---
 # Patterns
 
-&lt;img src="labs_files/patterns-colfinance.png" width="1005" style="display: block; margin: auto;" /&gt;
+&lt;img src="labs_files/patterns-colfinance.png" alt="" width="1005" style="display: block; margin: auto;" /&gt;
 
 ---
 # Exploratory plots (line graphs)
@@ -360,7 +286,7 @@ class: inverse, center, middle
 ---
 # Autocorrelation
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-19-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Clear trend; we should expect presence of autocorrelation
 
@@ -374,7 +300,7 @@ class: inverse, center, middle
 ggAcf(ts_taxrev[,1])
 ```
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-20-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 - Blue dashed line distinguishes statistically significant autocorrelation
@@ -421,12 +347,12 @@ ggAcf(ts_taxrev[,1])
 ---
 # Simple forecast models
 
-&lt;img src="labs_files/forcastcompare1.png" width="1347" style="display: block; margin: auto;" /&gt;
+&lt;img src="labs_files/forcastcompare1.png" alt="" width="1347" style="display: block; margin: auto;" /&gt;
 
 ---
 # Simple forecast models
 
-&lt;img src="labs_files/forecastcompare2.png" width="1339" style="display: block; margin: auto;" /&gt;
+&lt;img src="labs_files/forecastcompare2.png" alt="" width="1339" style="display: block; margin: auto;" /&gt;
 
 ---
 # Simple Forecasts in R
@@ -477,7 +403,7 @@ proprev_drift &lt;- rwf(ts_taxrev[,1], drift = TRUE, h = 4)
 autoplot(proprev_meanf)
 ```
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-27-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Mean forecast will be the worst model for strong trend data
 
@@ -489,7 +415,7 @@ autoplot(proprev_meanf)
 autoplot(proprev_naive)
 ```
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-28-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Viewing forecasts in R
@@ -499,7 +425,7 @@ autoplot(proprev_naive)
 autoplot(proprev_drift)
 ```
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-29-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Reporting plausible ranges
@@ -524,7 +450,7 @@ summary(proprev_drift)
 ---
 # Practice
 
-&gt; **In a new code chunk, use the drift forecast on sales tax for next 3 years**
+&gt; **In a new code chunk, use the drift forecast on sales tax for next 5 years**
 
 
 
@@ -542,21 +468,21 @@ class: inverse, center, middle
 
 - Assigns a descending weight to each past value
 
-&lt;img src="labs_files/expsmooth.png" width="1184" style="display: block; margin: auto;" /&gt;
+&lt;img src="labs_files/expsmooth.png" alt="" width="1184" style="display: block; margin: auto;" /&gt;
 
 ---
 # Exponential smoothing
 
 - Can also incorporate trend, damped or linear
 
-&lt;img src="labs_files/expsmooth-trend.png" width="1341" style="display: block; margin: auto;" /&gt;
+&lt;img src="labs_files/expsmooth-trend.png" alt="" width="1341" style="display: block; margin: auto;" /&gt;
 
 ---
 # Exponential smoothing
 
 - Can also incorporate seasonality that is additive (constant over time) or multiplicative (increases over time)
 
-&lt;img src="labs_files/expsmooth-season.png" width="1349" style="display: block; margin: auto;" /&gt;
+&lt;img src="labs_files/expsmooth-season.png" alt="" width="1349" style="display: block; margin: auto;" /&gt;
 
 ---
 # Exponential smoothing combinations
@@ -594,7 +520,7 @@ ets(ts_taxrev[,1]) %&gt;%
   autoplot()
 ```
 
-&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="rlab10-forecasting_files/figure-html/unnamed-chunk-39-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 - Chose `M`ultiplicative error, `Additive` trend, and `N`o seasonality
@@ -622,7 +548,7 @@ ets(ts_taxrev[,1]) %&gt;%
 ---
 # Practice
 
-&gt; **Use the `ets` function on sales tax for the next 3 years to produce a graph and table.**
+&gt; **Use the `ets` function on sales tax for the next 5 years to produce a graph and table.**
 
 
 
@@ -677,9 +603,9 @@ ets(ts_taxrev[,1]) %&gt;%
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"countIncrementalSlides": false,
-"highlightLines": true
+  "highlightStyle": "github",
+  "countIncrementalSlides": false,
+  "highlightLines": true
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 9: Forecasting"
+subtitle: "Lab 7: Forecasting"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -58,26 +58,6 @@ library(forecast)
 library(fpp2)
 options(scipen = 999)
 ```
-
----
-# Set-up
-
-> **Download `acc_select_tax_rev` from eLC.**
-
-> **Open `acc_select_tax_rev` in Excel or whatever spreadsheet software you have**
-
-> **Please do not work ahead yet**
-
----
-# Non-statistical forecast
-
-- Statistical forecasting does not necessarily produce the best forecast
-
-- Two common non-statistical methods:
-  - Expert judgement
-  - Delphi method
-  
-- Let's put a non-statistical approach to the test...
 
 ---
 # Import data
@@ -159,50 +139,6 @@ tail(quarterly, n = 2) %>% kable()
 ts_quarterly <- ts(quarterly[,-1], 
                    start = 2016, end = 2020,
                    frequency = 4) #<<
-```
-
----
-# TS object examples
-
-- monthly data (top & bottom rows shown)
-
-```{r, include=FALSE}
-monthly <- tibble::tibble(year = rep(2016:2020, 12), month = rep(1:12, 5), revenue = round(rnorm(60, 50, 10),0))
-
-monthly <- arrange(monthly, year, month)
-```
-
-```{r, echo=FALSE}
-head(monthly, n = 2) %>% kable()
-tail(monthly, n = 2) %>% kable()
-```
-
-```{r, eval=FALSE}
-ts_monthly <- ts(monthly[,-1], 
-                 start = 2016, end = 2020,
-                   frequency = 12) #<<
-```
-
----
-# TS object examples
-
-- biennial data (top & bottom rows shown)
-
-```{r, include=FALSE}
-biennial <- tibble::tibble(year = seq(2000, 2020, 2), revenue = round(rnorm(11, 50, 10),0))
-
-biennial <- arrange(biennial, year)
-```
-
-```{r, echo=FALSE}
-head(biennial, n = 2) %>% kable()
-tail(biennial, n = 2) %>% kable()
-```
-
-```{r, eval=FALSE}
-ts_biennial <- ts(biennial[,-1], 
-                  start = 2000, end = 2020,
-                   frequency = 0.5) #<<
 ```
 
 ---
@@ -482,10 +418,10 @@ kable(sum.proprev_naive)
 ---
 # Practice
 
-> **In a new code chunk, use the drift forecast on sales tax for next 3 years**
+> **In a new code chunk, use the drift forecast on sales tax for next 5 years**
 
 ```{r, echo=FALSE}
-salestax_drift <- rwf(ts_taxrev[,2], drift = TRUE, h = 3)
+salestax_drift <- rwf(ts_taxrev[,2], drift = TRUE, h = 5)
 ```
 
 > **Produce the graph and the numerical results**
@@ -586,17 +522,17 @@ kable(sum.ets_proprev)
 ---
 # Practice
 
-> **Use the `ets` function on sales tax for the next 3 years to produce a graph and table.**
+> **Use the `ets` function on sales tax for the next 5 years to produce a graph and table.**
 
 ```{r, eval=FALSE, echo=FALSE}
 ets(ts_taxrev[,2]) %>% 
-  forecast(h=3) %>% 
+  forecast(h=5) %>% 
   autoplot()
 ```
 
 ```{r, eval=FALSE, echo=FALSE}
 ets(ts_taxrev[,2]) %>% 
-  forecast(h=3) %>% 
+  forecast(h=5) %>% 
   summary()
 ```
 
