@@ -38,7 +38,7 @@ options(scipen = 999)
 
 ```{r, eval=FALSE}
 ---
-title: "RLab 9: Forecasting"
+title: "Lab 7: Forecasting"
 author: "Your Name"
 output: 
   html_document:
