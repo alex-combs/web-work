@@ -1,6 +1,6 @@
 ---
 title: "PADP 7120 Data Applications in PA"
-subtitle: "RLab 1: Intro to R"
+subtitle: "Lab 1: Intro to R"
 author: "Alex Combs"
 institute: "UGA | SPIA | PADP"
 date: "Last updated: `r format(Sys.time(), '%B %d, %Y')`"
@@ -26,7 +26,7 @@ class: inverse, middle, center
 - Export your R markdown document to HTML
 
 ---
-# How to Follow RLab Slides
+# How to Follow Lab Slides
 
 - Bullets provide background, concepts, etc.
 
@@ -42,21 +42,17 @@ summary(cars)
 
 - Or `in-line code like this`
 
-- You can copy-paste code from slides to your RStudio
-
 ---
-# RLab Process
+# Lab Process
 
-- I will complete RLabs along with you to help show what to do
-
-- This involves switching between slides and RStudio, blocking one from your view of the screen
+- I will complete Labs along with you to help show what to do
 
 - Helps to have the slides open on your computer
 
-- If you need to see something I did previously in RStudio, maybe wait until I switch back to RStudio before asking unless you feel yourself getting lost. 
+- You can copy-paste code from slides to your RStudio
 
 ---
-# RLab Process
+# Lab Process
 
 - Highly likely that you will encounter errors. This is normal. This lab will deliberately cause a few errors.
 
@@ -99,20 +95,18 @@ summary(cars)
 
 - Places a `.Rproj` in the folder you can open to return to your project
 
---
-
-> **Create a project called "rlab1" in a location of your choice (I will demonstrate)**
+- All of our Labs will begin with this process
 
 --
 
-- All of our R Labs will begin with this process
+> **Create a project called "Lab1" in a location of your choice (I will demonstrate)**
 
-- R Demo 1 on eLC demonstrates this process in case you forget
+--
 
 ---
 # Changing settings
 
-- If using your own copy of RStudio, let's change some RStudio settings that should reduce the chance of errors
+- If using RStudio locally on your own computer, let's change some settings that should reduce the chance of errors
 
 > **Go to "Tools" in the RStudio menu bar at the top. Click on "Global Options" at the bottom of the menu.**
 
@@ -341,12 +335,12 @@ states2 <- select(states1, state, pop_1990)
 ---
 class: inverse, middle, center
 
-# Let's create our first RLab Rmd to upload to eLC
+# Let's create our first Lab Rmd to upload to eLC
 
 ---
 # Set-up
 
-> **Download the file "rlab1_profile" from eLC and add to your project folder**
+> **Download the file "Lab1_profile" from eLC and add to your project folder**
 
 --
 
@@ -403,4 +397,4 @@ states1
 ---
 # Upload to eLC
 
-> **Upload your Rmd file to the RLab1 assignment dropbox on eLC.**
+> **Upload your Rmd file to the Lab1 assignment dropbox on eLC.**
