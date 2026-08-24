@@ -42,7 +42,7 @@ output:
 ```{r, include=FALSE}
 library(tidyverse)
 library(knitr)
-generic <- tibble(Variable_1 = c("Member 1 of Unit of Analysis", "Member 2 of Unit of Analysis", "Member 3 of Unit of Analysis"),
+generic <- tibble(Variable_1 = c("Observation 1 of Unit of Analysis", "Observation 2 of Unit of Analysis", "Observation 3 of Unit of Analysis"),
                   Variable_2 = c("Datum", "Datum", "Datum"),
                   Variable_3 = c("Datum", "Datum", "Datum"))
 ```
@@ -51,9 +51,9 @@ generic <- tibble(Variable_1 = c("Member 1 of Unit of Analysis", "Member 2 of Un
 kable(generic, format = 'html')
 ```
 
-- Each row is (or should be) an **observation**
+- Each row should be an **observation**
 
-- Each column is (or should be) a **variable**
+- Each column should be a **variable**
 
 ---
 # Identify the unit of analysis
@@ -61,7 +61,7 @@ kable(generic, format = 'html')
 - What is the likely unit of analysis based on the variable names?
 
 ```{r, echo=FALSE}
-generic <- tibble(Var1 = c("Unit of Analysis", "Unit", "Unit"),
+generic <- tibble(Var1 = c("Unit of Analysis", "Unit of Analysis", "Unit of Analysis"),
                   GDP = c("Datum", "Datum", "Datum"),
                   Population = c("Datum", "Datum", "Datum"))
 kable(generic, format = 'html')
@@ -73,7 +73,7 @@ kable(generic, format = 'html')
 - What is the likely unit of analysis based on the variable names?
 
 ```{r, echo=FALSE}
-generic <- tibble(Var1 = c("Unit of Analysis", "Unit", "Unit"),
+generic <- tibble(Var1 = c("Unit of Analysis", "Unit of Analysis", "Unit of Analysis"),
                   GRE_Score = c("Datum", "Datum", "Datum"),
                   Income = c("Datum", "Datum", "Datum"))
 kable(generic, format = 'html')

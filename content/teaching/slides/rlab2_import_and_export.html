@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: January 22, 2026
+### Last updated: August 24, 2026
 ]
 
 ---
@@ -223,7 +223,7 @@ output:
 ``` r
 ---
 title: "Lab2: Import &amp; Export"
-author: "Alex Combs"
+author: "Your Name"
 output:
   html_document:
 *   df_print: paged
@@ -237,13 +237,13 @@ output:
 ---
 # YAML themes
 
-This is not required, but you can change the theme of your document (similar to themed templates in Microsoft Office) like below.
+**Not required**, but you can change the theme of your document (similar to themed templates in Microsoft Office) like below.
 
 
 ``` r
 ---
 title: "Lab2: Import &amp; Export"
-author: "Alex Combs"
+author: "Your Name"
 output:
   html_document:
     df_print: paged
@@ -384,7 +384,7 @@ anyname &lt;- read_excel("filename.xlsx")
 &gt; **Name the saved data as ga_schdist_raw**
 
 ---
-# Preserve or Clean on Import
+# Cleaning Data During Import
 
 - The previous two slides cover all the code needed to import the two most common public data file formats.
 
@@ -394,7 +394,7 @@ anyname &lt;- read_excel("filename.xlsx")
 
 &gt; **Click on the two data sets you just saved to the environment.**
 
-&gt; **Let's examine whether data look correct.**
+&gt; **Let's examine whether data look clean**
 
 ---
 # Importing data
@@ -418,7 +418,7 @@ anyname &lt;- read_excel("filename.xlsx")
   - At least first 6 rows should be skipped
   - Variable names are very long
   - Row 231 and below contain information we don't want to import
-  - Note that the data we want to import runs from cells A7 to I230
+  - Note that the rectangle of data we want to import runs from cells A7 (top-left) to D230
 
 ---
 # Importing data
@@ -451,7 +451,7 @@ anyname &lt;- read_excel("filename.xlsx")
 ---
 # Importing data
 
-&gt; **Notice there is a "Range" option in the bottom left. Enter `A7:I230`.**
+&gt; **Notice there is a "Range" option in the bottom left. Enter `A7:D230`.**
 
 --
 
@@ -521,14 +521,14 @@ class: inverse, center, middle
 
 - If Word is installed on your computer, knitting to Word should work
 
-- Good way to get all text, graphs, and tables in a final Word document
+- Good way to get all text, graphs, and tables in a draft Word document
 
-- Can then change style and formatting
+- Can then format accordingly
 
 ---
 # Knit to PDF
 
-- To knit to PDF, you can install a light version of a program called LaTeX 
+- To knit to PDF, you can install a version of a program called LaTeX 
 
 
 ``` r
@@ -552,7 +552,7 @@ write_csv(name_of_object_in_environment, 'name_for_new_file.csv')
 
 --
 
-&gt; **Export the `ga_schdist_raw` object to a csv file. Name the file "ga_schdist_clean.csv"**
+&gt; **Export `ga_schdist_raw` to a csv file. Name the file "ga_schdist_clean.csv"**
 
 ---
 # Recap
