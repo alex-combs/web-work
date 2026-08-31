@@ -58,7 +58,7 @@ library(knitr)
 
 ```{r, eval=FALSE}
 ---
-title: "lab3: Data Wrangling"
+title: "Lab3: Data Wrangling"
 author: "Your Name"
 output:
   html_document:
