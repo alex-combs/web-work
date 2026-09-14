@@ -37,7 +37,7 @@ library(knitr)
 
 - This is a copy of lab 3 to help maintain consistency 
   
-> **Use the "Run" dropdown menu to "Run All" code**
+> **Run the setup code chunk at least. Note a new package was added: `knitr`**
 
 ---
 # Review
@@ -242,7 +242,7 @@ gapminder |>
 
 > **Copy and paste your code that made the summary table**
 
-> **Change the table so it reports these summary statistics by each year**
+> **Change the table so it reports min, median, and max `lifeExp` by `year`**
 
 ---
 # Kable options for tables
