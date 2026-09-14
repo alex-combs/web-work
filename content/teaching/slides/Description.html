@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: February 04, 2026
+### Last updated: September 14, 2026
 ]
 
 ---
@@ -66,13 +66,16 @@ class: center, middle, inverse, title-slide
 ---
 # Descriptive vs. inferential
 
-- Suppose we conduct a survey to learn more about employment and earning outcomes among MPA graduates.
+- Suppose we survey a subset of MPA graduates to learn about employment and earning outcomes.
 
 - Are the following questions **descriptive** or **inferential**?
 
 --
 
 - What is the average income of respondents?
+
+--
+
 - What is the average income of MPA graduates?
 
 --
@@ -95,7 +98,7 @@ class: center, middle, inverse, title-slide
   - Also referred to as an **estimate**
 
 ---
-# Back to Survey Example
+# Survey Example
 
 Suppose our survey of UGA MPA alumni receives 100 responses and and the median income of respondents is $80,000.
 
@@ -104,42 +107,24 @@ Suppose our survey of UGA MPA alumni receives 100 responses and and the median i
 ---
 # Descriptive vs. inferential
 
-Suppose we are told the average salary of college-educated women in Georgia is greater than the national average for college-educated women. 
-
-Suppose we set out to confirm the average salary in Georgia for ourselves. We survey a sample of 1,000 college-educated women in Georgia and record their income.
+Suppose we want to know the average salary of college-educated women in Georgia. We survey a sample of 1,000 college-educated women in Georgia and record their income.
 
 --
 
 - What is the population and what is the sample?
+
+--
+
 - What is the parameter we intend to estimate?
+
+--
+
 - What is the statistic we will use to estimate the parameter?
-
----
-# Descriptive vs. inferential
-
-Suppose we want to know the percent of Clarke County residents who have a valid ID for an upcoming election.
-
---
-
-What is the population?
-
---
-
-We survey people entering Baldwin Hall if they have a valid ID according to Georgia's election laws. We get 100 responses, and 80% said they have a valid ID.
-
---
-
-- Is our result of 80% a population parameter or an estimate?
-
---
-
-- Why might we have a sample size less than 100?
 
 ---
 class: inverse, middle, center
 
 # Data description
-
 
 ---
 # Distribution
@@ -366,14 +351,14 @@ median(ncbirths$weeks)
 
 - Mean is sensitive to extreme values, median is not
 
-- Median is better to use when a distribution is skewed
+- Median may be better to use when a distribution is skewed
 
-- Mode is can be used for discrete or categorical variables
+- Mode is useful for discrete or categorical variables with few possible values
 
 ---
 # Mean vs. median vs. mode
 
-- Which measure of center is best for describing typical weeks pregnant?
+- If distribution is symmetrical, little difference between mean and median
 
 .pull-left[
 &lt;img src="Description_files/figure-html/unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" /&gt;
@@ -401,7 +386,7 @@ median(ncbirths$weeks)
 ---
 # Mean vs. median vs. mode
 
-- Which measure of center is best for describing typical GDP per capita?
+- As distribution becomes skewed, mean and median begin to differ
 
 .pull-left[
 &lt;img src="Description_files/figure-html/unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" /&gt;
@@ -521,7 +506,7 @@ var(ncbirths$weeks)
 ## [1] 7.583423
 ```
 
-- On average, weeks pregnant deviates from the average by 7.6 squared weeks.
+- On average, weeks pregnant deviates from the average by 7.6 weeks squared.
 
 --
 
@@ -609,6 +594,8 @@ IQR(ncbirths$weeks)
 &lt;/tbody&gt;
 &lt;/table&gt;
 ]
+
+--
 
 .pull-right[
 
@@ -712,19 +699,6 @@ range(gapminder$gdpPercap)
 ## [1]    241.1659 113523.1329
 ```
 ]
-
----
-# Choosing measures
-
-.pull-left[
-![](Description_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
-]
-
-.pull-right[
-&lt;img src="Description_files/figure-html/unnamed-chunk-32-1.png" alt="" style="display: block; margin: auto;" /&gt;
-]
-
-- Which measures of center and spread should we use or not use to describe the above distributions?
 
 ---
 # Keep the Distribution in Mind
@@ -838,7 +812,7 @@ class: inverse, middle, center
 
 - Distribution of a variable *given* another variable's values
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-33-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-31-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Measures of association
@@ -885,7 +859,7 @@ Suppose we want to investigate the association between the percent of a state po
 ]
 
 .pull-right[
-&lt;img src="Description_files/figure-html/unnamed-chunk-36-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-34-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -893,7 +867,7 @@ Suppose we want to investigate the association between the percent of a state po
 
 - Or percent of white population in poverty
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-37-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-35-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Units with higher values along the x-axis tend to have higher or lower values along the Y axis. Or no tendency.
 
@@ -904,7 +878,7 @@ Suppose we want to investigate the association between the percent of a state po
 
 - **Direction:** when one variable increases, does the other variable *tend* to increase or decrease
 
-- **Strength:** how closely do the variables move together
+- **Strength:** how closely do the variables move together along a linear path
 
 - **Magnitude:** when one variable increases a certain amount, how much does the other variable increase or decrease
 
@@ -918,7 +892,32 @@ Suppose we want to investigate the association between the percent of a state po
 - **Regression coefficient:** measures the **direction** and **magnitude** of association between an explanatory variable and an outcome variable
 
 ---
-# Correlation coefficient
+# Covariance
+
+`$$COV(X,Y)={\frac {1}{n-1}}\sum _{i=1}^{n}(x_{i}-\bar{x})(y_{i}-\bar{y})$$`
+
+- A positive value means X and Y tend to move in the same direction
+
+- A negative value means X and Y tend to move in opposite directions
+
+
+``` r
+cov(state_trump$share_white_poverty, state_trump$share_vote_trump)
+```
+
+```
+## [1] 11.70204
+```
+
+- Result does not tell us if the association is strong or weak
+
+- Need to rescale it according to the spread of X and Y
+
+---
+# Pearson's correlation coefficient
+
+`$$r_{x,y} = \frac{COV(X,Y)}{S_{x} \cdot S_{y}}$$`
+
 
 - Ranges between -1 and 1
 
@@ -934,7 +933,7 @@ Suppose we want to investigate the association between the percent of a state po
 
 ---
 # Correlation coefficient
-&lt;img src="Description_files/figure-html/unnamed-chunk-38-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-37-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ``` r
@@ -977,7 +976,7 @@ Which correlation is stronger?
 ---
 # Correlation
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-42-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-41-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 Unit of analysis is states.
 Is the correlation positive or negative?
@@ -985,7 +984,7 @@ Is the correlation positive or negative?
 ---
 # Correlation
 
-&lt;img src="Description_files/figure-html/unnamed-chunk-43-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Description_files/figure-html/unnamed-chunk-42-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ``` r
@@ -1006,6 +1005,139 @@ What is the interpretation?
 - Sensitive to extreme values
 
 - Is necessary but not sufficient to claim causation
+
+---
+class: inverse, middle, center
+
+# Describing categorical variables
+
+---
+# Describing categorical variables
+
+.pull-left[
+![](Description_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+
+- There isn't a continuous distribution to calculate mean, median, variance, SD, IQR, or range.
+
+- Mode still works.
+
+- Frequency and cross-tabulations (contingency tables) are common.
+]
+
+---
+# Frequency Table
+
+- Can use the `table()` to get counts
+
+
+``` r
+(premie.table &lt;- table(ncbirths$premie)) |&gt;  
+  kable(col.names = c('Term', 'Count'))
+```
+
+
+
+|Term      | Count|
+|:---------|-----:|
+|full term |   694|
+|premie    |   106|
+
+---
+# Frequency table
+
+- Can use `prop.table()` on the saved result of `table()` to get proportions
+
+
+``` r
+prop.table(premie.table) |&gt;  
+  kable(digits = 2, col.names = c('Term', 'Proportion'))
+```
+
+
+
+|Term      | Proportion|
+|:---------|----------:|
+|full term |       0.87|
+|premie    |       0.13|
+
+
+---
+# Contingency Table or Cross-tab
+
+
+``` r
+(mytable &lt;- table(ncbirths$habit, ncbirths$premie)) |&gt;  
+  kable()
+```
+
+
+
+|          | full term| premie|
+|:---------|---------:|------:|
+|nonsmoker |       625|     91|
+|smoker    |        69|     15|
+
+- Tabulates the intersections between levels of two categorical variables
+
+- Common to use proportions or percentages
+
+- Important whether you use row or column percentages
+
+---
+# Contingency Table
+
+
+``` r
+prop.table(mytable, 1) |&gt;  
+  kable(digits = 2)
+```
+
+
+
+|          | full term| premie|
+|:---------|---------:|------:|
+|nonsmoker |      0.87|   0.13|
+|smoker    |      0.82|   0.18|
+
+- This table reports row proportions; note each row sums to 1
+
+- This table conveys the relative frequency of term levels conditional on smoking status level
+
+- "Among non-smoking mothers, 87% carried full-term and 13% had premature births."
+
+---
+# Contingency Table
+
+
+``` r
+prop.table(mytable, 2) |&gt;  
+  kable(digits = 2)
+```
+
+
+
+|          | full term| premie|
+|:---------|---------:|------:|
+|nonsmoker |       0.9|   0.86|
+|smoker    |       0.1|   0.14|
+
+- This table reports column proportions; note each column sums to 1
+
+- Conditional on term status, the relative frequency of smoking
+
+- "Among full-term births, 90% came from non-smoking mothers and 10% came from smoking mothers."
+
+---
+# Contingency Table
+
+- If your question involves an outcome and a possible explanation
+
+- Place the outcome in the columns
+
+- Use row percentages
 
 ---
 # Recap
