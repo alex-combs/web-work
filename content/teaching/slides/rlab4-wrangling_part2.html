@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: February 04, 2026
+### Last updated: September 14, 2026
 ]
 
 ---
@@ -34,7 +34,7 @@ class: center, middle, inverse, title-slide
 
 
 - More wrangling
-  - combine functions using the pipe operator `%&gt;%`
+  - combine functions using the pipe operator `%&gt;%` or `|&gt;`
   - provide descriptive statistics using `summarize` and `group_by`
   
 - Make small improvements to the format of our tables
@@ -42,25 +42,18 @@ class: center, middle, inverse, title-slide
 ---
 # Set up
 
-&gt; **Open your RLab 3 project file**
+&gt; **Create a new project named "lab4" and start new R Markdown document.**
 
-&gt; **Open your RLab 3 Rmd file**
+&gt; **Download the Lab4 markdown document on eLC. Move it to your project folder. Open document. **
 
-&gt; **Or download the RLab 3 Rmd on eLC and move to your project folder to use instead**
-
-&gt; **Add the following package in the setup code chunk**
-
-
-``` r
-library(knitr)
-```
-
-&gt; **Use "Run" menu to run all code chunks**
+- This is a copy of lab 3 to help maintain consistency 
+  
+&gt; **Use the "Run" dropdown menu to "Run All" code**
 
 ---
 # Review
 
-- In last R Lab, we learned:
+- Previous lab, we learned:
   - Keep/remove rows using `filter`
   - Keep/remove columns using `select`
   - Create new or change existing variables using `mutate`
@@ -73,7 +66,7 @@ class: inverse, middle, center
 # Combining Wrangle Verbs
 
 ---
-# Pipe operator %&gt;%
+# Pipe operator
 
 - Allows us to run multiple commands, sequentially feeding the result of the previous line of code to the next
 
@@ -87,10 +80,10 @@ Prints the result
 
 
 ``` r
-dataset %&gt;% 
-  filter(___) %&gt;% 
-  select(___) %&gt;% 
-  mutate(___) %&gt;% 
+dataset |&gt; 
+  filter(___) |&gt; 
+  select(___) |&gt; 
+  mutate(___) |&gt; 
   arrange(___)
 ```
 ]
@@ -101,10 +94,10 @@ Saves the result
 
 
 ``` r
-dataset &lt;- dataset %&gt;% 
-  filter(___) %&gt;% 
-  select(___) %&gt;% 
-  mutate(___) %&gt;% 
+dataset &lt;- dataset |&gt; 
+  filter(___) |&gt; 
+  select(___) |&gt; 
+  mutate(___) |&gt; 
   arrange(___)
 ```
 ]
@@ -112,7 +105,7 @@ dataset &lt;- dataset %&gt;%
 ---
 # Pipe example
 
-Suppose I want to print a table of the top five countries with respect to percent of global GDP in 2007. Without using %&gt;%:
+Suppose I want to print a table of the top five countries with respect to percent of global GDP in 2007. Without using |&gt;:
 
 
 ``` r
@@ -136,17 +129,17 @@ slice_head(gdp_table, n = 5)
 ---
 # Pipe example
 
-To print same table with `%&gt;%`:
+To print same table with `|&gt;`:
 
 
 ``` r
-gapminder %&gt;% 
-  filter(year == 2007) %&gt;% 
+gapminder |&gt; 
+  filter(year == 2007) |&gt; 
   mutate(gdp = gdpPercap*pop,
          global_gdp = sum(gdp),
-         pct_gdp = (gdp/global_gdp)*100) %&gt;% 
-  select(country, pct_gdp) %&gt;% 
-  arrange(desc(pct_gdp)) %&gt;% 
+         pct_gdp = (gdp/global_gdp)*100) |&gt; 
+  select(country, pct_gdp) |&gt; 
+  arrange(desc(pct_gdp)) |&gt; 
   slice_head(n=5)
 ```
 
@@ -157,11 +150,11 @@ gapminder %&gt;%
 ---
 # Pipe operator practice
 
-&gt; **Add a heading "Pipe Operator"**
+&gt; **Add a heading "Pipe Operator" at the bottom of the document**
 
 &gt; **Start a new code chunk.**
 
-&gt; **Use the pipe operator to save a new dataset `gapminder52` that contains only 1952 observations and add the GDP variables we created earlier (consider copy-and-paste)**
+&gt; **Use the pipe operator to save a new dataset `gapminder52` that contains only 1952 observations and add the GDP variables we created earlier**
 
 --
 
@@ -196,8 +189,8 @@ Suppose I want to report median life expectancy and GDP per capita in 2007
 
 
 ``` r
-gapminder %&gt;% 
-  filter(year == 2007) %&gt;% 
+gapminder |&gt; 
+  filter(year == 2007) |&gt; 
   summarize("Median Life Expectancy" = median(lifeExp),
             "Median GDP per Capita" = median(gdpPercap))
 ```
@@ -225,8 +218,8 @@ gapminder %&gt;%
 
 
 ``` r
-data_set %&gt;% 
-  group_by(grouping_variable) %&gt;% 
+data_set |&gt; 
+  group_by(grouping_variable) |&gt; 
   summarize(name = function(variable))
 ```
 
@@ -239,9 +232,9 @@ Median life expectancy and GDP per capita in 2007 **by continent**
 
 
 ``` r
-gapminder %&gt;% 
-  filter(year == 2007) %&gt;% 
-* group_by(continent) %&gt;%
+gapminder |&gt; 
+  filter(year == 2007) |&gt; 
+* group_by(continent) |&gt;
   summarize('Median Life Expectancy' = median(lifeExp),
             'Median GDP per Capita' = median(gdpPercap))
 ```
@@ -286,10 +279,10 @@ gapminder %&gt;%
 
 
 ``` r
-gapminder52 %&gt;% 
-  select(country, pct_gdp) %&gt;% 
-  arrange(desc(pct_gdp)) %&gt;% 
-  slice_head(n=5) %&gt;% 
+gapminder52 |&gt; 
+  select(country, pct_gdp) |&gt; 
+  arrange(desc(pct_gdp)) |&gt; 
+  slice_head(n=5) |&gt; 
   kable(digits = 1,
         col.names = c('Country', 'Percent of Global GDP'),
         caption = 'Largest Economies in 1952')
@@ -301,14 +294,6 @@ gapminder52 %&gt;%
 - Suppose we want to examine how life expectancy has changed over time
 
 &gt; **Create the best table you can that shows a reader this information**
-
----
-# Testing AI
-
-&gt; **Time permitting, let's give the prompt on the previous slide to AI and see how it does.**
-
-- How difficult was it to provide a sufficient prompt?
-- Can we understand the answer?
 
 ---
 # Upload Rmd
