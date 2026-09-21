@@ -111,7 +111,7 @@ class: inverse, middle, center
 
 - Accessible, should need minimal written explanation
 
-- Don't distort perception
+- Don't distort perception or be clear when you do
 
 - Avoid uninformative decoration (chart junk)
 
@@ -159,9 +159,11 @@ class: inverse, middle, center
 ![:scale 70%](lectures_files/badstackbars.png)
 ]
 
-- Is type D greater in 2010 or 2011?
+--
 
-- Is type C greater in 2010 or 2011?
+- Is type D greater in 2013 or 2014?
+
+- Is type C greater in 2013 or 2014?
 
 - Dodged bar chart usually better
 
@@ -279,13 +281,15 @@ dataset %>%
 ---
 # Grammar of graphics
 
-- Many options with ggplot; virtually impossible to memorize
+- Many options with ggplot; impossible to memorize
 
-- The autocomplete menu that pops up is very helpful
+- The autocomplete menu in RStudio is helpful for showing what you can do
 
 - Can result in long chunks of code
 
 - But easy to reproduce graphs and copy code from previous graphs to use on different data
+
+- Once you learn the basics, great use case for AI to add formatting
 
 ---
 # Some common options
@@ -422,6 +426,8 @@ nhanes %>%
   theme_minimal()
 ```
 
+- `guide = "none"` suppresses a legend for each color
+
 ---
 # Gun use in the US
 
@@ -433,7 +439,7 @@ nhanes %>%
 nhanes %>% 
   drop_na(gun.use) %>% 
   ggplot(aes(x = gun.use, 
-             y = after_stat(100*(count)/sum(count)), #<<
+             y = after_stat(count/sum(count)*100), #<<
              fill = gun.use)) +
   geom_bar() +
   scale_fill_manual(values = c('grey', 'steelblue'), guide = "none") +
@@ -465,36 +471,45 @@ class: inverse, middle, center
 ---
 # COD research funding
 
-> **Try to create the following graph (color need not match)**
+> **Create the following graph**
 
 ```{r, echo=FALSE, message=FALSE, fig.height=4}
 cod_research_funding %>% 
   ggplot(aes(x = funding)) +
-  geom_histogram(fill = 'springgreen4', color = 'black') +
-  labs(y = 'Causes of Death', x = 'Research funding, 2004-2015') +
+  geom_histogram() +
   theme_minimal()
 ```
+
+- What does the height of each bar represent?
 
 ---
 # Adjusting bins or binwidth
 
 - RStudio sometimes suggests we adjust `bins` or `binwidth`
 
-- Default is 30 bins. This is too many for 30 observations.
+- Default is 30 bins. We only have 30 observations so R, uses fewer.
 
-> **Let's adjust the number of bins to 10**
+- Adjust number of bins when variable is continuous with many values
+
+- Adjust binwidth when variable is discrete
 
 ---
-# Adjusting bins or binwidth
+# Adjusting bins or binwidth and color
+
+> **Adjust the number of bins to 5. Add color and labels.**
 
 ```{r, eval=FALSE}
 cod_research_funding %>% 
   ggplot(aes(x = funding)) +
-  geom_histogram(bins = 10, #<<
+  geom_histogram(bins = 5, #<<
                  fill = 'springgreen4', color = 'black') +
   labs(y = 'Causes of Death', x = 'Research funding, 2004-2015') +
   theme_minimal()
 ```
+
+- Note the loss in precision as we decrease number of bins. Might not be ideal.
+
+- `color` controls the outline of each bar
 
 ---
 # Dealing with large values
@@ -558,6 +573,22 @@ cod_research_funding %>%
   geom_boxplot(fill = 'springgreen4', color = 'black') +
   labs(x = 'Research funding, 2004-2015 (billions of dollars)') +
   theme_minimal()
+```
+
+---
+# Remove elements of an axis
+
+- Great question for google or AI, let me check what google gives us
+
+- **Add `theme(axis.text.y  = element_blank())` to the end of your code. Don't forget to add another `+`**
+
+```{r, echo=FALSE, include=FALSE}
+cod_research_funding %>% 
+  ggplot(aes(x = funding/1000000000)) +
+  geom_boxplot(fill = 'springgreen4', color = 'black') +
+  labs(x = 'Research funding, 2004-2015 (billions of dollars)') +
+  theme_minimal() +
+  theme(axis.text.y  = element_blank())
 ```
 
 ---

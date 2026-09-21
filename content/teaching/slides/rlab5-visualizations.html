@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: February 12, 2026
+### Last updated: September 21, 2026
 ]
 
 ---
@@ -140,7 +140,7 @@ class: inverse, middle, center
 
 - Accessible, should need minimal written explanation
 
-- Don't distort perception
+- Don't distort perception or be clear when you do
 
 - Avoid uninformative decoration (chart junk)
 
@@ -188,9 +188,11 @@ class: inverse, middle, center
 ![:scale 70%](lectures_files/badstackbars.png)
 ]
 
-- Is type D greater in 2010 or 2011?
+--
 
-- Is type C greater in 2010 or 2011?
+- Is type D greater in 2013 or 2014?
+
+- Is type C greater in 2013 or 2014?
 
 - Dodged bar chart usually better
 
@@ -307,13 +309,15 @@ dataset %&gt;%
 ---
 # Grammar of graphics
 
-- Many options with ggplot; virtually impossible to memorize
+- Many options with ggplot; impossible to memorize
 
-- The autocomplete menu that pops up is very helpful
+- The autocomplete menu in RStudio is helpful for showing what you can do
 
 - Can result in long chunks of code
 
 - But easy to reproduce graphs and copy code from previous graphs to use on different data
+
+- Once you learn the basics, great use case for AI to add formatting
 
 ---
 # Some common options
@@ -441,6 +445,8 @@ nhanes %&gt;%
   theme_minimal()
 ```
 
+- `guide = "none"` suppresses a legend for each color
+
 ---
 # Gun use in the US
 
@@ -453,7 +459,7 @@ nhanes %&gt;%
 nhanes %&gt;% 
   drop_na(gun.use) %&gt;% 
   ggplot(aes(x = gun.use, 
-*            y = after_stat(100*(count)/sum(count)),
+*            y = after_stat(count/sum(count)*100),
              fill = gun.use)) +
   geom_bar() +
   scale_fill_manual(values = c('grey', 'steelblue'), guide = "none") +
@@ -485,31 +491,41 @@ class: inverse, middle, center
 ---
 # COD research funding
 
-&gt; **Try to create the following graph (color need not match)**
+&gt; **Create the following graph**
 
 ![](rlab5-visualizations_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+
+- What does the height of each bar represent?
 
 ---
 # Adjusting bins or binwidth
 
 - RStudio sometimes suggests we adjust `bins` or `binwidth`
 
-- Default is 30 bins. This is too many for 30 observations.
+- Default is 30 bins. We only have 30 observations so R, uses fewer.
 
-&gt; **Let's adjust the number of bins to 10**
+- Adjust number of bins when variable is continuous with many values
+
+- Adjust binwidth when variable is discrete
 
 ---
-# Adjusting bins or binwidth
+# Adjusting bins or binwidth and color
+
+&gt; **Adjust the number of bins to 5. Add color and labels.**
 
 
 ``` r
 cod_research_funding %&gt;% 
   ggplot(aes(x = funding)) +
-* geom_histogram(bins = 10,
+* geom_histogram(bins = 5,
                  fill = 'springgreen4', color = 'black') +
   labs(y = 'Causes of Death', x = 'Research funding, 2004-2015') +
   theme_minimal()
 ```
+
+- Note the loss in precision as we decrease number of bins. Might not be ideal.
+
+- `color` controls the outline of each bar
 
 ---
 # Dealing with large values
@@ -557,6 +573,15 @@ options(scipen = 999)
 ![](rlab5-visualizations_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
 
 ---
+# Remove elements of an axis
+
+- Great question for google or AI, let me check what google gives us
+
+- **Add `theme(axis.text.y  = element_blank())` to the end of your code. Don't forget to add another `+`**
+
+
+
+---
 class: inverse, middle, center
 
 # Graphing Two Variables
@@ -585,7 +610,7 @@ class: inverse, middle, center
 
 &gt; **Try changing the code to produce a graph with respondent's sex along the x axis**
 
-![](rlab5-visualizations_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+![](rlab5-visualizations_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
 
 ---
 # Grouped/dodged bar chart
@@ -599,7 +624,7 @@ class: inverse, middle, center
 ---
 # Grouped/dodged bar chart
 
-![](rlab5-visualizations_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+![](rlab5-visualizations_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 
 - Note percentages add to 100 across all respondents, not within each sex
 
@@ -641,7 +666,7 @@ fbi_gun_deaths %&gt;%
 ---
 # Barchart by category
 
-![](rlab5-visualizations_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](rlab5-visualizations_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
 
 - Can fill each bar with different color, add labels, and change theme just like before
 
@@ -657,7 +682,7 @@ fbi_gun_deaths %&gt;%
 ---
 # Barchart by category
 
-![](rlab5-visualizations_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](rlab5-visualizations_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 
 ---
 # Boxplots by category
@@ -675,7 +700,7 @@ fbi_gun_deaths %&gt;%
 ---
 # Boxplots by category
 
-![](rlab5-visualizations_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](rlab5-visualizations_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
 
 ---
 # Scatterplot
