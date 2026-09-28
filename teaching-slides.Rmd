@@ -24,7 +24,7 @@ output: html_document
 
 ### [Regression with Categories](content/teaching/slides/Regression-with-Categories.html)
 
-### [Regression with Categories](content/teaching/slides/Regression-with-Interactions.html)
+### [Regression with Interactions](content/teaching/slides/Regression-with-Interactions.html)
 
 ### [Regression with Nonlinear Variables](content/teaching/slides/Regression-with-nonlinears.html)
 
