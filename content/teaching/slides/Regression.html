@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: February 19, 2026
+### Last updated: September 28, 2026
 ]
 
 ---
@@ -104,21 +104,21 @@ ggplot(States, aes(x = dollars, y = SATM)) +
 - The strength of the relationship is moderate at -0.48
 
 ---
-# Basic purpose of regression
+# Overview of regression
 
 .pull-left[
 ![](Regression_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-- Measures direction, strength, and magnitude of association
+- Provides direction, strength, and magnitude of association
 - Draws line of **best fit** through paired x-y data points
 - Slope of line tells us the **average, predicted change in y given a change in x**
-- Or, at any value of x, the **predicted value of y**
+- Or, the line tells us at any value of x, the **predicted value of y**
 ]
 
 ---
-# Basic purpose of regression
+# Purpose of regression
 
 - Regression is a way of modeling an outcome `\(y\)` as a function of one or more explanatory variables `\(x\)`.
 
@@ -168,8 +168,8 @@ ggplot(States, aes(x = dollars, y = SATM)) +
 
 `$$\hat{y}=b_0+b_1x$$`
 
-- Which represents the predicted outcome?
-- Which represents the estimates?
+- `\(\hat{y}\)` (y-hat) is now the predicted outcome
+- `\(b\)` represents the estimate of `\(\beta\)`
 
 ---
 # Applied example
@@ -238,6 +238,29 @@ On average, a one thousand dollar increase in state spending on public education
 --
 
 - What is the predicted `SATM` in a state that spends $0 per student?
+
+---
+# Math behind regression coefficient
+
+$$ b_1 = \frac{Cov(X_1,Y)}{V(X_1)} $$
+
+- Numerator: co-movement between X and Y
+
+- Denominator: with respect to movement in X
+
+---
+# Ballentine Venn Diagram
+
+.pull-left[
+&lt;img src="lectures_files/ballentine1.png" alt="" width="572" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+$$ Cov(X_1,Y) = A$$
+$$ V(X_1) = A + C $$
+
+$$ b_1 = \frac{A}{A+C}$$
+]
 
 ---
 # Another example
@@ -347,13 +370,15 @@ summary(States)
 
 
 ---
-# Running regression
+# Regression in R
 
 
 ``` r
 satm_mod1 &lt;- lm(SATM ~ dollars, data = States)
 satm_mod2 &lt;- lm(SATM ~ percent, data = States)
 ```
+
+- Can obtain standard regression table using `get_regression_table` from the `moderndive` package
 
 
 ``` r
@@ -365,6 +390,54 @@ get_regression_table(satm_mod1)
 |:---------|--------:|---------:|---------:|-------:|--------:|--------:|
 |intercept |  560.374|    16.801|    33.353|       0|  526.610|  594.137|
 |dollars   |  -12.169|     3.139|    -3.876|       0|  -18.478|   -5.860|
+
+---
+# Regression in R
+
+- Or use R's native command `summary()`, no package needed
+
+
+``` r
+summary(satm_mod1)
+```
+
+```
+## 
+## Call:
+## lm(formula = SATM ~ dollars, data = States)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -70.72 -17.85  -1.98  16.48  75.51 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  560.374     16.801  33.353  &lt; 2e-16 ***
+## dollars      -12.169      3.139  -3.876 0.000315 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 30.55 on 49 degrees of freedom
+## Multiple R-squared:  0.2347,	Adjusted R-squared:  0.2191 
+## F-statistic: 15.03 on 1 and 49 DF,  p-value: 0.0003155
+```
+
+---
+# Regression in R
+
+- Separate command to obtain confidence intervals
+
+
+``` r
+confint(satm_mod1)
+```
+
+```
+##                 2.5 %     97.5 %
+## (Intercept) 526.61035 594.136720
+## dollars     -18.47785  -5.860478
+```
+
 
 ---
 class: inverse, center, middle
@@ -396,10 +469,12 @@ class: inverse, center, middle
 
 - The residual is the sample statistic of the population parameter `\(\epsilon\)`
 
+- The sum of residuals equals zero; drops out of the equation
 
 
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-16-1.png" alt="" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="Regression_files/figure-html/unnamed-chunk-19-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # The residual
@@ -411,22 +486,6 @@ class: inverse, center, middle
   - Violations of the assumptions that enable credible regression (bad)
   - Other variables that associate with or impact the outcome (sometimes OK)
   - Randomness of social phenomena (OK)
-  
-- Severity of the problem can depend on the purpose of the regression.
-
----
-# Residuals
-
-`$$\hat{SATM} = 560 - 12.17 \times Dollars$$`
-
-- Suppose we were interested in predicted `SATM` for a few specific values for `dollars`:
-
-  - $3,648
-  - $7,887
-
---
-
-- If there are `SATM` scores we can observe for states with these specific values for `dollars`, then we can check by how much our regression model overestimates or underestimates `SATM`.
 
 ---
 # Examining residuals
@@ -508,13 +567,13 @@ class: inverse, center, middle
 
 - Simple linear regression is also known as ordinary least squares (OLS)
 
-- Regression uses calculus and matrix algebra to determine the intercept and slope of a line that minimizes the sum of squared residuals (SSR)
+- Regression uses calculus and matrix algebra to determine the intercept and slope of a line that minimizes the **sum of squared errors (SSE)**
 
 ---
 # OLS
 
 .pull-left[
-![](Regression_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+![](Regression_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
@@ -655,6 +714,39 @@ sum(satm_mod1_points$sq_resid)
   - The percent of variation in `\(y\)` explained by our regression model
 
 ---
+# R-squared
+
+.pull-left[
+![](Regression_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+- `\(\bar{Y}\)` is our best baseline prediction without any predictors
+- Regression line is our best prediction once we use spending to predict
+- Black segment: total deviation
+- Orange segment: explained deviation
+- Purple segment: unexplained deviation (residual)
+]
+
+---
+# `\(R^2\)` using Ballentine Venn Diagram
+
+.pull-left[
+&lt;img src="lectures_files/ballentine1.png" alt="" width="572" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+**Sum of Squared Total (SST)** deviation
+$$ SST = A + B$$
+**Sum of Squared Regression (SSR)**
+$$ SSR = A $$
+**Sum of Squared Error (SSE)**
+$$ SSE = B $$
+
+$$ R^2 = \frac{A}{A+B} $$
+]
+
+---
 # Goodness of fit
 
 - Model 1 using `dollars`
@@ -724,11 +816,11 @@ get_regression_summaries(satm_mod2)
 # Goodness of fit
 
 .pull-left[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-27-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-32-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-28-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-33-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 - Note that the data points in model 2 (right) are closer to the regression line -&gt; more explained variance in `SATM` -&gt; higher `\(R^2\)`
@@ -800,7 +892,6 @@ Model 2 using percent
 --
 
 .pull-right[
-- Model 2 predictions are off by about 18 points, on average.
 - Model 2 is *statistically* better at predicting math.
 ]
 
@@ -824,22 +915,31 @@ class: inverse, center, middle
 
 --
 
-- This isolates the association between the outcome and each explanatory variable, holding all other variables constant at their respective means.
+- This isolates the association between the outcome and each explanatory variable, holding all other variables constant at their means.
 
 ---
 # Controlling for other factors
 
 - The two previous regressions each controlled for one variable we might hypothesize affects average state SAT math scores
 
---
-
 - There is any number of additional variables contained in the error term `\(\epsilon\)`
 
---
+- If we can, we usually want to include those additional variables in the same regression model
 
-- If we can, we should include those additional variables in the same regression model
+- Especially if those variables affect the explanatory variable currently in our model (more on this later)
 
-- Especially if those variables might affect the explanatory variable currently in our model
+---
+# Multiple regression venn diagram
+
+.pull-left[
+&lt;img src="lectures_files/ballentine2.png" alt="" width="576" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+- A case where `\(X_1\)` and `\(X_2\)` are correlated
+- `\(b_1\)` still equals `\(\frac{A}{A+C}\)`
+- Isolates association between `\(X_1\)` and `\(Y\)` by discarding `\(D\)` and `\(E\)`
+]
 
 ---
 # Making sense of our results
@@ -847,11 +947,11 @@ class: inverse, center, middle
 - We found states spending more on education tend to have lower SAT math scores, and states with a higher percent of graduates taking the SAT tend to have lower SAT math scores. What may be going on?
 
 .pull-left[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-31-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-37-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-&lt;img src="Regression_files/figure-html/unnamed-chunk-32-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-38-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -859,7 +959,7 @@ class: inverse, center, middle
 
 - Relationship between spending and SAT participation
 
-&lt;img src="Regression_files/figure-html/unnamed-chunk-33-1.png" alt="" style="display: block; margin: auto;" /&gt;
+&lt;img src="Regression_files/figure-html/unnamed-chunk-39-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Running multiple regression
@@ -1029,6 +1129,74 @@ What is the predicted average SAT math score for a state that spends $5,000 per 
 ---
 class: inverse, middle, center
 
+# Goodness-of-fit with multiple regression
+
+---
+# Goodness-of-fit
+
+**Model 2 using only percent**
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; r_squared &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; adj_r_squared &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; rmse &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sigma &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.736 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.731 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.57277 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.928 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Model 3 using dollars and percent**
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; r_squared &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; adj_r_squared &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mse &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; rmse &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sigma &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.768 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.759 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 271.2768 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.47048 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.977 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- Based on `\(R^2\)`, model 3 appears to be the better model, however...
+
+---
+# Goodness of fit
+
+- `\(R^2\)` mechanically increases as you add more variables whether or not they improve the model
+
+- Therefore, we should not use `\(R^2\)` to compare models with different numbers of explanatory variables
+
+--
+
+- **Adjusted `\(R^2\)` ** accounts for this, adjusting based on how useful each additional variable is at explaining the outcome
+
+- Model 3 still has the higher adjusted `\(R^2\)` so it remains the statistically better model
+
+- And the RMSE agrees; virtually always the case
+
+---
+class: inverse, middle, center
+
 # Connecting results to conclusions
 
 ---
@@ -1040,7 +1208,7 @@ class: inverse, middle, center
   
 - But spending seems to increase the percent of SAT participation, which then decreases average SAT math scores
 
-- Let's quantify the effect of spending on SAT participation
+- Let's quantify the association of spending on SAT participation
 
 ---
 # Spending and SAT participation
@@ -1108,75 +1276,8 @@ get_regression_table(satm_mod4)
 
 --
 
-- How might these results inform state government officials concerned with the relationship between spending and academic performance (SATM)?
+- Given these results, what might we say to a state official concerned about the relationship between spending and academic performance (measured as SATM in this case)?
 
----
-class: inverse, middle, center
-
-# Goodness-of-fit with multiple regression
-
----
-# Goodness-of-fit
-
-**Model 2 using only percent**
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; r_squared &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; adj_r_squared &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; rmse &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; sigma &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 0.736 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.731 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.57277 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.928 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-**Model 3 using dollars and percent**
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; r_squared &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; adj_r_squared &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mse &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; rmse &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; sigma &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 0.768 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.759 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 271.2768 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16.47048 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16.977 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-- Based on `\(R^2\)`, model 3 appears to be the better model, however...
-
----
-# Goodness of fit
-
-- `\(R^2\)` mechanically increases as you add more variables whether or not they improve the model
-
-- Therefore, we should not use `\(R^2\)` to compare models with different numbers of explanatory variables
-
---
-
-- **Adjusted `\(R^2\)` ** accounts for this, adjusting based on how useful each additional variable is at explaining the outcome
-
-- Model 3 still has the higher adjusted `\(R^2\)` so it remains the statistically better model
-
-- And the RMSE agrees; virtually always the case
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
