@@ -119,7 +119,7 @@ glimpse(gapminder97)
 ---
 # Append Example
 
-- To append, all we need to do is `bind` the `rows` of each dataset using the `bind_rows` function
+- To append, we need to `bind` the `rows` of each dataset using the `bind_rows` function
 
 - General syntax
 
@@ -176,7 +176,7 @@ class: inverse, middle, center
 
 - These come from *New York Time's* daily COVID data [here](https://github.com/nytimes/covid-19-data)
 
-- *NYT* discontinued collecting local data on March 23, 2023 and now uses weekly CDC data
+- *NYT* discontinued collecting local data on March 23, 2023
 
 - Our `covid_ga_5` data contain their last counts of cumulative COVID cases and deaths for 5 Georgia counties
 
@@ -222,14 +222,9 @@ covid_ga_5 %>%
 ---
 # County comparison
 
-- Why are these county comparisons misleading?
-
----
-# County comparison
-
 - We haven't adjusted for county population.
 
-- Therefore, we need to compute rates; cases and/or deaths per some standard number of people. 
+- Therefore, we need to compute rates; cases and deaths per some standard number of people. 
 
 - But the raw data do not include county population
 
@@ -240,6 +235,8 @@ covid_ga_5 %>%
 
 - A left join is used when we want to add variables from a secondary dataset to our primary dataset, matching observations based on a common set of variables called the **key**
 
+--
+
 - Keeps **ALL** of the observations in our main dataset regardless of whether there is a match in the secondary dataset
 
 - Observations in the secondary dataset that don't match with the main dataset **are not** added
@@ -249,9 +246,7 @@ covid_ga_5 %>%
 ---
 # The Key to Joins/Merges
 
-- The **key** is the variable or set of variables that uniquely identifies each observation/row that is shared across the datasets you want to join.
-
-- If you can identify the unit of analysis in both datasets, you have identified the key to use for joins
+- The **key** is the variable or set of variables that uniquely identifies each observation/row that is shared across the datasets you want to join (i.e., unit of analysis)
 
 - Datasets must have the same key in order to join them
 
@@ -270,12 +265,12 @@ new_dataset <- name_of_left_dataset %>%
 
 --
 
--  If multiple variables of the same name are the key
+-  If multiple variables of the same name are the key (like panel data where unit of analysis is unit-year)
 
 ```{r, eval=FALSE}
 new_dataset <- name_of_left_dataset %>% 
   left_join(name_of_right_dataset, 
-            by = c("name_of_key1", "name_of_key2", ...)) #<<
+            by = c("name_of_key1", "name_of_key2")) #<<
 ```
 
 ---
@@ -297,7 +292,7 @@ new_dataset <- name_of_left_dataset %>%
 new_dataset <- name_of_left_dataset %>% 
   left_join(name_of_right_dataset, 
             by = c("key_in_left_data" = "key_in_right_data", #<<
-                   "common_key", ...)) #<<
+                   "common_key")) #<<
 ```
 
 ---
@@ -417,17 +412,17 @@ glimpse(covid_ga_5)
 ---
 # Adjusting for Population
 
-> **Insert a new code chunk below the left join that added population to `covid_ga_5`. Add three new variables: `pop100K`, `cases_rate`, and `deaths_rate`.**
+> **Insert a new code chunk below the left join that added population to `covid_ga_5`. Add three new variables to a new dataset `covidrates_ga_5`: `pop100K`, `cases_rate`, and `deaths_rate`.**
 
 ```{r, eval=FALSE}
-covid_ga_5 <- covid_ga_5 %>% 
+covidrates_ga_5 <- covid_ga_5 %>% 
   ___(pop100K = ___,
       cases_rate = ___, 
       deaths_rate = ___)
 ```
 
 ```{r, include=FALSE}
-covid_ga_5 <- covid_ga_5 %>% 
+covidrates_ga_5 <- covid_ga_5 %>% 
   mutate(pop100K = population/100000,
          cases_rate = cases/pop100K, 
          deaths_rate = deaths/pop100K)
@@ -442,7 +437,7 @@ covid_ga_5 <- covid_ga_5 %>%
 # Updated bar graphs
 
 ```{r,echo=FALSE,fig.width=8, fig.height=6, fig.align='center'}
-covid_ga_5 %>% 
+covidrates_ga_5 %>% 
   ggplot(aes(x = county, y = cases_rate)) +
   geom_col()
 ```
@@ -451,7 +446,7 @@ covid_ga_5 %>%
 # Updated bar graphs
 
 ```{r,echo=FALSE,fig.width=8, fig.height=6, fig.align='center'}
-covid_ga_5 %>% 
+covidrates_ga_5 %>% 
   ggplot(aes(x = county, y = deaths_rate)) +
   geom_col()
 ```

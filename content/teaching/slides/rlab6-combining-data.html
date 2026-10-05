@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="rlab6-combining-data_files/header-attrs-2.30/header-attrs.js"></script>
+    <script src="rlab6-combining-data_files/header-attrs-2.32/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: September 28, 2026
+### Last updated: October 05, 2026
 ]
 
 ---
@@ -145,7 +145,7 @@ glimpse(gapminder97)
 ---
 # Append Example
 
-- To append, all we need to do is `bind` the `rows` of each dataset using the `bind_rows` function
+- To append, we need to `bind` the `rows` of each dataset using the `bind_rows` function
 
 - General syntax
 
@@ -211,7 +211,7 @@ class: inverse, middle, center
 
 - These come from *New York Time's* daily COVID data [here](https://github.com/nytimes/covid-19-data)
 
-- *NYT* discontinued collecting local data on March 23, 2023 and now uses weekly CDC data
+- *NYT* discontinued collecting local data on March 23, 2023
 
 - Our `covid_ga_5` data contain their last counts of cumulative COVID cases and deaths for 5 Georgia counties
 
@@ -250,14 +250,9 @@ covid_ga_5 %&gt;%
 ---
 # County comparison
 
-- Why are these county comparisons misleading?
-
----
-# County comparison
-
 - We haven't adjusted for county population.
 
-- Therefore, we need to compute rates; cases and/or deaths per some standard number of people. 
+- Therefore, we need to compute rates; cases and deaths per some standard number of people. 
 
 - But the raw data do not include county population
 
@@ -268,6 +263,8 @@ covid_ga_5 %&gt;%
 
 - A left join is used when we want to add variables from a secondary dataset to our primary dataset, matching observations based on a common set of variables called the **key**
 
+--
+
 - Keeps **ALL** of the observations in our main dataset regardless of whether there is a match in the secondary dataset
 
 - Observations in the secondary dataset that don't match with the main dataset **are not** added
@@ -277,9 +274,7 @@ covid_ga_5 %&gt;%
 ---
 # The Key to Joins/Merges
 
-- The **key** is the variable or set of variables that uniquely identifies each observation/row that is shared across the datasets you want to join.
-
-- If you can identify the unit of analysis in both datasets, you have identified the key to use for joins
+- The **key** is the variable or set of variables that uniquely identifies each observation/row that is shared across the datasets you want to join (i.e., unit of analysis)
 
 - Datasets must have the same key in order to join them
 
@@ -299,13 +294,13 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 
 --
 
--  If multiple variables of the same name are the key
+-  If multiple variables of the same name are the key (like panel data where unit of analysis is unit-year)
 
 
 ``` r
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(name_of_right_dataset, 
-*           by = c("name_of_key1", "name_of_key2", ...))
+*           by = c("name_of_key1", "name_of_key2"))
 ```
 
 ---
@@ -329,7 +324,7 @@ new_dataset &lt;- name_of_left_dataset %&gt;%
 new_dataset &lt;- name_of_left_dataset %&gt;% 
   left_join(name_of_right_dataset, 
 *           by = c("key_in_left_data" = "key_in_right_data",
-*                  "common_key", ...))
+*                  "common_key"))
 ```
 
 ---
@@ -508,11 +503,11 @@ glimpse(covid_ga_5)
 ---
 # Adjusting for Population
 
-&gt; **Insert a new code chunk below the left join that added population to `covid_ga_5`. Add three new variables: `pop100K`, `cases_rate`, and `deaths_rate`.**
+&gt; **Insert a new code chunk below the left join that added population to `covid_ga_5`. Add three new variables to a new dataset `covidrates_ga_5`: `pop100K`, `cases_rate`, and `deaths_rate`.**
 
 
 ``` r
-covid_ga_5 &lt;- covid_ga_5 %&gt;% 
+covidrates_ga_5 &lt;- covid_ga_5 %&gt;% 
   ___(pop100K = ___,
       cases_rate = ___, 
       deaths_rate = ___)

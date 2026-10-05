@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Regression-with-Categories_files/header-attrs-2.30/header-attrs.js"></script>
+    <script src="Regression-with-Categories_files/header-attrs-2.32/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: September 28, 2026
+### Last updated: October 05, 2026
 ]
 
 ---
@@ -51,7 +51,7 @@ class: center, middle, inverse, title-slide
 ---
 # Example
 
-- Suppose HR wants to examine if male professors are paid differently than female professors
+- Suppose HR wants to examine if male professors are paid differently than female professors (later coverage of inference will address whether any difference is statistically significant)
 
 
 ``` r
@@ -133,7 +133,7 @@ ggplot(Salaries,
 
 `$$\hat{y} = b_0 + b_1x + b_2 d$$`
 
-- Change in `\(y\)` due to a one-unit increase in `\(x\)` is still `\(b_1\)` for any scenario
+- `\(b_1\)` is still the predicted change in `\(y\)` due to a one-unit increase in `\(x\)`, regardless of `\(d\)`
 
 --
 
@@ -195,7 +195,7 @@ get_regression_table(sal_mod)
    &lt;td style="text-align:right;"&gt; 966.617 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; sex: Male &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sex-Male &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 9071.800 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 4861.644 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.866 &lt;/td&gt;

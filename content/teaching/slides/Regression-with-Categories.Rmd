@@ -41,7 +41,7 @@ options(scipen = 999)
 ---
 # Example
 
-- Suppose HR wants to examine if male professors are paid differently than female professors
+- Suppose HR wants to examine if male professors are paid differently than female professors (later coverage of inference will address whether any difference is statistically significant)
 
 ```{r}
 glimpse(Salaries)
@@ -127,7 +127,7 @@ $$\hat{y} = b_0 + b_1x + b_2 d$$
 
 $$\hat{y} = b_0 + b_1x + b_2 d$$
 
-- Change in $y$ due to a one-unit increase in $x$ is still $b_1$ for any scenario
+- $b_1$ is still the predicted change in $y$ due to a one-unit increase in $x$, regardless of $d$
 
 --
 
