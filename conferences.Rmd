@@ -4,63 +4,70 @@ title: "Conferences"
 
 <br>
 
-## 2023
+::: talk-list
+- Should We Put Food Back on the Table? An Examination of Food in the Sales Tax Base
+  [Association for Public Policy Analysis & Management, 2025]{.talk-meta}
 
-> The impact of school district tax and expenditure limits on education-supporting nonprofit revenues. Association for Public Policy Analysis & Management.
+- Sharing the Burden: Did Sales Tax Redistribution Alleviate Excess Property Taxes in North Carolina Counties?
+  [Association for Budgeting and Financial Management, 2025]{.talk-meta}
 
-> The impact of school district tax and expenditure limits on education-supporting nonprofit revenues. Association for Budgeting and Financial Management.
+- Equity in Local Option Tax Policy: Rethinking What is Fair
+  [Public Management Research Conference, 2024]{.talk-meta}
 
-> The impact of school district tax and expenditure limits on education-supporting nonprofit revenues.Southeastern Conference for Public Administration.
+- Equity in Local Option Tax Policy: Rethinking What is Fair
+  [Association for Public Policy Analysis & Management, 2024]{.talk-meta}
 
-> School District TEL Stringency and Education-Supporting Nonprofit Revenues: 2023 Crowding Out Community Support to Supplement School Revenues. Korean Association of Public Administration.
+- Dollars, Desks, and Development: The Impact of Local Sales Tax Revenue Redistribution on Recipient Programs in North Carolina
+  [Association for Budgeting and Financial Management, 2024]{.talk-meta}
 
-> School District TEL Stringency and the Finances of Education-Supporting Nonprofits: Crowding Out Community Support to Supplement School Revenues. Association of Education Finance and Policy
+- The impact of school district tax and expenditure limits on education-supporting nonprofit revenues
+  [Association for Public Policy Analysis & Management, 2023]{.talk-meta}
 
-### 2022
+- The impact of school district tax and expenditure limits on education-supporting nonprofit revenues
+  [Association for Budgeting and Financial Management, 2023]{.talk-meta}
 
-> Do Nonprofits Substitute Educational Resources in Response to Tax and Expenditure Limits on School Districts?
-Association for Budgeting and Financial Management.
+- The impact of school district tax and expenditure limits on education-supporting nonprofit revenues
+  [Southeastern Conference for Public Administration, 2023]{.talk-meta}
 
-> Property tax levies relative to predetermined options:  Exploiting fiscal illusion? Association for Public Policy Analysis & Management.
+- School district TEL stringency and education-supporting nonprofit revenues: Crowding out community support to supplement school revenues
+  [Korean Association of Public Administration, 2023]{.talk-meta}
 
-### 2021
+- School district TEL stringency and the finances of education-supporting nonprofits: Crowding out community support to supplement school revenues
+  [Association of Education Finance and Policy, 2023]{.talk-meta}
 
-> The effects of removing voter recall from school district property taxes. Association for Budgeting and Financial Management.
+- Do nonprofits substitute educational resources in response to tax and expenditure limits on school districts?
+  [Association for Budgeting and Financial Management, 2022]{.talk-meta}
 
-### 2019
+- Property tax levies relative to predetermined options: Exploiting fiscal illusion?
+  [Association for Public Policy Analysis & Management, 2022]{.talk-meta}
 
-> The impact of state oversight on property assessments and school district revenues. Association for Public Policy Analysis & Management. [Presentation](static-files/pa_oversight_appam2019.pdf)
+- The effects of removing voter recall from school district property taxes
+  [Association for Budgeting and Financial Management, 2021]{.talk-meta}
 
-> Does state intervention in local property assessments impact school finance equalization? Association of Education Finance and Policy.
+- The impact of state oversight on property assessments and school district revenues
+  [Association for Public Policy Analysis & Management, 2019 | [Presentation](static-files/pa_oversight_appam2019.pdf)]{.talk-meta}
 
-<br>
+- The effects of homestead exemptions for the disabled and the elderly on school districts
+  [Association of Education Finance and Policy, 2019]{.talk-meta}
 
-### 2018
+- High-tuition, high-aid policy and college expenditures
+  [Association of Education Finance and Policy, 2018 | [Presentation](static-files/htha_aefp2018.pdf)]{.talk-meta}
 
-> High-tuition, high-aid policy and college expenditures. Association of Education Finance and Policy. [Presentation](static-files/htha_aefp2018.pdf)
+- Are state subsidies in higher education driving a divergence in institutional expenditures?
+  [Association for Budgeting and Financial Management, 2018]{.talk-meta}
 
-> Are state subsidies in higher education driving a divergence in institutional expenditures? Association for Budgeting and Financial Management.
+- The effect of NCLB waivers on college outcomes
+  [Association for Public Policy Analysis & Management, 2017 | [Presentation](static-files/waivers_appam2017.pdf)]{.talk-meta}
 
-<br>
+- Local response to school finance equalization: The importance of place
+  [Association for Public Policy Analysis & Management, 2017 | [Presentation](static-files/sfe_appam2017.pdf)]{.talk-meta}
 
-### 2017
+- Local response to school finance equalization
+  [Association for Budgeting and Financial Management, 2017]{.talk-meta}
 
-> The effect of NCLB waivers on college outcomes. Association for Public Policy Analysis & Management. [Presentation](static-files/waivers_appam2017.pdf)
+- The effect of distance on degree completion
+  [Association of Education Finance and Policy, 2016 | [Presentation](static-files/distance_aefp2016.pdf)]{.talk-meta}
 
-> The effect of No Child Left Behind Sanctions on College Outcomes:  Examining Kentucky's ESEA Waiver. Association of Education Finance and Policy. [Poster](static-files/waivers_abfm2017.pdf)
-
-> Local response to school finance equalization: The important of place. Association for Public Policy Analysis & Management. [Presentation](static-files/sfe_appam2017.pdf)
-
-> Local response to school finance equalization. Association for Budgeting and Financial Management.
-
-<br>
-
-### 2016
-
-> The effect of distance on degree completion. Association of Education Finance and Policy. [Presentation](static-files/distance_aefp2016.pdf)
-
-<br>
-
-### 2015
-
-> Trends and determinants of state government privatization activity. Association for Budgeting and Financial Management. [Presentation](static-files/privatization_abfm2015.pdf)
+- Trends and determinants of state government privatization activity
+  [Association for Budgeting and Financial Management, 2015 | [Presentation](static-files/privatization_abfm2015.pdf)]{.talk-meta}
+:::

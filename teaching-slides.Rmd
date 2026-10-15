@@ -10,54 +10,36 @@ output: html_document
 
 ### Lectures
 
-### [Introduction & Overview](content/teaching/slides/Intro_Slides.html)
+::: link-list
+- [Introduction & Overview](content/teaching/slides/Intro_Slides.html)
+- [Data Types & Structures](content/teaching/slides/Data.html)
+- [Measurement Validity & Reliability](content/teaching/slides/measurement.html)
+- [Data Description](content/teaching/slides/Description.html)
+- [Visualizations](content/teaching/slides/Visualizations.html)
+- [Regression](content/teaching/slides/Regression.html)
+- [Regression with Categories](content/teaching/slides/Regression-with-Categories.html)
+- [Regression with Interactions](content/teaching/slides/Regression-with-Interactions.html)
+- [Regression with Nonlinear Variables](content/teaching/slides/Regression-with-nonlinears.html)
+- [Causality & Bias](content/teaching/slides/Causality.html)
+- [Sampling & Inference](content/teaching/slides/Sampling.html)
+- [Hypothesis Testing](content/teaching/slides/Hypothesis-Testing.html)
+- [Regression Diagnostics](content/teaching/slides/Reg_Diagnostics.html)
+- [Panel Analysis](content/teaching/slides/panel.html)
+:::
 
-### [Data Types & Structures](content/teaching/slides/Data.html)
-
-### [Measurement Validity & Reliability](content/teaching/slides/measurement.html)
-
-### [Data Description](content/teaching/slides/Description.html)
-
-### [Visualizations](content/teaching/slides/Visualizations.html)
-
-### [Regression](content/teaching/slides/Regression.html)
-
-### [Regression with Categories](content/teaching/slides/Regression-with-Categories.html)
-
-### [Regression with Interactions](content/teaching/slides/Regression-with-Interactions.html)
-
-### [Regression with Nonlinear Variables](content/teaching/slides/Regression-with-nonlinears.html)
-
-### [Causality & Bias](content/teaching/slides/Causality.html)
-
-### [Sampling & Inference](content/teaching/slides/Sampling.html)
-
-### [Hypothesis Testing](content/teaching/slides/Hypothesis-Testing.html)
-
-### [Regression Diagnostics](content/teaching/slides/Reg_Diagnostics.html)
-
-### [Panel Analysis](content/teaching/slides/panel.html)
-
-<br><br>
+<br>
 
 ### R Labs
 
-### [Introduction to R](content/teaching/slides/rlab1_intro_to_r.html)
-
-### [Import & Export Data & Documents](content/teaching/slides/rlab2_import_and_export.html)
-
-### [Data Wrangling Part 1](content/teaching/slides/rlab3_data_wrangling.html)
-
-### [Data Wrangling Part 2](content/teaching/slides/rlab4-wrangling_part2.html)
-
-### [Basic Viz](content/teaching/slides/rlab5-visualizations.html)
-
-### [Combining Data](content/teaching/slides/rlab6-combining-data.html)
-
-### [Polished Viz](content/teaching/slides/rlab7-polished-viz.html)
-
-### [Reporting Regressions](content/teaching/slides/rlab8-reporting-reg.html)
-
-### [Omitted Variable Bias](content/teaching/slides/rlab9-ovb.html)
-
-### [Forecasting](content/teaching/slides/rlab10-forecasting.html)
+::: link-list
+- [Introduction to R](content/teaching/slides/rlab1_intro_to_r.html)
+- [Import & Export Data & Documents](content/teaching/slides/rlab2_import_and_export.html)
+- [Data Wrangling Part 1](content/teaching/slides/rlab3_data_wrangling.html)
+- [Data Wrangling Part 2](content/teaching/slides/rlab4-wrangling_part2.html)
+- [Basic Viz](content/teaching/slides/rlab5-visualizations.html)
+- [Combining Data](content/teaching/slides/rlab6-combining-data.html)
+- [Polished Viz](content/teaching/slides/rlab7-polished-viz.html)
+- [Reporting Regressions](content/teaching/slides/rlab8-reporting-reg.html)
+- [Omitted Variable Bias](content/teaching/slides/rlab9-ovb.html)
+- [Forecasting](content/teaching/slides/rlab10-forecasting.html)
+:::

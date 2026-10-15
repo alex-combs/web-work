@@ -1,35 +1,21 @@
 ---
-title: Alex E. Combs
+title: Alex E. Combs, Ph.D.
 ---
 
-```{=html}
-<style>
-.column-left{
-  float: left;
-  width: 33%;
-  text-align: left;
-}
-.column-right{
-  float: right;
-  width: 60%;
-  text-align: left;
-  line-height: 2
-}
-</style>
-```
-::: column-left
-<br>
+:::: home
 
-![](static-files/Combs.jpg)
-:::
-
-<br>
-
-::: column-right
-
+::: home-bio
 I am an assistant professor in the School of Public and International Affairs at the University of Georgia. I earned my PhD from the Martin School of Public Policy and Administration at the University of Kentucky. My research involves state and local government finance and education. I focus on the impact of property taxes and local sales taxes on K-12 school finance and how state postsecondary subsidies affect college expenditures. I teach undergraduate courses in policy analysis and nonprofit management, as well as graduate courses in public budgeting, quantitative methods, and education finance.
-
-<br>
-
-#### [Curriculum Vitae](CV_Combs.pdf)
 :::
+
+::: home-photo
+![](static-files/Combs.jpg)
+
+<div class="home-affil">
+Assistant Professor of Public Administration<br>
+School of Public and International Affairs<br>
+University of Georgia
+</div>
+:::
+
+::::

@@ -1,0 +1,76 @@
+/* Site-wide styles. Referenced from _site.yml (output > html_document > css). */
+
+/* ---------- Home page ---------- */
+.home {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  margin-top: 20px;
+}
+.home-bio {
+  flex: 1 1 auto;
+  font-size: 19px;
+  line-height: 1.75;
+}
+.home-photo {
+  flex: 0 0 auto;
+}
+.home-photo img {
+  width: 240px;      /* headshot width */
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.home-affil {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #555;
+  white-space: nowrap;
+}
+@media (max-width: 767px) {
+  .home { flex-direction: column; gap: 20px; }
+  .home-photo { order: -1; }
+  .home-photo img { width: 200px; }
+  .home-affil { white-space: normal; }
+}
+
+/* ---------- Research page (numbered paper lists) ---------- */
+ol.pub-list {
+  font-size: 17px;
+  line-height: 1.6;
+  padding-left: 2em;
+  margin-bottom: 30px;
+}
+ol.pub-list li {
+  margin-bottom: 1.4em;
+  padding-left: 0.4em;
+}
+ol.pub-list li::marker { font-weight: 600; }
+.pub-title  { display: block; text-decoration: underline; font-weight: 600; }
+.pub-author { display: block; }
+.pub-venue  { display: block; }
+.pub-link   { display: block; }
+
+/* ---------- Plain-text link lists (teaching slides) and talk lists (speaking) ---------- */
+/* Font size set to sit close to a level-3 heading; change the one number to adjust. */
+.link-list ul,
+.talk-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+.link-list li {
+  font-size: 20px;
+  margin-bottom: 0.55em;
+}
+.talk-list li {
+  font-size: 20px;
+  line-height: 1.4;
+  margin-bottom: 1.1em;
+}
+.talk-meta {
+  display: block;
+  font-size: 16px;
+  color: #666;
+  margin-top: 2px;
+}

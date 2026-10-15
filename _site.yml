@@ -1,14 +1,17 @@
-name: "Alex Combs"
+name: "Alex Combs, Ph.D."
 output_dir: "."
 output:
   html_document:
     theme: spacelab
     highlight: textmate
+    css: styles.css
 navbar:
   title: ""
   left:
-    - text: "About"
+    - text: "Home"
       href: index.html
+    - text: "CV"
+      href: CV_Combs.pdf
     - text: "Research"
       href: papers.html
     - text: "Teaching"
@@ -19,11 +22,11 @@ navbar:
           href: teaching-slides.html
     - text: "Speaking"
       href: conferences.html
-    - text: "CV"
-      href: CV_Combs.pdf
   right:
     - icon: fa-envelope fa-lg
-      href: contact.html
+      href: mailto:Alex.Combs@uga.edu
+    - icon: fab fa-google-scholar fa-lg
+      href: https://scholar.google.com/citations?user=LAWPHesAAAAJ&hl=en
     - icon: fa-github fa-lg
       href: https://github.com/alex-combs/web-work
     - icon: fa-linkedin fa-lg

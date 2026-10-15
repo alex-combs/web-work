@@ -5,36 +5,31 @@ output: html_document
 ***
 <br>
 
-### Public Finance
+::: talk-list
+- Data Applications in Public Administration
+  [University of Georgia]{.talk-meta}
 
-> Public Financial Management. University of Georgia. Fall 2019. [Syllabus](static-files/PADP8430F19_Syllabus_and_Schedule.pdf)
+- Education Finance and Policy
+  [University of Georgia]{.talk-meta}
 
-<br>
+- Introduction to the Nonprofit Sector
+  [University of Georgia]{.talk-meta}
 
-### Statistics, Quantitative Methods, Data Applications
+- Introduction to Public Policy Analysis
+  [University of Georgia]{.talk-meta}
 
-> Data Applications in Public Administration. University of Georgia. Spring 2020. [Syllabus](static-files/PADP7120F20_Syllabus.html)
+- Public Financial Management
+  [University of Georgia]{.talk-meta}
 
-> Data Applications in Public Administration. University of Georgia. Spring 2020. [Syllabus](static-files/PADP7120S20_Syllabus.pdf)
+- Faculty-Mentored Undergraduate Research
+  [University of Georgia]{.talk-meta}
 
-> Data Applications in Public Administration. University of Georgia. Fall 2019. [Syllabus](static-files/PADP7120F19_Syllabus_and_Schedule.pdf)
+- Public Program Evaluation
+  [University of Kentucky]{.talk-meta}
 
-> Program Evaluation. University of Kentucky. Spring 2019. [Syllabus](static-files/PA622_S19_Syllabus.pdf)
+- Strategic Planning & Organizational Change
+  [University of Kentucky]{.talk-meta}
 
-> Economic and Business Statistics. University of Kentucky. Spring 2017. [Syllabus](static-files/ECO391S17_Syllabus.pdf)
-
-<br>
-
-### Policy Analysis
-
-> Introduction to Policy Analysis. University of Georgia. Spring 2020. [Syllabus](static-files/PADP 3100 Spring 2020 Syllabus.pdf)
-
-<br>
-
-### Management
-
-> Introduction to Nonprofit Administration. University of Georgia. Fall 2020.
-[Syllabus](static-files/PADP4640F20_Syllabus.html)
-
-> Strategic Planning & Organizational Change. University of Kentucky. Fall 2018. [Syllabus](static-files/PA 602 Strategic Planning Syllabus Fall 2018.pdf)
-
+- Economic and Business Statistics
+  [University of Kentucky]{.talk-meta}
+:::
