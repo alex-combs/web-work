@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Causality_files/header-attrs-2.30/header-attrs.js"></script>
+    <script src="Causality_files/header-attrs-2.32/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: March 19, 2026
+### Last updated: October 18, 2026
 ]
 
 ---
@@ -44,13 +44,26 @@ class: center, middle, inverse, title-slide
 - Systematic process to identify omitted variable bias (endogeneity) and what can be done about it
 
 ---
+# Treatment
+
+- Treatment can be any variable we claim has a causal effect on an outcome
+
+- Binary policy or program (0/1)
+
+- Policy or program with multiple intensities (0,1,2,3,...)
+
+--
+
+- Any explanatory variable, categorical or numerical
+
+---
 # Potential outcomes
 
 - A causal effect is a comparison of two potential outcomes
 
-  - The outcome that we observe in the presence of the event
+  - The outcome that we observe in the presence of the treatment
 
-  - **Counterfactual:** The outcome we would have observed had the event not happened
+  - **Counterfactual:** The outcome we would have observed had the treatment not happened
 
 ---
 # Potential outcomes
@@ -68,11 +81,11 @@ class: center, middle, inverse, title-slide
 ---
 # The challenge of counterfactual
 
-- All we can do is compare outcomes between observed groups (treated and untreated). This can take several forms.
+- All we can do is compare outcomes between observed groups (treated and untreated). We use the untreated to represent the counterfactual.
 
 --
 
-- **Randomize** treatment so nothing else differs between treated and untreated groups
+- **Randomize** treatment so nothing else systematically differs between treated and untreated groups
 
 --
   
@@ -80,21 +93,23 @@ class: center, middle, inverse, title-slide
 
 --
   
-- **Non-experimental:** Controlling for all the necessary variables to claim there is no relevant difference between treated and untreated (least credible)
+- **Non-experimental:** Controlling for all the necessary variables to claim there is no systematic difference between treated and untreated (least credible)
 
 ---
 # Credible Analysis
 
-&lt;img src="lectures_files/credible.png" alt="" width="1304" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/credible.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Internal validity
 
-**Internal validity:** the credibility of the theoretical assumptions applied and the causal connection established between the cause (policy, program, treatment) and an effect
+**Internal validity:** the credibility of the theoretical assumptions applied and the causal connection established between the cause (treatment) and an effect (outcome)
+
+$$ y = \beta_0 + \beta_1x + \epsilon $$
 
 - Does a change in `\(x\)` cause a change in `\(y\)`?
 
-- Is the estimate biased? Is our estimate systematically higher or lower than the truth?
+- Is the estimate **biased**: systematically higher or lower than the truth?
 
 ---
 # Internal validity
@@ -113,38 +128,44 @@ class: center, middle, inverse, title-slide
 - Internal validity concerns whether there is a credible theory why these factors would have an impact and if estimates are accurate or biased. If biased, to what extent does it limit our ability to make useful conclusions?
 
 ---
+class: inverse, center, middle
+
+# 3 Criteria for causation
+
+---
 # Criteria for causation
 
 1. Correlation between `\(x\)` and `\(y\)` -- as `\(x\)` changes, `\(y\)` must also tend to change
-
-2. Temporal precedence -- `\(x\)` must occur before `\(y\)`
-
-3. No plausible rival or alternative explanations -- no other variable `\(z\)` can influence the change in `\(y\)` we attribute to `\(x\)`
-
----
-# Correlation between X and Y
 
 - If you run a hypothesis test and the estimate is statistically significant (we haven't covered this yet), you have established credible non-random correlation 
 
 - But many things correlate that share no causal relationship
 
 ---
-# Temporal Precedence
+# Criteria for causation
 
-- Cause must occur before its effect
+&lt;ol start="2"&gt;
+  &lt;li&gt;Temporal precedence -- Cause must occur before its effect &lt;/li&gt;
+&lt;/ol&gt;
 
-- Easiest to claim for discrete events with a clear pre and post
+- `\(x\)` must occur before `\(y\)`
+
+- Easiest to claim for discrete events with a pre- and post-period
   - Marijuana legalization on health outcomes
   - Child tax credit expansion on child poverty
 
 --
 
-- Without a clear pre and post period, harder to eliminate **reverse causality**
+- Otherwise, harder to rule out **reverse causality**
   - Crime rates and police funding
   - GDP and life expectancy
 
 ---
-# No plausible alternative explanation
+# Criteria for causation
+
+&lt;ol start="3"&gt;
+  &lt;li&gt;No plausible rival or alternative explanations &lt;/li&gt;
+&lt;/ol&gt;
 
 - No other variable `\(z\)` can influence the change in `\(y\)` we attribute to `\(x\)`
 
@@ -179,12 +200,12 @@ class: inverse, center, middle
 
 `$$Happiness=\beta_0+\beta_1Age+\beta_2Income+\epsilon$$`
 
-&lt;img src="lectures_files/dag15.png" alt="" width="843" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag15.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Backdoor path
 
-&lt;img src="lectures_files/dag3.png" alt="" width="552" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag3.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - `\(Z\)` is a **confounder**
 
@@ -193,7 +214,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-- Our goal is to close all backdoor paths between `\(X\)` and `\(Y\)`
+- Must close/block backdoor paths between `\(X\)` and `\(Y\)` to recover causal effect
 
 - Three ways to close a backdoor path
 
@@ -204,7 +225,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-&lt;img src="lectures_files/dag4.png" alt="" width="700" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag4.png" alt="" style="display: block; margin: auto;" /&gt;
 
 .pull-left[
 `$$Y=\beta_0+\beta_1X+\epsilon$$`
@@ -232,7 +253,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-&lt;img src="lectures_files/dag4.2.png" alt="" width="447" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag4.2.png" alt="" style="display: block; margin: auto;" /&gt;
 
 .center[
 `$$X \rightarrow Y$$`
@@ -267,7 +288,7 @@ class: inverse, center, middle
 ---
 # Collider variable
 
-&lt;img src="lectures_files/dag6.png" alt="" width="533" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag6.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - `\(Z\)` is a **collider** in this case
 
@@ -276,7 +297,7 @@ class: inverse, center, middle
 ---
 # Close the backdoor
 
-&lt;img src="lectures_files/dag5.png" alt="" width="351" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag5.png" alt="" style="display: block; margin: auto;" /&gt;
 
 .center[
 `\(X \rightarrow Y\)`
@@ -289,6 +310,7 @@ class: inverse, center, middle
 `$$Y=\beta_0+\beta_1X+\beta_2Z+\epsilon$$`
 `$$Y=\beta_0+\beta_1X+\beta_2Z+\beta_3K+\epsilon$$`
 - All are fine; backdoor closed
+
 ]
 
 .pull-right[
@@ -297,12 +319,88 @@ class: inverse, center, middle
 - Backdoor now open; OVB
 
 - Also known as **bad control**
+
 ]
+
+---
+# Collider bias
+  
+- Collider bias can occur in two ways:
+  
+- Controlling for a collider in our regression that opens a backdoor path
+
+- Using a sample where observations are selected based on a collider variable
+
+---
+# Seeing collider bias
+  
+
+
+
+
+
+
+
+
+
+
+
+| Treatment| Outcome| Collider|
+|---------:|-------:|--------:|
+|         0|      99|      993|
+|         0|     101|     1007|
+|         1|     149|     1542|
+|         0|      99|      996|
+
+- Sample includes 2,500 observations
+
+---
+# Seeing Collider Bias
+  
+`$$Outcome=\beta_0 + \beta_1Treatment + \epsilon$$`
+  
+`$$Outcome=\beta_0 + \beta_1Treatment + \beta_2Collider + \epsilon$$`
+  
+- These data are made up in a way that the effect of Treatment, `\(\beta_1\)`, should equal 50.
+
+- The collider does not affect the outcome or the treatment. The outcome and treatment affect the collider.
+
+`$$Treatment \rightarrow Collider \leftarrow Outcome$$`
+  
+---
+# Seeing collider bias
+  
+
+``` r
+valid &lt;- lm(Outcome ~ Treatment, data = collider_bias)
+biased &lt;- lm(Outcome ~ Treatment + Collider, data = collider_bias)
+```
+
+.pull-left[
+
+|term      | estimate|
+|:---------|--------:|
+|intercept |   100.01|
+|Treatment |    49.93|
+]
+
+.pull-right[
+
+|term      | estimate|
+|:---------|--------:|
+|intercept |     0.99|
+|Treatment |    -4.45|
+|Collider  |     0.10|
+]
+
+- Coefficient for `\(Treatment\)` should be 50.
+
+- Because `\(Treatment \rightarrow Collider \leftarrow Outcome\)`, controlling for Collider introduces bias
 
 ---
 # The error term and OVB
 
-&lt;img src="lectures_files/dag8.png" alt="" width="796" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag8.png" alt="" style="display: block; margin: auto;" /&gt;
 
 .center[
 
@@ -321,7 +419,7 @@ class: inverse, center, middle
 `$$Happiness=\beta_0+\beta_1Age+\beta_2Income+\epsilon$$`]
 
 .pull-left[
-&lt;img src="lectures_files/dag15.png" alt="" width="843" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag15.png" alt="" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
@@ -371,14 +469,14 @@ class: inverse, center, middle
 
 - Suppose we settle on the following DAG
 
-&lt;img src="lectures_files/dag10.png" alt="" width="473" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag10.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Next step is to list all paths we can trace between `\(C\)` and `\(Y\)`, drawing the arrows according to their direction in our diagram
 
 ---
 # Using DAGS
 
-&lt;img src="lectures_files/dag10.png" alt="" width="394" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag10.png" alt="" style="display: block; margin: auto;" /&gt;
 
 1. `\(C \rightarrow Y\)` (the causal effect of college on earnings)
 
@@ -421,7 +519,7 @@ class: inverse, center, middle
 ---
 # Assumptions &amp; alternatives
 
-&lt;img src="lectures_files/dag10.png" alt="" width="394" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag10.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Two key assumptions this DAG makes
 
@@ -436,7 +534,7 @@ class: inverse, center, middle
 ---
 # Assumptions &amp; alternatives
 
-&lt;img src="lectures_files/dag11.png" alt="" width="389" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag11.png" alt="" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -459,6 +557,117 @@ class: inverse, center, middle
 - Currently no way to close 5; omitted variable bias
 ]
 
+
+
+
+---
+# Collider bias: bad sample
+  
+- Suppose a nonprofit that works with at-risk youth wants to understand the effect of school absences on grades. It only has access to data on its own clients.
+
+- Suppose at-risk youth are identified by socioeconomic status, GPA, and absences
+
+&lt;img src="lectures_files/dag13.png" alt="" style="display: block; margin: auto;" /&gt;
+
+---
+# Collider bias (2) bad sample
+  
+`$$GPA = \beta_0 + \beta_1TotAbsences + \beta_2 SES + \epsilon$$`
+  
+&lt;img src="lectures_files/dag13.png" alt="" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+  
+1. `\(TA \rightarrow GPA\)`
+2. `\(TA \leftarrow SES \rightarrow GPA\)`
+3. `\(TA \rightarrow AtRisk \leftarrow GPA\)`
+4. `\(TA \leftarrow SES \rightarrow AtRisk \leftarrow GPA\)`
+    
+]
+
+.pull-right[
+  
+- Will our estimate `\(b_1\)` be unbiased?
+    
+- No. Because our sample is selected from `\(AtRisk\)`; same as controlling for it.
+  
+- Selection bias
+]
+
+---
+# Seeing selection bias
+  
+`\(Absent \rightarrow AtRisk \leftarrow GPA\)`
+  
+- Suppose our sample only includes those at-risk
+
+- But we want to estimate the effect of absences on GPA
+
+
+
+
+---
+# Seeing selection bias
+  
+.pull-left[
+    
+![](Causality_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+    
+]
+
+.pull-right[
+  
+
+|term      | estimate|
+|:---------|--------:|
+|intercept |    3.223|
+|absent    |   -0.190|
+  
+]
+
+---
+# Seeing selection bias
+  
+.pull-left[
+    
+![](Causality_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+    
+]
+
+.pull-right[
+  
+
+|term      | estimate|
+|:---------|--------:|
+|intercept |    3.105|
+|absent    |   -0.061|
+  
+]
+
+---
+# Seeing selection bias
+  
+.pull-left[
+    
+![](Causality_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+    
+]
+
+.pull-right[
+  
+
+|term      | estimate|
+|:---------|--------:|
+|intercept |    2.536|
+|absent    |   -0.004|
+  
+]
+
+---
+# Seeing Selection Bias
+  
+&lt;img src="Causality_files/figure-html/unnamed-chunk-34-1.png" alt="" height="90%" style="display: block; margin: auto;" /&gt;
+
 ---
 # Direction of OVB
 
@@ -466,7 +675,7 @@ class: inverse, center, middle
 
 - All is not necessarily lost. Results may still be useful.
 
-&lt;img src="lectures_files/dag_ovbdirect.png" alt="" width="292" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag_ovbdirect.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - If influence of `\(Z\)` is in same direction: bias is positive
 - If influence of `\(Z\)` is in opposite directions: bias is negative
@@ -502,7 +711,7 @@ class: inverse, center, middle
 ---
 # Causal inference models
 
-&lt;img src="lectures_files/dag14.png" alt="" width="468" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/dag14.png" alt="" style="display: block; margin: auto;" /&gt;
 
 - Random assignment breaks any OVB from the error term
 
@@ -511,193 +720,9 @@ class: inverse, center, middle
 - There are quasi-experimental regression techniques that arguably achieve the same break from the error term as if random
   - Difference-in-differences, regression discontinuity, instrumental variables, synthetic control, propensity score matching
 
----
-class: inverse, center, middle
 
-# Supplemtary Slides: Collider Bias Revisited
 
----
-# Collider bias
 
-- Collider bias can occur in two ways:
-
-- Controlling for a collider in our regression that opens a backdoor path
-
-- Using a sample where observations are selected based on a collider variable
-
----
-# Seeing collider bias
-
-
-
-
-
-
-
-
-
-
-
-
-| Treatment| Outcome| Collider|
-|---------:|-------:|--------:|
-|         0|      99|      993|
-|         0|     101|     1007|
-|         1|     149|     1542|
-|         0|      99|      996|
-
-- Sample includes 2,500 observations
-
----
-# Seeing Collider Bias
-
-`$$Outcome=\beta_0 + \beta_1Treatment + \epsilon$$`
-
-`$$Outcome=\beta_0 + \beta_1Treatment + \beta_2Collider + \epsilon$$`
-
-- These data are made up in a way that the effect of Treatment, `\(\beta_1\)`, should equal 50.
-
-- The collider does not affect the outcome or the treatment. The outcome and treatment affect the collider.
-
-`$$Treatment \rightarrow Collider \leftarrow Outcome$$`
-
----
-# Seeing collider bias
-
-
-``` r
-valid &lt;- lm(Outcome ~ Treatment, data = collider_bias)
-biased &lt;- lm(Outcome ~ Treatment + Collider, data = collider_bias)
-```
-
-.pull-left[
-
-|term      | estimate|
-|:---------|--------:|
-|intercept |   100.01|
-|Treatment |    49.93|
-]
-
-.pull-right[
-
-|term      | estimate|
-|:---------|--------:|
-|intercept |     0.99|
-|Treatment |    -4.45|
-|Collider  |     0.10|
-]
-
-- Coefficient for `\(Treatment\)` should be 50.
-
-- Because `\(Treatment \rightarrow Collider \leftarrow Outcome\)`, controlling for Collider introduces bias
-
----
-# Collider bias: bad sample
-
-- Suppose a nonprofit that works with at-risk youth wants to understand the effect of school absences on grades. It only has access to data on its own clients.
-
-- Suppose at-risk youth are identified by socioeconomic status, GPA, and absences
-
-&lt;img src="lectures_files/dag13.png" alt="" width="385" style="display: block; margin: auto;" /&gt;
-
----
-# Collider bias (2) bad sample
-
-`$$GPA = \beta_0 + \beta_1TotAbsences + \beta_2 SES + \epsilon$$`
-
-&lt;img src="lectures_files/dag13.png" alt="" width="385" style="display: block; margin: auto;" /&gt;
-
-.pull-left[
-
-1. `\(TA \rightarrow GPA\)`
-2. `\(TA \leftarrow SES \rightarrow GPA\)`
-3. `\(TA \rightarrow AtRisk \leftarrow GPA\)`
-4. `\(TA \leftarrow SES \rightarrow AtRisk \leftarrow GPA\)`
-
-]
-
-.pull-right[
-
-- Will our estimate `\(b_1\)` be unbiased?
-
-- No. Because our sample is selected from `\(AtRisk\)`; same as controlling for it.
-
-- Selection bias
-]
-
----
-# Seeing selection bias
-
-`\(Absent \rightarrow AtRisk \leftarrow GPA\)`
-
-- Suppose our sample only includes those at-risk
-
-- But we want to estimate the effect of absences on GPA
-
-
-
-
----
-# Seeing selection bias
-
-.pull-left[
-
-![](Causality_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
-
-]
-
-.pull-right[
-
-
-|term      | estimate|
-|:---------|--------:|
-|intercept |    3.223|
-|absent    |   -0.190|
-
-]
-
----
-# Seeing selection bias
-
-.pull-left[
-
-![](Causality_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
-
-]
-
-.pull-right[
-
-
-|term      | estimate|
-|:---------|--------:|
-|intercept |    3.105|
-|absent    |   -0.061|
-
-]
-
----
-# Seeing selection bias
-
-.pull-left[
-
-![](Causality_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
-
-]
-
-.pull-right[
-
-
-|term      | estimate|
-|:---------|--------:|
-|intercept |    2.536|
-|absent    |   -0.004|
-
-]
-
----
-# Seeing Selection Bias
-
-&lt;img src="Causality_files/figure-html/unnamed-chunk-36-1.png" alt="" height="90%" style="display: block; margin: auto;" /&gt;
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

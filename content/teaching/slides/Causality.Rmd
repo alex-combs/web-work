@@ -34,13 +34,26 @@ options(scipen = 999)
 - Systematic process to identify omitted variable bias (endogeneity) and what can be done about it
 
 ---
+# Treatment
+
+- Treatment can be any variable we claim has a causal effect on an outcome
+
+- Binary policy or program (0/1)
+
+- Policy or program with multiple intensities (0,1,2,3,...)
+
+--
+
+- Any explanatory variable, categorical or numerical
+
+---
 # Potential outcomes
 
 - A causal effect is a comparison of two potential outcomes
 
-  - The outcome that we observe in the presence of the event
+  - The outcome that we observe in the presence of the treatment
 
-  - **Counterfactual:** The outcome we would have observed had the event not happened
+  - **Counterfactual:** The outcome we would have observed had the treatment not happened
 
 ---
 # Potential outcomes
@@ -58,11 +71,11 @@ options(scipen = 999)
 ---
 # The challenge of counterfactual
 
-- All we can do is compare outcomes between observed groups (treated and untreated). This can take several forms.
+- All we can do is compare outcomes between observed groups (treated and untreated). We use the untreated to represent the counterfactual.
 
 --
 
-- **Randomize** treatment so nothing else differs between treated and untreated groups
+- **Randomize** treatment so nothing else systematically differs between treated and untreated groups
 
 --
   
@@ -70,7 +83,7 @@ options(scipen = 999)
 
 --
   
-- **Non-experimental:** Controlling for all the necessary variables to claim there is no relevant difference between treated and untreated (least credible)
+- **Non-experimental:** Controlling for all the necessary variables to claim there is no systematic difference between treated and untreated (least credible)
 
 ---
 # Credible Analysis
@@ -82,11 +95,13 @@ include_graphics('lectures_files/credible.png')
 ---
 # Internal validity
 
-**Internal validity:** the credibility of the theoretical assumptions applied and the causal connection established between the cause (policy, program, treatment) and an effect
+**Internal validity:** the credibility of the theoretical assumptions applied and the causal connection established between the cause (treatment) and an effect (outcome)
+
+$$ y = \beta_0 + \beta_1x + \epsilon $$
 
 - Does a change in $x$ cause a change in $y$?
 
-- Is the estimate biased? Is our estimate systematically higher or lower than the truth?
+- Is the estimate **biased**: systematically higher or lower than the truth?
 
 ---
 # Internal validity
@@ -104,38 +119,44 @@ kable(recidivism, digits = 3)
 - Internal validity concerns whether there is a credible theory why these factors would have an impact and if estimates are accurate or biased. If biased, to what extent does it limit our ability to make useful conclusions?
 
 ---
+class: inverse, center, middle
+
+# 3 Criteria for causation
+
+---
 # Criteria for causation
 
 1. Correlation between $x$ and $y$ -- as $x$ changes, $y$ must also tend to change
-
-2. Temporal precedence -- $x$ must occur before $y$
-
-3. No plausible rival or alternative explanations -- no other variable $z$ can influence the change in $y$ we attribute to $x$
-
----
-# Correlation between X and Y
 
 - If you run a hypothesis test and the estimate is statistically significant (we haven't covered this yet), you have established credible non-random correlation 
 
 - But many things correlate that share no causal relationship
 
 ---
-# Temporal Precedence
+# Criteria for causation
 
-- Cause must occur before its effect
+<ol start="2">
+  <li>Temporal precedence -- Cause must occur before its effect </li>
+</ol>
 
-- Easiest to claim for discrete events with a clear pre and post
+- $x$ must occur before $y$
+
+- Easiest to claim for discrete events with a pre- and post-period
   - Marijuana legalization on health outcomes
   - Child tax credit expansion on child poverty
 
 --
 
-- Without a clear pre and post period, harder to eliminate **reverse causality**
+- Otherwise, harder to rule out **reverse causality**
   - Crime rates and police funding
   - GDP and life expectancy
 
 ---
-# No plausible alternative explanation
+# Criteria for causation
+
+<ol start="3">
+  <li>No plausible rival or alternative explanations </li>
+</ol>
 
 - No other variable $z$ can influence the change in $y$ we attribute to $x$
 
@@ -188,7 +209,7 @@ include_graphics('lectures_files/dag3.png', dpi = 100)
 ---
 # Close the backdoor
 
-- Our goal is to close all backdoor paths between $X$ and $Y$
+- Must close/block backdoor paths between $X$ and $Y$ to recover causal effect
 
 - Three ways to close a backdoor path
 
@@ -277,7 +298,7 @@ include_graphics('lectures_files/dag6.png', dpi = 100)
 ---
 # Close the backdoor
 
-```{r, echo=FALSE, fig.align='center'}
+```{r, echo=FALSE, fig.align='center', fig.height=1}
 include_graphics('lectures_files/dag5.png', dpi = 140)
 ```
 
@@ -292,6 +313,7 @@ $$Y=\beta_0+\beta_1X+\epsilon$$
 $$Y=\beta_0+\beta_1X+\beta_2Z+\epsilon$$
 $$Y=\beta_0+\beta_1X+\beta_2Z+\beta_3K+\epsilon$$
 - All are fine; backdoor closed
+
 ]
 
 .pull-right[
@@ -300,7 +322,95 @@ $$Y=\beta_0+\beta_1X+\beta_2K+\epsilon$$
 - Backdoor now open; OVB
 
 - Also known as **bad control**
+
 ]
+
+---
+# Collider bias
+  
+- Collider bias can occur in two ways:
+  
+- Controlling for a collider in our regression that opens a backdoor path
+
+- Using a sample where observations are selected based on a collider variable
+
+---
+# Seeing collider bias
+  
+```{r, include=FALSE}
+collider_bias <- data.frame(k = rnorm(2500, mean = 10, sd = 4), 
+                            e = rnorm(2500), 
+                            u = rnorm(2500))
+```
+
+```{r, include=FALSE}
+head(collider_bias, n = 4) %>% 
+  kable(digits = 2)
+```
+
+```{r, include=FALSE}
+collider_bias <- collider_bias %>% 
+  mutate(Treatment = if_else( k >= 12, 1, 0))
+```
+
+```{r, include=FALSE}
+collider_bias <- collider_bias %>% 
+  mutate(Outcome = 100 + 50*Treatment + e)
+```
+
+```{r, include=FALSE}
+collider_bias <- collider_bias %>% 
+  mutate(Collider = 50*Treatment + 10*Outcome + u)
+```
+
+```{r, echo=FALSE}
+head(collider_bias, n = 4) %>%
+  select(Treatment, Outcome, Collider) %>% 
+  kable(digits = 0)
+```
+
+- Sample includes 2,500 observations
+
+---
+# Seeing Collider Bias
+  
+$$Outcome=\beta_0 + \beta_1Treatment + \epsilon$$
+  
+$$Outcome=\beta_0 + \beta_1Treatment + \beta_2Collider + \epsilon$$
+  
+- These data are made up in a way that the effect of Treatment, $\beta_1$, should equal 50.
+
+- The collider does not affect the outcome or the treatment. The outcome and treatment affect the collider.
+
+$$Treatment \rightarrow Collider \leftarrow Outcome$$
+  
+---
+# Seeing collider bias
+  
+```{r}
+valid <- lm(Outcome ~ Treatment, data = collider_bias)
+biased <- lm(Outcome ~ Treatment + Collider, data = collider_bias)
+```
+
+.pull-left[
+```{r, echo=FALSE}
+  get_regression_table(valid) %>% 
+    select(term, estimate) %>% 
+    kable(digits = 2)
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+  get_regression_table(biased) %>% 
+    select(term, estimate) %>% 
+    kable(digits = 2)
+```
+]
+
+- Coefficient for $Treatment$ should be 50.
+
+- Because $Treatment \rightarrow Collider \leftarrow Outcome$, controlling for Collider introduces bias
 
 ---
 # The error term and OVB
@@ -474,6 +584,179 @@ include_graphics('lectures_files/dag11.png', dpi = 150)
 - Currently no way to close 5; omitted variable bias
 ]
 
+
+
+
+---
+# Collider bias: bad sample
+  
+- Suppose a nonprofit that works with at-risk youth wants to understand the effect of school absences on grades. It only has access to data on its own clients.
+
+- Suppose at-risk youth are identified by socioeconomic status, GPA, and absences
+
+```{r, echo=FALSE, fig.align='center'}
+include_graphics('lectures_files/dag13.png', dpi = 150)
+```
+
+---
+# Collider bias (2) bad sample
+  
+$$GPA = \beta_0 + \beta_1TotAbsences + \beta_2 SES + \epsilon$$
+  
+```{r, echo=FALSE, fig.align='center'}
+include_graphics('lectures_files/dag13.png', dpi = 150)
+```
+
+.pull-left[
+  
+1. $TA \rightarrow GPA$
+2. $TA \leftarrow SES \rightarrow GPA$
+3. $TA \rightarrow AtRisk \leftarrow GPA$
+4. $TA \leftarrow SES \rightarrow AtRisk \leftarrow GPA$
+    
+]
+
+.pull-right[
+  
+- Will our estimate $b_1$ be unbiased?
+    
+- No. Because our sample is selected from $AtRisk$; same as controlling for it.
+  
+- Selection bias
+]
+
+---
+# Seeing selection bias
+  
+$Absent \rightarrow AtRisk \leftarrow GPA$
+  
+- Suppose our sample only includes those at-risk
+
+- But we want to estimate the effect of absences on GPA
+
+```{r, include=FALSE}
+selection_bias <- data.frame(absent = rnorm(2500, 8, 2), 
+                             gpa = rnorm(2500, 2.5, 0.45))
+
+selection_bias <- mutate(selection_bias, score = (absent + 3*gpa))
+
+quantile(selection_bias$score, 0.2)
+selection_bias <- mutate(selection_bias, at_risk = if_else(score <= 13.423, 1, 0))
+```
+
+
+---
+# Seeing selection bias
+  
+.pull-left[
+    
+```{r, echo=FALSE, message=FALSE}
+    selection_bias %>% 
+      filter(at_risk == 1) %>% 
+      ggplot(aes(x = absent, y = gpa)) +
+      geom_point(alpha = 0.4) +
+      geom_smooth(method = "lm", se = FALSE) + 
+      labs(title = 'Effect of absences on GPA',
+           subtitle = 'Sample of At-Risk Students') +
+      theme_minimal() + 
+      theme(text = element_text(size=18))
+```
+    
+]
+
+.pull-right[
+  
+```{r, echo=FALSE}
+  selbias_risk <- selection_bias %>% 
+    filter(at_risk == 1)
+  
+  atrisk_mod <- lm(gpa ~ absent, selbias_risk)
+  
+  get_regression_table(atrisk_mod) %>% 
+    select(term, estimate) %>% 
+    kable(digits = 3)
+```
+  
+]
+
+---
+# Seeing selection bias
+  
+.pull-left[
+    
+```{r, echo=FALSE, message=FALSE}
+    selection_bias %>% 
+      filter(at_risk == 0) %>% 
+      ggplot(aes(x = absent, y = gpa)) +
+      geom_point(alpha = 0.4) +
+      geom_smooth(method = "lm", se = FALSE) + 
+      labs(title = 'Effect of absences on GPA',
+           subtitle = 'Sample of Students Not At-Risk') +
+      theme_minimal() +
+      theme(text = element_text(size=18))
+```
+    
+]
+
+.pull-right[
+  
+```{r, echo=FALSE}
+  selbias_norisk <- selection_bias %>% 
+    filter(at_risk == 0)
+  
+  norisk_mod <- lm(gpa ~ absent, selbias_norisk)
+  
+  get_regression_table(norisk_mod) %>% 
+    select(term, estimate) %>% 
+    kable(digits = 3)
+```
+  
+]
+
+---
+# Seeing selection bias
+  
+.pull-left[
+    
+```{r, echo=FALSE, message=FALSE}
+    selection_bias %>% 
+      ggplot(aes(x = absent, y = gpa)) +
+      geom_point(alpha = 0.4) +
+      geom_smooth(method = "lm", se = FALSE) + 
+      labs(title = 'Effect of absences on GPA',
+           subtitle = 'All Students') +
+      theme_minimal() +
+      theme(text = element_text(size=18))
+```
+    
+]
+
+.pull-right[
+  
+```{r, echo=FALSE}
+  allstud_mod <- lm(gpa ~ absent, selection_bias)
+  
+  get_regression_table(allstud_mod) %>% 
+    select(term, estimate) %>% 
+    kable(digits = 3)
+```
+  
+]
+
+---
+# Seeing Selection Bias
+  
+```{r, echo=FALSE, fig.align='center', out.height='90%', message=FALSE}
+selection_bias %>% 
+  ggplot(aes(x = absent, y = gpa)) +
+  geom_point(aes(x = absent, y = gpa, color = as.factor(at_risk)), alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(aes(x = absent, y = gpa, color = as.factor(at_risk)), method = "lm", se = FALSE) +
+  labs(color = "At-Risk") +
+  theme_minimal() +
+  theme(text = element_text(size=18))
+```
+
 ---
 # Direction of OVB
 
@@ -530,265 +813,7 @@ include_graphics('lectures_files/dag14.png', dpi = 150)
 - There are quasi-experimental regression techniques that arguably achieve the same break from the error term as if random
   - Difference-in-differences, regression discontinuity, instrumental variables, synthetic control, propensity score matching
 
----
-class: inverse, center, middle
 
-# Supplemtary Slides: Collider Bias Revisited
 
----
-# Collider bias
 
-- Collider bias can occur in two ways:
-
-- Controlling for a collider in our regression that opens a backdoor path
-
-- Using a sample where observations are selected based on a collider variable
-
----
-# Seeing collider bias
-
-```{r, include=FALSE}
-collider_bias <- data.frame(k = rnorm(2500, mean = 10, sd = 4), 
-                            e = rnorm(2500), 
-                            u = rnorm(2500))
-```
-
-```{r, include=FALSE}
-head(collider_bias, n = 4) %>% 
-  kable(digits = 2)
-```
-
-```{r, include=FALSE}
-collider_bias <- collider_bias %>% 
-  mutate(Treatment = if_else( k >= 12, 1, 0))
-```
-
-```{r, include=FALSE}
-collider_bias <- collider_bias %>% 
-  mutate(Outcome = 100 + 50*Treatment + e)
-```
-
-```{r, include=FALSE}
-collider_bias <- collider_bias %>% 
-  mutate(Collider = 50*Treatment + 10*Outcome + u)
-```
-
-```{r, echo=FALSE}
-head(collider_bias, n = 4) %>%
-  select(Treatment, Outcome, Collider) %>% 
-  kable(digits = 0)
-```
-
-- Sample includes 2,500 observations
-
----
-# Seeing Collider Bias
-
-$$Outcome=\beta_0 + \beta_1Treatment + \epsilon$$
-
-$$Outcome=\beta_0 + \beta_1Treatment + \beta_2Collider + \epsilon$$
-
-- These data are made up in a way that the effect of Treatment, $\beta_1$, should equal 50.
-
-- The collider does not affect the outcome or the treatment. The outcome and treatment affect the collider.
-
-$$Treatment \rightarrow Collider \leftarrow Outcome$$
-
----
-# Seeing collider bias
-
-```{r}
-valid <- lm(Outcome ~ Treatment, data = collider_bias)
-biased <- lm(Outcome ~ Treatment + Collider, data = collider_bias)
-```
-
-.pull-left[
-```{r, echo=FALSE}
-get_regression_table(valid) %>% 
-  select(term, estimate) %>% 
-  kable(digits = 2)
-```
-]
-
-.pull-right[
-```{r, echo=FALSE}
-get_regression_table(biased) %>% 
-  select(term, estimate) %>% 
-  kable(digits = 2)
-```
-]
-
-- Coefficient for $Treatment$ should be 50.
-
-- Because $Treatment \rightarrow Collider \leftarrow Outcome$, controlling for Collider introduces bias
-
----
-# Collider bias: bad sample
-
-- Suppose a nonprofit that works with at-risk youth wants to understand the effect of school absences on grades. It only has access to data on its own clients.
-
-- Suppose at-risk youth are identified by socioeconomic status, GPA, and absences
-
-```{r, echo=FALSE, fig.align='center'}
-include_graphics('lectures_files/dag13.png', dpi = 150)
-```
-
----
-# Collider bias (2) bad sample
-
-$$GPA = \beta_0 + \beta_1TotAbsences + \beta_2 SES + \epsilon$$
-
-```{r, echo=FALSE, fig.align='center'}
-include_graphics('lectures_files/dag13.png', dpi = 150)
-```
-
-.pull-left[
-
-1. $TA \rightarrow GPA$
-2. $TA \leftarrow SES \rightarrow GPA$
-3. $TA \rightarrow AtRisk \leftarrow GPA$
-4. $TA \leftarrow SES \rightarrow AtRisk \leftarrow GPA$
-
-]
-
-.pull-right[
-
-- Will our estimate $b_1$ be unbiased?
-
-- No. Because our sample is selected from $AtRisk$; same as controlling for it.
-
-- Selection bias
-]
-
----
-# Seeing selection bias
-
-$Absent \rightarrow AtRisk \leftarrow GPA$
-
-- Suppose our sample only includes those at-risk
-
-- But we want to estimate the effect of absences on GPA
-
-```{r, include=FALSE}
-selection_bias <- data.frame(absent = rnorm(2500, 8, 2), 
-                             gpa = rnorm(2500, 2.5, 0.45))
-
-selection_bias <- mutate(selection_bias, score = (absent + 3*gpa))
-
-quantile(selection_bias$score, 0.2)
-selection_bias <- mutate(selection_bias, at_risk = if_else(score <= 13.423, 1, 0))
-```
-
-
----
-# Seeing selection bias
-
-.pull-left[
-
-```{r, echo=FALSE, message=FALSE}
-selection_bias %>% 
-  filter(at_risk == 1) %>% 
-  ggplot(aes(x = absent, y = gpa)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) + 
-  labs(title = 'Effect of absences on GPA',
-       subtitle = 'Sample of At-Risk Students') +
-  theme_minimal() + 
-  theme(text = element_text(size=18))
-```
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE}
-selbias_risk <- selection_bias %>% 
-  filter(at_risk == 1)
-
-atrisk_mod <- lm(gpa ~ absent, selbias_risk)
-
-get_regression_table(atrisk_mod) %>% 
-  select(term, estimate) %>% 
-  kable(digits = 3)
-```
-
-]
-
----
-# Seeing selection bias
-
-.pull-left[
-
-```{r, echo=FALSE, message=FALSE}
-selection_bias %>% 
-  filter(at_risk == 0) %>% 
-  ggplot(aes(x = absent, y = gpa)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) + 
-  labs(title = 'Effect of absences on GPA',
-       subtitle = 'Sample of Students Not At-Risk') +
-  theme_minimal() +
-  theme(text = element_text(size=18))
-```
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE}
-selbias_norisk <- selection_bias %>% 
-  filter(at_risk == 0)
-
-norisk_mod <- lm(gpa ~ absent, selbias_norisk)
-
-get_regression_table(norisk_mod) %>% 
-  select(term, estimate) %>% 
-  kable(digits = 3)
-```
-
-]
-
----
-# Seeing selection bias
-
-.pull-left[
-
-```{r, echo=FALSE, message=FALSE}
-selection_bias %>% 
-  ggplot(aes(x = absent, y = gpa)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) + 
-  labs(title = 'Effect of absences on GPA',
-       subtitle = 'All Students') +
-  theme_minimal() +
-  theme(text = element_text(size=18))
-```
-
-]
-
-.pull-right[
-
-```{r, echo=FALSE}
-allstud_mod <- lm(gpa ~ absent, selection_bias)
-
-get_regression_table(allstud_mod) %>% 
-  select(term, estimate) %>% 
-  kable(digits = 3)
-```
-
-]
-
----
-# Seeing Selection Bias
-
-```{r, echo=FALSE, fig.align='center', out.height='90%', message=FALSE}
-selection_bias %>% 
-  ggplot(aes(x = absent, y = gpa)) +
-  geom_point(aes(x = absent, y = gpa, color = as.factor(at_risk)), alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE) +
-  geom_smooth(aes(x = absent, y = gpa, color = as.factor(at_risk)), method = "lm", se = FALSE) +
-  labs(color = "At-Risk") +
-  theme_minimal() +
-  theme(text = element_text(size=18))
-```
 
