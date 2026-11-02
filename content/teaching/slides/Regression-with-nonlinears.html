@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Regression-with-nonlinears_files/header-attrs-2.30/header-attrs.js"></script>
+    <script src="Regression-with-nonlinears_files/header-attrs-2.32/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 01, 2026
+### Last updated: November 01, 2026
 ]
 
 ---
@@ -74,7 +74,7 @@ class: center, middle, inverse, title-slide
 
 `$$y=\beta_0+\beta_1x_1+\beta_2x_1^2+\beta_3x_2+...+\beta_kx_{k-1}+\epsilon$$`
 
-&lt;img src="lectures_files/quadratic.png" alt="" width="420" style="display: block; margin: auto;" /&gt;
+&lt;img src="lectures_files/quadratic.png" alt="" style="display: block; margin: auto;" /&gt;
 
 .pull-left[
 If relationship between `\(x\)` and `\(y\)` is initially negative then eventually positive, linear term, `\(b_1\)`, will be negative and quadratic term, `\(b_2\)`, will be positive. 
@@ -308,14 +308,14 @@ get_regression_table(log_log) %&gt;%
 
 .pull-left[
 
-|term                | estimate|
-|:-------------------|--------:|
-|intercept           |    3.062|
-|log(gdpPercap)      |    0.112|
-|continent: Americas |    0.133|
-|continent: Asia     |    0.110|
-|continent: Europe   |    0.166|
-|continent: Oceania  |    0.152|
+|term               | estimate|
+|:------------------|--------:|
+|intercept          |    3.062|
+|log(gdpPercap)     |    0.112|
+|continent-Americas |    0.133|
+|continent-Asia     |    0.110|
+|continent-Europe   |    0.166|
+|continent-Oceania  |    0.152|
 ]
 
 .pull-right[
@@ -369,14 +369,14 @@ get_regression_table(lev_log) %&gt;%
 
 .pull-left[
 
-|term                | estimate|
-|:-------------------|--------:|
-|intercept           |    2.317|
-|log(gdpPercap)      |    6.422|
-|continent: Americas |    7.015|
-|continent: Asia     |    5.912|
-|continent: Europe   |    9.577|
-|continent: Oceania  |    9.213|
+|term               | estimate|
+|:------------------|--------:|
+|intercept          |    2.317|
+|log(gdpPercap)     |    6.422|
+|continent-Americas |    7.015|
+|continent-Asia     |    5.912|
+|continent-Europe   |    9.577|
+|continent-Oceania  |    9.213|
 ]
 
 .pull-right[
@@ -425,14 +425,14 @@ get_regression_table(log_lev) %&gt;%
 
 .pull-left[
 
-|term                | estimate|
-|:-------------------|--------:|
-|intercept           |    3.856|
-|gdpPercap           |    0.000|
-|continent: Americas |    0.250|
-|continent: Asia     |    0.160|
-|continent: Europe   |    0.311|
-|continent: Oceania  |    0.316|
+|term               | estimate|
+|:------------------|--------:|
+|intercept          |    3.856|
+|gdpPercap          |    0.000|
+|continent-Americas |    0.250|
+|continent-Asia     |    0.160|
+|continent-Europe   |    0.311|
+|continent-Oceania  |    0.316|
 ]
 
 .pull-right[
