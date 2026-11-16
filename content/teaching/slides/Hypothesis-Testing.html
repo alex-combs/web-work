@@ -4,7 +4,7 @@
     <title>PADP 7120 Data Applications in PA</title>
     <meta charset="utf-8" />
     <meta name="author" content="Alex Combs" />
-    <script src="Hypothesis-Testing_files/header-attrs-2.30/header-attrs.js"></script>
+    <script src="Hypothesis-Testing_files/header-attrs-2.32/header-attrs.js"></script>
     <link rel="stylesheet" href="mypres.css" type="text/css" />
   </head>
   <body>
@@ -24,7 +24,7 @@ class: center, middle, inverse, title-slide
 ### UGA | SPIA | PADP
 ]
 .date[
-### Last updated: April 15, 2026
+### Last updated: November 16, 2026
 ]
 
 ---
@@ -47,10 +47,10 @@ class: center, middle, inverse, title-slide
 
 
 
-|term           | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:--------------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept      |    20.06|         0|   123.322|       0|    19.75|    20.38|
-|treatment: Yes |    -6.41|         0|   -27.850|       0|    -6.86|    -5.96|
+|term          | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:-------------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept     |    20.06|         0|   123.322|       0|    19.75|    20.38|
+|treatment-Yes |    -6.41|         0|   -27.850|       0|    -6.86|    -5.96|
 
 - Our goal is to better understand the `statistic` (less important) and `p_value` columns. 
 
@@ -92,21 +92,21 @@ class: inverse, center, middle
 
 &gt; **Run all code chunks down to and including `promo-estimates`**
 
----
-# Example
+&lt;!-- --- --&gt;
+&lt;!-- # Example --&gt;
 
-- Descriptive:
+&lt;!-- - Descriptive: --&gt;
 
-  - For our one sample, we have calculated the proportion of males promoted `\(p_M=0.88\)` and proportion of females promoted `\(p_F=0.58\)`
-  - In this sample, the difference in proportion promoted is `\(p_M-p_F= 0.88-0.58=0.3\)` or 30 percentage points.
+&lt;!--   - For our one sample, we have calculated the proportion of males promoted `\(p_M=0.88\)` and proportion of females promoted `\(p_F=0.58\)` --&gt;
+&lt;!--   - In this sample, the difference in proportion promoted is `\(p_M-p_F= 0.88-0.58=0.3\)` or 30 percentage points. --&gt;
 
---
+&lt;!-- -- --&gt;
 
-- Inference:
+&lt;!-- - Inference: --&gt;
 
-  - This is a sample of an unobserved population
-  - And/or the counterfactual is unobservable
-  - This sample provides us estimates of `\(P_M\)`, `\(P_F\)`, and `\(P_M-P_F\)`
+&lt;!--   - This is a sample of an unobserved population --&gt;
+&lt;!--   - And/or the counterfactual is unobservable --&gt;
+&lt;!--   - This sample provides us estimates of `\(P_M\)`, `\(P_F\)`, and `\(P_M-P_F\)` --&gt;
 
 ---
 # Example
@@ -148,20 +148,20 @@ class: inverse, center, middle
 
 - "Absence of evidence is not evidence of absence."
 
----
-# What If We're Wrong
+&lt;!-- --- --&gt;
+&lt;!-- # What If We're Wrong --&gt;
 
-- Suppose our estimate of `\(P_M-P_F=?\)`, `\(p_M-p_F=0.3\)`, is so unlikely that we reject the null based on p-value
+&lt;!-- - Suppose our estimate of `\(P_M-P_F=?\)`, `\(p_M-p_F=0.3\)`, is so unlikely that we reject the null based on p-value --&gt;
 
-- Conclude that males and females are not promoted in equal proportions `\(P_M-P_F \neq 0\)`.
+&lt;!-- - Conclude that males and females are not promoted in equal proportions `\(P_M-P_F \neq 0\)`. --&gt;
 
-- Or, we obtain a high p-value, so we fail to reject the null, and can't conclude there is a difference
+&lt;!-- - Or, we obtain a high p-value, so we fail to reject the null, and can't conclude there is a difference --&gt;
 
---
+&lt;!-- -- --&gt;
 
-- But 0.3 is an *estimate* around which we construct a range of plausible values we assume captures the true parameter
+&lt;!-- - But 0.3 is an *estimate* around which we construct a range of plausible values we assume captures the true parameter --&gt;
 
-- But our confidence interval could be 1 of the 5 out of 100 (assuming 95% CI) expected to fail
+&lt;!-- - But our confidence interval could be 1 of the 5 out of 100 (assuming 95% CI) expected to fail --&gt;
 
 ---
 # What If We're Wrong
@@ -169,14 +169,14 @@ class: inverse, center, middle
 - If we **reject the null** because our 95% CI does **not** contain 0 (p-value &lt; 0.05) but are wrong
 
   - Type I error
-  - False positive - concluding there is evidence when there truly is not
+  - False positive - concluding there is non-random evidence when truly random
 
 --
 
 - If we **fail to reject** because our 95% CI does contain 0 (p-value `\(\geq\)` 0) but are wrong
 
   - Type II error
-  - False negative - concluding no evidence when there truly is
+  - False negative - concluding no evidence when truth is there is non-random correlation
 
 ---
 # Decision rule
@@ -212,7 +212,7 @@ class: inverse, center, middle
 ---
 # Example
 
-- If the null were true, then promotions would be random with respect to gender
+- If the null were true, then promotions would be random with respect to male/female
 
   - On average, `\(P_M-P_F = 0\)`
   - Promotions and gender would share no correlation
@@ -290,27 +290,26 @@ class: inverse, center, middle
 # Back to regression table
 
 
-|term           | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:--------------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept      |   20.064|     0.163|   123.322|       0|   19.745|   20.383|
-|treatment: Yes |   -6.406|     0.230|   -27.850|       0|   -6.857|   -5.955|
+|term          | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:-------------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept     |   20.064|     0.163|   123.322|       0|   19.745|   20.383|
+|treatment-Yes |   -6.406|     0.230|   -27.850|       0|   -6.857|   -5.955|
 
-- What are the null and alternative hypotheses? What is the result of the test?
+- What are the null and alternative hypotheses with respect to treatment?
 
-- How many standard errors is our estimate from the center (0) of the null distribution?
+- `statistic` = estimate/standard error = how many standard errors the estimate is from 0
 
-- What is the probability of obtaining our estimates or more extreme in a world where the null is true (treatment = 0)?
+- What is the probability of obtaining our estimates or more extreme in a world where the null is true?
 
----
-# Back to regression table
+&lt;!-- --- --&gt;
+&lt;!-- # Back to regression table --&gt;
 
+&lt;!-- ```{r, echo=FALSE} --&gt;
+&lt;!-- get_regression_table(mod1) %&gt;%  --&gt;
+&lt;!--   kable(digits = 2) --&gt;
+&lt;!-- ``` --&gt;
 
-|term           | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:--------------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept      |    20.06|      0.16|    123.32|       0|    19.75|    20.38|
-|treatment: Yes |    -6.41|      0.23|    -27.85|       0|    -6.86|    -5.96|
-
-There is statistically significant evidence that the health insurance subsidy reduced out-of-pocket expenditures on health care. On average, expenditures among treated households declined about $6 dollars per person. 
+&lt;!-- There is statistically significant evidence that the health insurance subsidy reduced out-of-pocket expenditures on health care. On average, expenditures among treated households declined about $6 dollars per person.  --&gt;
 
 ---
 # Another example
@@ -369,10 +368,10 @@ class: inverse, center, middle
 |&amp;nbsp;&amp;nbsp;&amp;nbsp;Range     |      0 - 1       |
 
 
-|term           | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
-|:--------------|--------:|---------:|---------:|-------:|--------:|--------:|
-|intercept      |   20.064|     0.163|   123.322|       0|   19.745|   20.383|
-|treatment: Yes |   -6.406|     0.230|   -27.850|       0|   -6.857|   -5.955|
+|term          | estimate| std_error| statistic| p_value| lower_ci| upper_ci|
+|:-------------|--------:|---------:|---------:|-------:|--------:|--------:|
+|intercept     |   20.064|     0.163|   123.322|       0|   19.745|   20.383|
+|treatment-Yes |   -6.406|     0.230|   -27.850|       0|   -6.857|   -5.955|
 
 
     </textarea>

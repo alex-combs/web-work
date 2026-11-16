@@ -93,21 +93,21 @@ ggplot(promotions, aes(x = gender, fill = decision)) +
 
 > **Run all code chunks down to and including `promo-estimates`**
 
----
-# Example
+<!-- --- -->
+<!-- # Example -->
 
-- Descriptive:
+<!-- - Descriptive: -->
 
-  - For our one sample, we have calculated the proportion of males promoted $p_M=0.88$ and proportion of females promoted $p_F=0.58$
-  - In this sample, the difference in proportion promoted is $p_M-p_F= 0.88-0.58=0.3$ or 30 percentage points.
+<!--   - For our one sample, we have calculated the proportion of males promoted $p_M=0.88$ and proportion of females promoted $p_F=0.58$ -->
+<!--   - In this sample, the difference in proportion promoted is $p_M-p_F= 0.88-0.58=0.3$ or 30 percentage points. -->
 
---
+<!-- -- -->
 
-- Inference:
+<!-- - Inference: -->
 
-  - This is a sample of an unobserved population
-  - And/or the counterfactual is unobservable
-  - This sample provides us estimates of $P_M$, $P_F$, and $P_M-P_F$
+<!--   - This is a sample of an unobserved population -->
+<!--   - And/or the counterfactual is unobservable -->
+<!--   - This sample provides us estimates of $P_M$, $P_F$, and $P_M-P_F$ -->
 
 ---
 # Example
@@ -149,20 +149,20 @@ ggplot(promotions, aes(x = gender, fill = decision)) +
 
 - "Absence of evidence is not evidence of absence."
 
----
-# What If We're Wrong
+<!-- --- -->
+<!-- # What If We're Wrong -->
 
-- Suppose our estimate of $P_M-P_F=?$, $p_M-p_F=0.3$, is so unlikely that we reject the null based on p-value
+<!-- - Suppose our estimate of $P_M-P_F=?$, $p_M-p_F=0.3$, is so unlikely that we reject the null based on p-value -->
 
-- Conclude that males and females are not promoted in equal proportions $P_M-P_F \neq 0$.
+<!-- - Conclude that males and females are not promoted in equal proportions $P_M-P_F \neq 0$. -->
 
-- Or, we obtain a high p-value, so we fail to reject the null, and can't conclude there is a difference
+<!-- - Or, we obtain a high p-value, so we fail to reject the null, and can't conclude there is a difference -->
 
---
+<!-- -- -->
 
-- But 0.3 is an *estimate* around which we construct a range of plausible values we assume captures the true parameter
+<!-- - But 0.3 is an *estimate* around which we construct a range of plausible values we assume captures the true parameter -->
 
-- But our confidence interval could be 1 of the 5 out of 100 (assuming 95% CI) expected to fail
+<!-- - But our confidence interval could be 1 of the 5 out of 100 (assuming 95% CI) expected to fail -->
 
 ---
 # What If We're Wrong
@@ -170,14 +170,14 @@ ggplot(promotions, aes(x = gender, fill = decision)) +
 - If we **reject the null** because our 95% CI does **not** contain 0 (p-value < 0.05) but are wrong
 
   - Type I error
-  - False positive - concluding there is evidence when there truly is not
+  - False positive - concluding there is non-random evidence when truly random
 
 --
 
 - If we **fail to reject** because our 95% CI does contain 0 (p-value $\geq$ 0) but are wrong
 
   - Type II error
-  - False negative - concluding no evidence when there truly is
+  - False negative - concluding no evidence when truth is there is non-random correlation
 
 ---
 # Decision rule
@@ -215,7 +215,7 @@ include_graphics('lectures_files/nulldist.png')
 ---
 # Example
 
-- If the null were true, then promotions would be random with respect to gender
+- If the null were true, then promotions would be random with respect to male/female
 
   - On average, $P_M-P_F = 0$
   - Promotions and gender would share no correlation
@@ -297,21 +297,21 @@ get_regression_table(mod1) %>%
   kable(digits = 5)
 ```
 
-- What are the null and alternative hypotheses? What is the result of the test?
+- What are the null and alternative hypotheses with respect to treatment?
 
-- How many standard errors is our estimate from the center (0) of the null distribution?
+- `statistic` = estimate/standard error = how many standard errors the estimate is from 0
 
-- What is the probability of obtaining our estimates or more extreme in a world where the null is true (treatment = 0)?
+- What is the probability of obtaining our estimates or more extreme in a world where the null is true?
 
----
-# Back to regression table
+<!-- --- -->
+<!-- # Back to regression table -->
 
-```{r, echo=FALSE}
-get_regression_table(mod1) %>% 
-  kable(digits = 2)
-```
+<!-- ```{r, echo=FALSE} -->
+<!-- get_regression_table(mod1) %>%  -->
+<!--   kable(digits = 2) -->
+<!-- ``` -->
 
-There is statistically significant evidence that the health insurance subsidy reduced out-of-pocket expenditures on health care. On average, expenditures among treated households declined about $6 dollars per person. 
+<!-- There is statistically significant evidence that the health insurance subsidy reduced out-of-pocket expenditures on health care. On average, expenditures among treated households declined about $6 dollars per person.  -->
 
 ---
 # Another example
